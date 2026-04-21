@@ -1,0 +1,20 @@
+# Claude Code 個人資料（絕對不推）
+social-post/style_profile.md
+social-post/content_plan.md
+social-post/_scraped_posts_draft.md
+
+# Claude Code 設定（含本機權限清單）
+.claude/
+!.claude/skills/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Python / Node（若未來加腳本）
+__pycache__/
+*.pyc
+node_modules/
