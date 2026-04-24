@@ -1,5 +1,61 @@
 # Changelog
 
+## v0.4 — 2026-04-25
+
+Token 消耗優化 + 知識結構重整。SKILL.md 從 247 行降到 116 行（-53%），每次觸發省 ~1300 tokens。
+
+### Refactored
+
+- **SKILL.md 精簡為 router + 硬規則**（116 行）
+  - 7 條編號核心規則（R1 一天一篇、R2 爆款冷卻、R3 突破鐵粉圈、R4 時段分流、R5 爆款節奏、R6 4 指標評估、R7 真 KPI 是社群轉化）
+  - 所有實戰詳情下放 references，每次觸發只載必要
+- **抽出 `references/evaluation.md`**（108 行）
+  - FB 2026 演算法訊號權重
+  - 4 指標評估框架（連結點擊率、追蹤者比例、互動率、下游轉化）
+  - 真 flop 紅線（4 條件全踩才算）
+  - 2 種貼文類型框架（擴散型 vs 深化型）
+  - 排名指標（最近 10 篇相對表現）
+- **抽出 `references/case_studies.md`**（149 行）
+  - Day 1-4 完整實戰案例解剖
+  - Day 1 mega-viral 數據 + 啟示
+  - Day 2 「被誤判 flop」的深化文重判讀
+  - Day 3 真 underperform 歸因
+  - Day 4 鐵粉圈觸及限定分析
+
+### Added
+
+- **private skill confirm bypass 條款**（SKILL.md 安全閘段）：
+  - 開源版永遠保留「發佈前必須『確認』字眼」硬規則
+  - 私人版可接受「你自己操作不用問我」當 session 授權
+  - 兩版明確分離，防開源版繼承私人設定
+- **診斷流程**（`generate_and_publish.md`）：使用者貼數據 / 截圖時如何用 evaluation.md 框架判讀
+- **發文前三檢查**（`generate_and_publish.md`）：冷卻 / 鐵粉圈 / 輕重節奏，取代原單一冷卻檢查
+- **不要做 list 補充**：不刪除使用者留言（系統硬規則）
+- **快速查詢表**（SKILL.md 底部）：知識點 → 檔案對應
+
+### Changed
+
+- 所有規則統一編號 R1-R7 方便引用
+- 「爆款後 Day 2 禁忌」移到 `case_studies.md` 當歷史案例保存，不再獨立規則
+- `generate_and_publish.md` 新增「Step 0：三檢查」取代單一冷卻檢查
+
+### Token 消耗優化數據
+
+| 場景 | v0.3 | v0.4 | 節省 |
+|---|---|---|---|
+| Skill 觸發（SKILL.md 載入）| ~2500 tok | ~1200 tok | **-52%** |
+| Phase 2 典型發文 | ~4500 tok | ~3700 tok | **-18%** |
+| Phase 診斷使用者數據 | 需重讀 SKILL | 讀 evaluation.md（108 行）| 更精準 |
+
+### Lessons learned（新增）
+
+- 連 2 篇同公式 = 鉤子燒完（F6b Day 1 vs Day 2）
+- Meta AI 會把爆款貼文當「Manus AI 範本」在作者自己 profile 展示給自己看（僅作者可見，不影響效果）
+- 絕對讚數判斷 flop 會誤判，4 指標框架才準
+- 外部連結點擊率在 mega-viral 中極低（Day 1 只 7/74,510），社群成長主路徑是留言 → 作者私訊拉人
+
+---
+
 ## v0.3 — 2026-04-24
 
 3 天內第三次重大更新。基於 Day 1-4 完整數據 + 深度研究「突破鐵粉圈」的演算法訊號 + 6 個新公式。
