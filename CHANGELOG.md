@@ -1,5 +1,67 @@
 # Changelog
 
+## v0.8 — 2026-05-13（F19 Threads 立場宣言型 + R19 雙 brand 雙 funnel 戰略）
+
+第一個正式 minor release（v0.7.x 都是 patch）。新增 Thread 平台主戰場武器：F19 立場宣言型公式（2025-07 實證 400 → 10K 粉一週）。
+
+### 🆕 Added — F19 Threads 立場宣言型公式（formulas.md）
+
+**結構**：
+```
+[hook 敵人 + 我對立 + TM 級用詞] 最近 X 都 Y，我做 Z 就 TM 做真的！
+[宣言 + 攻擊性動詞] 我就持續 A 幹翻 B！！
+[純粹動機 + 零代價聲明] 對我來說 C 就是 D，我 E 對我來說 F！！
+```
+
+**實證**（Hao 副帳號 @hao0321_studio 2025-07 爆款專案）：
+
+| 日期 | 瀏覽 | 讚 | 留言 | 轉發 | 分享 |
+|---|---|---|---|---|---|
+| 25/7/8 | **26 萬** | 2,741 | 314 | 76 | 316 |
+| 25/7/9 | 6.9 萬 | 916 | 90 | 10 | 34 |
+| 25/7/13 | 12.7 萬 | 1,194 | 90 | 12 | 45 |
+
+**帳號 400 粉 → 一週內破 10K**（+9,600 / 7 天）。
+
+### 🆕 Added — R19 Thread 轉發權重 + Keyword 機制（SKILL.md）
+
+**Thread 演算法跟 FB 完全不同 axis**：
+- FB 最強 = **私訊分享**
+- Thread 最強 = **轉發 repost + keyword detection**
+
+熱門 keyword 池：免費 / 付費 / 韭菜 / 賺錢 / 幹翻 / TM 做真的
+
+### 🆕 Added — Thread vs FB 演算法 3 大差異對照（threads.md）
+
+| 維度 | FB | Thread |
+|---|---|---|
+| 最強信號 | 私訊分享 | 轉發 repost |
+| 觸發機制 | dwell time + 互動 | keyword detection |
+| 內容偏好 | 長文 + 多媒體 | 短文 + 對立立場 |
+| viral 主路徑 | 鐵粉 → 跨粉絲圈 | keyword match → 同 ideology 圈 |
+
+### 🆕 Added — 雙 brand 雙 funnel 整合戰略
+
+| brand | 平台 | 公式 | funnel |
+|---|---|---|---|
+| social-post（@lo.jain.hao）| FB 主 | F6b / F15 mini | FB → Line 群 |
+| **AI 教學分享（@hao0321_studio）**| **Thread 主** | **F19 立場宣言** | **Thread → 帳號追蹤** |
+
+兩 brand 內容不交叉（F6b 別發 Thread / F19 別發 FB），互補不互搶。
+
+### 🆕 Added — Case 11 Threads 爆款專案完整解構（case_studies.md）
+
+包含 3 篇 hao0321_studio 完整戰績、F19 公式起源、雙 brand 戰略整合。
+
+### Lessons learned
+
+1. **Thread ≠ FB**：F6b 純血在 Thread 無效（會被判 spam）；F19 在 FB 無效（沒對立 culture）
+2. **轉發是 Thread 真正 viral 引擎**（identity signal）
+3. **keyword 命中比結構優先**（Thread 演算法用 keyword detection）
+4. **雙 brand 互補**：Hao 已有兩個 brand 各自 viral 紀錄，不該強合一
+
+---
+
 ## v0.7.4 — 2026-05-13（doc sync patch + cleanup-helper v0.2 audit loop 閉環）
 
 由姐妹 skill [`code-cleanup-helper` v0.2 Mode B audit](https://github.com/Hao0321/claude-skill-code-cleanup) 偵測 — v0.7.3 release 後 CHANGELOG/README 漏更。完美 demo cleanup-helper v0.2 設計目的：**release ship 後 doc 自動 drift detection**。

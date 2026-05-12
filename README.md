@@ -34,6 +34,8 @@
 
 > **姐妹 skill: [claude-skill-code-cleanup v0.2](https://github.com/Hao0321/claude-skill-code-cleanup)** — 雙模式 / 8 dimensions：Mode A 掃 codebase 找重複/命名/模組/過長；Mode B 跑 repo audit 檢查私公版 sync / release 一致性 / cross-link / 版本漂移。用來 maintain 這個 social-post skill 自己（已抓到 v0.7.3 doc drift → 推 v0.7.4 修）。
 
+> **v0.8 更新（2026-05-13）**：第一個 minor release。新增 **F19 Threads 立場宣言型公式**（Hao 副帳號 @hao0321_studio 2025-07 實證 400 → 10K 粉一週，3 篇 26 萬/6.9 萬/12.7 萬瀏覽）+ **R19 Thread 轉發權重 + Keyword 機制** + **雙 brand 雙 funnel 戰略**（FB social-post brand + Thread 教學分享 brand 互補）。
+>
 > **v0.7.4 更新（2026-05-13）**：cleanup-helper v0.2 Mode B audit 抓到 v0.7.3 doc drift → 補 CHANGELOG/README v0.7.3 entry。雙 repo audit loop 閉環。
 >
 > **v0.7.3 更新（2026-05-13）**：命名統一（規則 1-11 → 歸納 1-11 + cross-ref table）+ 歸納 10 擴展 7-case Viral 4 條件對照表。
