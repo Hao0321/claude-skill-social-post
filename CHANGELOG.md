@@ -1,5 +1,59 @@
 # Changelog
 
+## v0.7.1 — 2026-05-13（v0.7 後 1 天的硬實證修正）
+
+5/12 v0.7 R11-R14 首次實證 → **partial fail**。F6b 全綠規則但仍 plateau 在 219 觀眾 / 0 分享 / 88.7% 鐵粉鎖死。本 patch 修正 v0.7 過度樂觀的假設。
+
+### ⚠️ Added — R11-R14 重要警告
+
+**R11-R14 是 hook 強化裝飾品，不是 archetype swap**。
+
+- F6b 公式本身分享率天花板就 0.21（讚 / 留言驅動 archetype 結構限制）
+- 再強化 hook punch 詞 / 金句密度 / 量化稀缺 = **只能維持讚 / 留言驅動，不會變成分享驅動**
+- 想突破分享率天花板**必須換 archetype**（F15 SKILL.md 公開 / F16 weekly 精選彙整），不是強化 F6b
+
+**Hao 鐵粉警告升級**：連 6+ 篇 F6b 後鐵粉對 voice 整體疲勞（不只 hype 詞），R11-R14 改善有限。
+
+### Added — Readability 三項硬檢查
+
+每篇 Mode B 草稿生成後必跑：
+
+1. **5 秒非追蹤者讀懂測試**：段 1 給沒看過你貼文的人，5 秒內懂主題嗎？
+2. **meta 層數 ≤ 2**：第 3 層以上禁止
+3. **數字密度 ≤ 3 個 / 段**：超過就是 dashboard report
+
+5/12 fail 例：段 1「skill 訓練 AI → 學我語氣 → 鐵粉警告 → R10 輪替」**4 層 meta** + 「14 / 14 / 75K / 4 / 12」**5 個數字** → 非追蹤者超載。
+
+### Added — FB compose 段落硬規則
+
+**4 段 4 句草稿貼到 FB 必須手動兩次 Enter 保段落**。FB compose 預設會把單 Enter 變空白，必須手動雙 Enter。
+
+5/12 fail 例：使用者直接複製貼上 → markdown 空行被壓掉 → 4 段變一坨字。
+
+**規則**：
+- 給草稿時必明確標註「段間請按兩次 Enter」
+- 或用 markdown horizontal rule（---）替代空行
+
+### 💥 Case 9 完整解構
+
+| 因素 | 估權重 |
+|---|---|
+| **F6b archetype 天花板** | **40%**（最根本）|
+| 內容 4 層 meta 看不懂 | 35% |
+| FB compose 段落 fail | 25% |
+
+→ **真正的修正方向：5/19 起改試 F15 SKILL.md 公開（換 archetype，非強化 F6b）**
+
+### Lessons learned
+
+1. **Hook 強化 ≠ archetype swap**：v0.7 R11-R14 全綠仍可 fail
+2. **F6b 分享率 0.21 是結構天花板**，公式本身決定上限
+3. **Readability 是硬指標**：meta 層數 + 數字密度 + 5 秒測試
+4. **FB compose 段落會被壓**：草稿給使用者時必須附手動 Enter 提示
+5. **v0.7 是空中樓閣，要 v0.7.1 落地**：規則升級前必須先實證
+
+---
+
 ## v0.7 — 2026-05-12
 
 外部 5 個 viral 範例逆向工程後的 hook 強化版。新增 R11-R14 四條規則 + F14-F17 四個分享驅動公式 + 完整 hook punch 詞庫，把分享率從 0.05-0.21 推到目標 0.3-0.5。
