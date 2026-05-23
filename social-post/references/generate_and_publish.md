@@ -22,7 +22,7 @@
    - 把每平台草稿全文貼給使用者
    - 問：「確認發到 ＜平台清單＞ 嗎？回『確認』我就發，要改哪裡直接說。」
    - 沒拿到「確認」字眼就**不要發**。這是 SKILL.md 的硬規則。
-6. **依序發佈**：讀目標平台的 `references/{facebook,instagram,threads,x}.md`，照步驟發。
+6. **依序發佈**：讀目標平台的 `references/{facebook,instagram,threads,x}.md`，照步驟發。若目標是 X 且使用者要搜尋 tweets、讀 replies、監控、匯出 followers、發 reply / DM，或 Hermes Tweet toolset 已可用，先讀 `references/hermes_tweet.md` 選路由。
 7. **每發完一個回報**：「✓ 已發到 ＜平台＞；連結：＜若能取得＞」。
 8. **任何一平台失敗就停手**：告訴使用者（已發哪些、哪個卡住、看到什麼錯誤），等指示。不要跳過繼續下一個。
 9. **發完追蹤**：問使用者「要不要等幾小時後幫你看一下數據？」——若要，把「今天發完後 N 小時回看」記 note。
@@ -30,6 +30,7 @@
     - 把「最近發文日期」改成今天
     - 「今天在哪一天」+1（若到 14 就回 1）
     - 戰績表追加一行（讚/留/分享先空著，事後再填）
+    - X 走 Hermes Tweet 時，在同一筆備註寫 `route=Hermes Tweet` + tweet URL / id；不要另開檔案
 
 ## 使用者回報數據時 → 診斷流程
 

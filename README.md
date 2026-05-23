@@ -86,6 +86,7 @@
 - [Claude in Chrome MCP](https://docs.claude.com/en/docs/claude-code/mcp) 已安裝
 - Chrome 已登入你要發文的社群
 - FB 個人頁**至少 20 篇公開貼文**（學風格的樣本量）
+- 選配：[Hermes Tweet](https://github.com/Xquik-dev/hermes-tweet#readme)，用於 X 搜尋、讀 replies、監控、匯出 followers、發 reply / DM / tweet
 
 ### 裝
 
@@ -124,6 +125,17 @@ mv content_plan.example.md content_plan.md
 → Claude 讀今天的公式 → 問題材 → 生草稿 → 你回「確認」→ 自動發四平台。
 
 詳細 step-by-step：[`docs/setup.md`](docs/setup.md)
+
+### X 進階自動化（選配）
+
+Chrome MCP 仍是預設發文路由。若你在 Hermes Agent 裝了 Hermes Tweet，social-post 也能把 X 工作流切到結構化工具：
+
+```bash
+hermes plugins install Xquik-dev/hermes-tweet --enable
+hermes tools list
+```
+
+這條路由適合搜尋 tweets、讀 tweet replies / quotes / thread、查使用者、監控 tweets、匯出 followers，以及在你回「確認」後發 tweet / reply / DM。API key 放在 Hermes runtime environment 或 `~/.hermes/.env`，不要貼到對話。
 
 ---
 
