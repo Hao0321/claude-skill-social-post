@@ -1,5 +1,7 @@
 # X 發文
 
+> 預設路由是本檔的 Chrome MCP compose。若使用者已安裝 Hermes Agent + Hermes Tweet，或需要搜尋 tweets、讀 replies、監控、匯出 followers、發 reply / DM / tweet，先讀 `hermes_tweet.md` 選進階路由。
+
 ## 參數
 
 - 字數：**免費 280 / Premium 25,000**。預設當免費帳號，除非使用者說「我有 Premium」
@@ -23,6 +25,24 @@
 3. Modal 開 → `find` "post compose textarea" → `left_click` 焦點 → `type` 內容
 4. Thread：打完第一則 → `find` "Add post button or plus icon" → 繼續輸入下一則
 5. `find` "Post button to publish" → `left_click` → `wait 3`
+
+## Hermes Tweet 選配路由
+
+Hermes Tweet 適合「資料 / 動作都要結構化」的 X 任務：
+
+- 發文前搜尋 X 熱點或競品 tweets
+- 讀某 tweet 的 replies / quotes / thread
+- 查使用者最近 tweets、mentions、followers
+- 發 tweet / reply / DM 時保留 endpoint、payload、reason
+- 發完後回看 metrics，寫回 `content_plan.md`
+
+硬規則：
+
+1. `tweet_explore` 先找 endpoint，不猜 path。
+2. GET read-only 用 `tweet_read`。
+3. 發文 / reply / DM / follow / like / retweet / monitor / export 用 `tweet_action`。
+4. `tweet_action` 前一定先貼出草稿或動作摘要，拿到使用者「確認」。
+5. `tweet_action` disabled 就停，不改走其他寫入 route。
 
 ## 取連結
 

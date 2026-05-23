@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- X 選配 Hermes Tweet route：搜尋 tweets、讀 replies / quotes / thread、查使用者、監控、匯出 followers、發 tweet / reply / DM。
+- `social-post/references/hermes_tweet.md`：保留原本 Chrome MCP compose，新增 Hermes Agent toolset 的 read / action 分流與「確認」安全閘。
+- README / setup / P2 發佈流程：說明何時走 Chrome MCP、何時走 Hermes Tweet。
+
+---
+
 ## v0.8.6 — 2026-05-19（🚨 R25 鐵則：FB / Threads 貼文絕不附外部連結）
 
 使用者 5/19 lock — AI 反覆把 GitHub 連結誤加進 viral 草稿，全部撤回 + 鎖死規則。

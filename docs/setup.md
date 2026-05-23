@@ -10,6 +10,7 @@
 - [x] 已安裝 Claude in Chrome MCP（[官方說明](https://docs.claude.com/en/docs/claude-code/mcp)）
 - [x] Chrome 瀏覽器已登入你要發文的**所有**社群平台
 - [x] 你的 FB 個人頁有**至少 20 篇公開貼文**（否則學不出穩定風格）
+- [ ] 選配：若要在 X 用結構化搜尋、讀 replies、監控、匯出 followers、發 reply / DM / tweet，安裝 [Hermes Tweet](https://github.com/Xquik-dev/hermes-tweet#readme)
 
 ## 1. 安裝 skill
 
@@ -92,6 +93,25 @@ Claude 會：
 ### ⚠️ 硬規則：沒「確認」不發
 
 這是 skill 內建的安全閘。即使你之前說「完全自動」、即使你用 `--dangerously-skip-permissions` 啟動 Claude Code，**每次發佈前 skill 都會要你在對話裡打「確認」兩字**。公開貼文不可逆，這層不能省。
+
+### X 進階路由：Hermes Tweet（選配）
+
+如果你已經使用 Hermes Agent，可以把 X 交給 Hermes Tweet 做結構化工具呼叫：
+
+```bash
+hermes plugins install Xquik-dev/hermes-tweet --enable
+hermes tools list
+```
+
+適合：
+
+- 發文前搜尋 X 上的討論與競品 tweets
+- 讀 tweet replies / quotes / thread
+- 查使用者與 followers
+- 發 tweet / reply / DM 前留下明確 payload
+- 發完後用 metrics 回寫 `content_plan.md`
+
+安全規則不變：沒有「確認」就不會用 action 發文、回覆、DM、follow、like、retweet。不要把 `XQUIK_API_KEY` 貼到對話，放在 Hermes runtime environment 或 `~/.hermes/.env`。
 
 ## 5. 回報戰績
 
