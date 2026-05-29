@@ -36,6 +36,8 @@
 
 > **v0.8.1 更新（2026-05-13）**：F19 排版精修 — v0.8 第一版誤把 F19 寫成 3 段空行（FB F6b 思維誤帶到 Thread），對照 Hao 3 篇真實爆款反向工程後修正為「**1 段不換行 / 連續逗號流 / 「！」最多 2 個 / 60-150 字**」。
 >
+> **v0.9.0 更新（2026-05-26）**：🔧 全面 audit + 重構 — SKILL.md **565 → 130 行（-77% token）**，新增 `references/rules.md` 收錄 R1-R29 完整定義，規則編號統一連續（補回 R20-R24）。用姐妹 skill code-cleanup-helper v0.2 跑 8 dimension audit 後重構。
+>
 > **v0.8.7 更新（2026-05-26）**：🆕 **Mode C 深度反思系列 + F20-F23 四變體 + R26-R29**。非 hype voice 系列 broke 鐵粉圈最高 94.5%（F23「一致性大戰打完了」10,022 觀眾 / 儲存 40 = Mode C 最強）。Hao brand 解鎖第 4 種 funnel（Mode A / Mode B / **Mode C** / Thread F19）。
 >
 > **v0.8 更新（2026-05-13）**：第一個 minor release。新增 **F19 Threads 立場宣言型公式**（Hao 副帳號 @hao0321_studio 2025-07 實證 400 → 10K 粉一週，3 篇 26 萬/6.9 萬/12.7 萬瀏覽）+ **R19 Thread 轉發權重 + Keyword 機制** + **雙 brand 雙 funnel 戰略**（FB social-post brand + Thread 教學分享 brand 互補）。

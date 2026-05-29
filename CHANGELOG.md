@@ -1,5 +1,52 @@
 # Changelog
 
+## v0.9.0 — 2026-05-26（🔧 全面 audit + 重構：SKILL.md -77% token + 規則編號統一）
+
+第二次大型 token 優化（v0.4 後）。用姐妹 skill code-cleanup-helper v0.2 跑完整 8 dimension audit，抓到 4 個 critical 問題後重構。
+
+### 🚨 Audit 抓到的 4 個問題
+
+| 問題 | 重構前 | 重構後 |
+|---|---|---|
+| SKILL.md 膨脹 | **565 行**（v0.4 曾 116）| **130 行（-77%）** |
+| 規則編號斷層 | R19 → R25（R20-R24 散在 case_studies）| **R1-R29 連續** |
+| 規則順序錯亂 | R1-R19 → R25-R29 → R15-R18 混排 | **速查表按序 + rules.md 完整** |
+| case_studies / formulas 過長 | 1,072 / 771 行 | 不動（只在案例/P2 階段載入）|
+
+### 🔧 Refactored
+
+- **SKILL.md 重構為 router + 速查表**（130 行）：
+  - 階段路由 + 安全閘 + 不要做
+  - **R1-R29 一句話速查表**（標 ⭐ 高頻 / 🚨 硬規則 / 🏆 最強）
+  - Viral 4 條件 + Hao 4 Mode 地圖
+  - 實用技巧 / 持續優化 / 快速查詢 / 常見踩雷
+- **新增 `references/rules.md`**（206 行）：R1-R29 完整定義 + 實證 + 操作細節
+  - **補回 R20-R24**（之前散在 case_studies.md，造成編號斷層）
+  - Viral 4 條件 + Readability 三檢查 + FB compose 段落鐵則
+- **P2 路由更新**：發文時載 `rules.md`（相關規則段）而非整個 SKILL.md
+
+### Token 節省
+
+| 場景 | v0.8.7 | v0.9.0 | 節省 |
+|---|---|---|---|
+| Skill 觸發（SKILL.md 載入）| ~565 行 | **~130 行** | **-77%** |
+| P2 發文 | SKILL 全載 | router + 目標規則段 | 更精準 |
+| 規則查詢 | 翻 SKILL.md 混排 | `rules.md` R1-R29 連續 | 更快 |
+
+### Changed
+
+- 規則編號 R20-R24 從 case_studies.md「歸納」段提到 rules.md，統一 R 系統
+- 廢除規則（R9/R21/R22）速查表保留標記，完整原因見 rules.md
+
+### Lessons learned
+
+1. **skill 自己會膨脹** — v0.4 優化到 116 行，4 週後膨脹回 565 行（每次 patch +10-40 行）
+2. **progressive disclosure 是 token 王道** — 速查表（每次載）+ 完整版（按需載）
+3. **規則散在 case_studies 造成編號斷層** — 規範規則應集中 rules.md
+4. **用 cleanup-helper audit 自己** — Mode A Dimension 4（過長）+ Dimension 2（編號）抓到問題
+
+---
+
 ## v0.8.7 — 2026-05-26（🆕 Mode C 深度反思系列 + F20-F23 四變體 + R26-R29）
 
 5/22 + 5/25 共 4 篇 Mode C 範例，broke 鐵粉圈最高 94.5%（F23 Mode C 系列最強 10,022 觀眾 / 儲存 40）。Hao brand 解鎖第 4 種 funnel（Mode A 日常 / Mode B 純血 / **Mode C 深度反思** / Thread F19）。
