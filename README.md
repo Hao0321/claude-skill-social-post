@@ -36,6 +36,8 @@
 
 > **v0.8.1 更新（2026-05-13）**：F19 排版精修 — v0.8 第一版誤把 F19 寫成 3 段空行（FB F6b 思維誤帶到 Thread），對照 Hao 3 篇真實爆款反向工程後修正為「**1 段不換行 / 連續逗號流 / 「！」最多 2 個 / 60-150 字**」。
 >
+> **v0.9.2 更新（2026-05-31）**：🆕 **F24 Brand 邊界澄清型 + R31 trust reset**（5/27「一些說明」5 點澄清文 2,754 觀眾 / 84 留言 / 42.4% 非追蹤）。Mode C 系列第 5 變體解鎖（F20-F24），跟 F22 confess 內在焦慮不同 — F24 confess 外在邊界（沒賣課/不接案/邊界期待）。
+>
 > **v0.9.1 更新（2026-05-31）**：🆕 **R30 FB 社團 cross-post = 留言放大 5-10x**（5/22 Claude in Chrome 同篇 cross-post 2 社團合計 956 留言 = 主帳號 137x）。主帳號發完後 1-2h cross-post 對口社團，archetype × 社團 match 表新增。
 >
 > **v0.9.0 更新（2026-05-26）**：🔧 全面 audit + 重構 — SKILL.md **565 → 130 行（-77% token）**，新增 `references/rules.md` 收錄 R1-R29 完整定義，規則編號統一連續（補回 R20-R24）。用姐妹 skill code-cleanup-helper v0.2 跑 8 dimension audit 後重構。
