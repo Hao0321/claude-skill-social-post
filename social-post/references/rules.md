@@ -177,6 +177,49 @@ v0.8.4 誤判 F19 2025→2026 衰退 89%。真因：**沒連發累積 momentum**
 
 反主流 + 趨勢預言：「X 在 2026 已不是門檻還拿來當賣點落伍」/「X 大戰打完了，下一場是 Y 大戰」。F23 實證 10,022 觀眾 / 94.5% / 儲存 40 = Mode C 系列最強。
 
+## R30：FB 社團 cross-post 策略（v0.9.1，5/22 + 5/29 實證）
+
+主帳號 timeline 發完後，cross-post 到 AI / dev 主題社團 = **留言放大 5-10x / 觸及 2-3x**。
+
+**操作鐵則**：
+1. 主帳號自己 timeline 先發（讓鐵粉看到原始版）
+2. **1-2 小時後** cross-post 到主題對口社團
+3. 同篇文不重寫（社團 audience 不重疊）
+4. **每篇選 1-2 個社團**，不洗 3+ 社團（spam 警告）
+5. 主動回留言區 = 社團 algorithm 加權
+
+**社團對口 audience**：
+
+| 社團 | audience | 適合 archetype |
+|---|---|---|
+| Vibe Coding Taiwan | code + AI ship | F23 行業 / F6b 純血 |
+| Generative AI 技術交流中心 | AI 工具發現 | **F22 工具發現** |
+| Gemini AI Google | Google AI | F21 答疑 / F23 |
+| Claude Code 台灣 | Claude 實戰 | F6b / F15 mini |
+| 自由工坊 | AIGC 創作 | F18 作品 / F20 故事 |
+
+**實證**（5/22 Claude in Chrome 同篇 cross-post 2 社團）：
+- 主帳號 timeline：7 留言（Case 17 F21）
+- Generative AI 中心：**425 留言** 🔥
+- Gemini AI Google：**531 留言** 🔥
+- **合計 956 留言 = 主帳號 137x**
+
+**5/29 Opus 4.8 dynamic workflows → Vibe Coding Taiwan**：247 讚 / 39 分享（社團小但分享率高 0.16 > Mode C 平均）。
+
+### R29 + R30 三重組合（最強配置）
+
+```
+凌晨主帳號發 F22 / F23
+↓ 1-2 小時後
+cross-post 社團 1（同 niche）
+↓ 4-6 小時後
+cross-post 社團 2（不同 audience bucket）
+```
+
+= 同篇貼文最大化 audience exposure。但**同篇不洗 3+ 社團**（spam）。
+
+---
+
 ## R29：Mode C 同日連發策略
 
 同日 2 篇 Mode C OK，前提：① 主題類別相關（同 niche）② framing 互補（vulnerable vs insider）③ 不同 archetype。

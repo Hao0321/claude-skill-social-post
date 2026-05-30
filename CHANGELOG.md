@@ -1,5 +1,58 @@
 # Changelog
 
+## v0.9.1 — 2026-05-31（🆕 R30 FB 社團 cross-post = 留言放大 5-10x）
+
+### 🚨 重大發現：社團 cross-post 留言爆 137x
+
+5/22 Claude in Chrome 一篇 cross-post 到 2 個 AI 社團合計：
+- Generative AI 技術交流中心：126 讚 / **425 留言** / 20 分享
+- Gemini AI Google：148 讚 / **531 留言** / 14 分享
+- **合計 956 留言 = 主帳號 timeline 同篇（7 留言）137x**
+
+5/29 Opus 4.8 dynamic workflows → Vibe Coding Taiwan：247 讚 / 39 分享（分享率 0.16）。
+
+### 🆕 R30：FB 社團 cross-post 策略
+
+主帳號 timeline 發完後 1-2h cross-post 主題對口社團 = 留言 5-10x / 觸及 2-3x。
+
+**操作鐵則**：
+1. 主帳號先發（鐵粉看原始）
+2. 1-2h 後 cross-post（不重寫）
+3. **每篇 ≤ 2 個社團**（≥ 3 = spam 警告）
+4. 主動回留言區 = 社團 algorithm 加權
+
+**社團 × archetype match**：
+- Vibe Coding Taiwan = F23 行業 / F6b
+- Generative AI 中心 = F22 工具發現 + 脆弱
+- Gemini AI Google = F21 答疑 / F23
+- Claude Code 台灣 = F6b / F15 mini
+- 自由工坊 = F18 作品 / F20 故事
+
+### 🎯 R29 + R30 三重組合戰略
+
+```
+凌晨主帳號 Mode C → 1-2h cross-post 社團 1 → 4-6h cross-post 社團 2
+```
+
+最大化 audience exposure，雙篇社團不洗同一個 niche 3+ 次。
+
+### Funnel 雙路強化推測
+
+社團 cross-post 拉的 Line 群成員 **quality 可能 > 主帳號鐵粉**（同 niche audience 精準度高）。待 5/31+ Line 群成長對照驗證。
+
+### Cases 新增
+
+- Case 21: 3 社團 cross-post 戰績完整解構 + archetype × 社團 match table
+
+### Lessons learned
+
+1. **社團 cross-post 留言文化 5-10x 主帳號**
+2. **archetype × 社團 match 影響觸及天花板**（F22 適合通用 AI 社團 / F23 適合 niche）
+3. **每篇 ≤ 2 個社團**（spam 警告線）
+4. **主動回留言 = 社團 algorithm 加權**
+
+---
+
 ## v0.9.0 — 2026-05-26（🔧 全面 audit + 重構：SKILL.md -77% token + 規則編號統一）
 
 第二次大型 token 優化（v0.4 後）。用姐妹 skill code-cleanup-helper v0.2 跑完整 8 dimension audit，抓到 4 個 critical 問題後重構。
