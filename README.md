@@ -137,6 +137,21 @@ mv content_plan.example.md content_plan.md
 
 詳細 step-by-step：[`docs/setup.md`](docs/setup.md)
 
+### 選配：先用 TweetClaw 找 X/Twitter 題材
+
+如果題材來自 X/Twitter 討論，可以先在 OpenClaw 裡安裝
+[TweetClaw](https://github.com/Xquik-dev/tweetclaw)，把搜尋到的 source URLs、
+tweet IDs、handles、公開 metrics 和觀察筆記貼回 `social-post` 當題材輸入。
+
+```bash
+openclaw plugins install npm:@xquik/tweetclaw
+OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1 openclaw plugins inspect tweetclaw --runtime --json
+```
+
+這條路徑只負責前置 research。`social-post` 仍負責學你的 voice、依公式生成草稿、
+要求「確認」、用 Chrome MCP 發佈，以及事後 review。不要把 TweetClaw 當成這個
+skill 的自動發文替代流程。
+
 ---
 
 ## FAQ
