@@ -10,6 +10,467 @@
 
 ---
 
+## v1.0.1 — 2026-06-10（🚀 真實 voice + keyword CTA：6/7-6/9 雙 mega-viral 實證）
+
+6/1-6/10 連續實戰打出兩篇 mega-viral，新增 R34（反 AI 腔）/ R35（keyword CTA）/ F26（作品集 reveal）/ F27（單品 giveaway）+ Cases 27-31。
+
+### 🏆 雙 mega-viral 實證
+
+| 篇 | 公式 | 觀眾 | 非追蹤 | 留言 |
+|---|---|---|---|---|
+| 6/7 F21「不是 ComfyUI」| R34+R35（DM 版）| 10,966 | 82.5% | 323 |
+| **6/9 F6b giveaway** | R34+R35-safe（公開 link）| **42,103** | **93.1%** | **959** 🏆 |
+
+→ 6/9 = 史上第三大觀眾 + **史上最高留言（959）** + 最高收益（$3.94）。
+
+### 🆕 R34 真實 voice（反 AI 腔，🚨 硬規則）
+
+有讀者說「像 AI 文」。關鍵診斷（用 Hao 真實貼文反查）：**元兇是「詞」不是「標點」**。
+- AI 腔元兇 = 抽象空詞（護城河/本質/真正的 X）+ staged 開場 + over-narrate + 過度工整
+- `──` 分隔符（5/22 broke 94.5% 用過）+ `！！！` hype（Day1 mega-viral 用過）= **proven 爆款裝置，不是 AI 腔**
+- 日常標點 `，、`，proven 公式裝置照公式用
+- **6/9 證明：R34 真實 voice 跟 F6b mega-viral 完全相容**
+
+### 🆕 R35 keyword CTA = broke 鐵粉圈引擎（🏆 最強 CTA）
+
+「留言『關鍵詞』」= 留言磁鐵：每個留言 5x 權重堆爆 → 演算法判爆點 → broke。
+- **公開 link 自助派發 = 最優預設**（精選留言，無 DM 天花板 + account-safe）：6/9 衝 959 留言零限制
+- DM 版有天花板：6/7 323 留言就觸發 FB 私訊限制（封號前兆）→ 改 F24 限制說明 + 公開 link
+- 絕不導 GitHub 正文（R25）
+
+### 🆕 公式 F26 / F27（giveaway 系列）
+
+- **F26 隱藏作品集釋出型**：「我私下還做了一堆東西」reveal + giveaway 測水溫
+- **F27 單品 spotlight giveaway**：系列接力單元（manifest 後一個個 drop），PWYW（輸入 0 元）+ 條件開源 + 必加 R35 keyword CTA
+
+### 📚 Cases 27-31
+
+作品集 reveal（35.2%）/ F21 mega（10,966）/ 串燒 Reel 對照（GitHub CTA flop）/ F24 限制說明（R35 天花板）/ F6b giveaway mega（42,103）/ POS 單品接力。
+
+### 規則 / 公式總數
+
+R1-R35（R9/R21/R22 廢除）/ F1-F27 / Mode C 9 變體。
+
+---
+
+## v1.0.0 — 2026-05-31（🎉 月底 milestone：框架穩定，5 月完整實證）
+
+從 2026-04-21 Day 1 mega-viral 開始，**41 天 / 25 個 case / 32 條規則 / 4 個 Mode / 14 個 release** — 整套框架穩定，ship v1.0.0 標記。
+
+### 📊 5 月底完整數據
+
+**Hao Brand 戰績**：
+- **Day 1 4/21 → 5/31**：FB 主帳號 ~4,200 → ~4,500 追蹤者
+- **Line 群**：800 → 4,568+（**+3,768 / 41 天 = 92/day average**）
+- **Discord**：6,930+（雙 funnel 累積 1.15 萬+）
+- **FB 內容營利**：已啟動 $0.78+ 累積（v0.8.6 後）
+- **Thread 副帳號**：~10K+ 追蹤（25/7 起累積）
+
+### 🎯 v1.0.0 框架完整覆蓋
+
+**4 個 Mode**：
+- Mode A 日常（鐵粉黏著）
+- Mode B 純血 F6b / F15 mini（擴散 + Line 群）
+- **Mode C 深度反思 8 變體**（F20/F21/F22/F23/F24/F25a/b/c）
+- Thread F19 立場宣言
+
+**R1-R32 規則系統**（R9/R21/R22 已廢除標記）：
+- R1-R7 核心節奏 + 評估
+- R8-R14 Mode B 純血生成規則
+- R15-R19 2026 演算法新信號
+- R20-R24 漸進改進 + 連發累積
+- R25 🚨 無 URL 硬規則
+- R26-R29 Mode C 規則
+- R30 社團 cross-post（留言 137x）
+- R31 trust reset
+- R32 集體 framing broke 鐵粉圈
+
+**Viral 4 條件 + Readability 隱藏第 5**：結構 + voice + 新意圖 + 時段 + readability。
+
+### 📚 25 個 Case 完整實證庫
+
+Day 1-7（4/21-4/29）/ 5/5-5/12（v0.5-v0.8 演進）/ 5/16-5/19（F4→F19 進化 + R25 lock）/ 5/22-5/29（Mode C 5 變體實證 + 社團 cross-post + 集體 framing）。
+
+### 🤖 雙 repo 互修生態（v0.7.3 後）
+
+```
+claude-skill-social-post v1.0.0 ← cleanup-helper v0.2 audit
+claude-skill-code-cleanup v0.2 (8 dimensions: 4 cleanup + 4 audit)
+```
+
+每次 cleanup-helper 升級都會抓 social-post 新債 → 觸發新 release。
+
+### 🏆 5 月最強 case
+
+| 維度 | 紀錄 | 公式 |
+|---|---|---|
+| 觀眾峰值 | Day 1 75K | F6b promo |
+| Mode C 峰值 | 5/22 F23 一致性大戰 **10,022 觀眾 / 94.5% 非追蹤** | F23 行業洞察 |
+| 留言爆 | 5/22 同篇 cross-post 2 社團 = **956 留言** | R30 cross-post |
+| Thread mega | 25/7 三篇平均 150K 觸及 | F19 純血 |
+| Line 群轉化 | Day 1 +1,319 / 5/5 +1,239 | F6b 變體 D |
+
+### 🎯 v1.0.0 後路線（v1.x 框架補強）
+
+- v1.0.x：戰績累積 + 細節 patch（不增 archetype）
+- v1.1.0：跨平台拓展（IG / X / YouTube）
+- v1.2.0：英文版（拓展非中文受眾）
+- v2.0.0：另一個帳號 fork 實證（驗證可移植性）
+
+### 🙏 致謝
+
+Hao 41 天連續實戰 + 真實貼戰績訓練 + 多次校正 AI 過頭歸因 = 整套框架真實可複製，不是空中樓閣。
+
+---
+
+## v0.9.3 — 2026-05-31（🌟 F25 集體願景型 3 變體 + R32 反個人主義 framing）
+
+5/26 + 5/28 + 5/29 三篇集體 framing 實證，Mode C 解鎖第 6-8 變體（F25a/b/c），完整 Mode C 8 變體地圖。
+
+### 🆕 F25 集體願景型 3 sub-variants
+
+| Sub-variant | 觸發場景 | 實證 觀眾 / 非追蹤 / 儲存 |
+|---|---|---|
+| **F25a Ship 系列承諾 manifest** | 要 ship 新系列 / 公開承諾 | 5/26 = 2,648 / **39.7% broke** / 12 儲存 |
+| **F25b Milestone + 集體歸功** | 達標 / 帳號成就 | 5/28 = 852 / 16.7% / 0 儲存 |
+| **F25c 階段 review + 集體 vision** | 月底總結 / 換 phase | 5/29 = 988 / 20.4% / 3 儲存 |
+
+### F25a 結構（broke 鐵粉圈最強變體）
+
+```
+[標題式 hook] 「做了一個決定」
+[自問自答] 「為什麼想做這件事？」
+[痛點 framing] 私訊量爆，與其一個個回不如公開
+[拒絕主流 punch] 「不藏 / 不留一手 / 不鎖付費」
+[個人成長傳承] 「我也是這樣學起來的，輪到我傳下去」
+[系列預告 + 互動 CTA] 「每天一部 + 留言類型告訴我」
+[簡短收尾] 「我們明天見」
+```
+
+### F25b 結構
+
+```
+[達標 hype 克制] 「達標了！！我們 X」
+[時間軸故事] 「4/1 創 → 4/16 認真經營 → 5/28 滿額」
+[數字 stacking + 雙 funnel] 「Line 5000 + Discord 6930 = 12,000+」
+[集體歸功反個人] 「完全不是我一個人的功勞，是所有夥伴」
+[延續 framing] 「Line 滿額但故事才剛開始」
+```
+
+### F25c 結構
+
+```
+[個人總結 hook] 「玩了一個多月，X 套路透了 😂」
+[階段 review] 「我做了 A / B / C」
+[反命題 punch] 「最開心的不是數字 ── 是 Y」
+[名言引用] 「一個人快，一群人遠」（集體價值觀）
+[未來 vision] 「下階段：合作 / 把專長兜在一起」
+[期待收尾 + emoji] 「玩點更大的 😂」
+```
+
+### 🆕 R32 集體 framing trigger
+
+任何 Mode B / Mode C 篇用「我們 / 大家一起 / 不只是我」反個人主義 framing = **broke 鐵粉圈廣度 +30-50%**。
+
+vs 個人 hype（F6b mega-viral 但稀有）：F25 集體 framing **普遍可達 broke 鐵粉圈**（廣度高但峰值 < mega）。
+
+### voice 鐵則（F25 系列共通）
+
+- 適度 emoji（😂 OK 但不堆疊）
+- 「！！」最多，不用「！！！」
+- 不用 TM 級用詞 / 攻擊性動詞
+- 用「我們 / 大家 / 一起」反個人代名詞
+- 故事 framing 收尾（「明天見」/「才剛開始」/「玩點更大的」）
+
+### Hao Mode C 完整 8 變體地圖
+
+| F | 觸發 | 月配額 |
+|---|---|---|
+| F20 故事傳承 | mentor 影響你深 | 1-2 |
+| F21 Ship 答疑 | ship 後留言問怎麼用 | 每 ship 後 1 |
+| F22 工具發現 + 脆弱 | 新工具解套你卡點 | 1-2 |
+| F23 行業洞察 | 媒體寫了你不同意 | 1-2 |
+| F24 邊界澄清 | 私訊爆 / 誤解 | 1 月最多 |
+| **F25a Ship 系列承諾** | 要 ship 新系列 | 1-2 |
+| **F25b Milestone 集體** | 達標 / 成就 | 1（達標時觸發）|
+| **F25c 階段 review + vision** | 月底總結 / 換 phase | 1（月末）|
+
+→ **Mode C 月內可配置 7-10 篇有計畫地輪播**。
+
+### Cases 新增
+
+- Case 23: F25a 5/26「做了一個決定」manifest broke 鐵粉圈
+- Case 24: F25b 5/28 Line 5000 集體歸功
+- Case 25: F25c 5/29 階段 review + 集體 vision
+
+### Lessons learned
+
+1. **集體 framing 比個人 hype 廣度大**（F25 普遍 broke 鐵粉圈 vs F6b 稀有 mega-viral）
+2. **拒絕主流 = trust signal**（「不藏 / 不鎖付費」廣 identity）
+3. **個人成長傳承 framing 強**（「我也是這樣學的，輪到我傳下去」）
+4. **Mode C 8 變體 = 月配置 7-10 篇 viral 可能**（信任複利累積）
+
+---
+
+## v0.9.2 — 2026-05-31（🆕 F24 Brand 邊界澄清型 + R31 trust reset）
+
+### 🛡️ F24 第 5 個 Mode C 變體 — Brand 邊界澄清
+
+5/27「一些說明，跟大家講清楚」5 點澄清文 4 天 plateau：
+- 2,754 觀眾 / 173 讚 / **84 留言** / 6 分享 / **42.4% 非追蹤**
+- $0.19 收益 / 鐵粉強認同（「太猛了大神」「感恩分享」）
+- 35-54 歲占 69% 成熟受眾
+
+### 🆕 F24 結構（編號 5 點 + 謙卑收尾）
+
+```
+[標題式 hook] 「一些說明，跟大家講清楚」
+[動機開場] 「想藉這篇一次說明，讓彼此都舒服一點」
+[編號 5 點，每點 = 問題 + 反駁 + 立場]
+   一、我從來沒有賣過 X
+   二、Y 是 Z 不是 W
+   三、麻煩多用「追蹤」陌生交友我不會加
+   四、訊息太多回不完，來社群找我更快
+   五、我發出來的東西，都是開源，沒賺大家錢
+[謙卑收尾] 「感謝大家的配合，也謝謝一直以來支持的每一個人」
+```
+
+### F24 vs 其他 Mode C
+
+| 變體 | confess 對象 |
+|---|---|
+| F22 工具發現 + 脆弱 | **內在焦慮**（拖延 / 出鏡焦慮）|
+| F23 行業洞察 | 反主流 framework |
+| **F24 Brand 邊界** | **外在邊界**（沒賣課 / 不接案）|
+
+### 🆕 R31：Brand 邊界澄清時機
+
+觸發 F24 條件（任一）：
+1. 私訊量爆（回不完）
+2. 陌生交友邀請太多
+3. 有人誤解你在賣課 / 接案
+4. 鐵粉有「跟我們有距離」感
+5. 月內 hype + ship 過多後 reset 信任
+
+**頻率**：每月 ≤ 1 次（太頻繁 = 自我中心感）。
+
+### voice 鐵則（跟其他 Mode C 不同）
+
+- 無「！」hype
+- 無 TM 級用詞
+- 無攻擊性動詞
+- 用「── 真的沒有」溫和強調
+- 編號（一、二、三、四、五）
+- 謙卑收尾
+
+### Hao Mode C 完整 5 變體
+
+| F | 觸發 | 月配額 |
+|---|---|---|
+| F20 故事傳承 | mentor 影響你深 | 1-2 |
+| F21 Ship 答疑 | ship 後留言問怎麼用 | 每次 ship 後 1 |
+| F22 工具發現 + 脆弱 | 新工具解套你卡點 | 1-2 |
+| F23 行業洞察 | 媒體寫了你不同意 | 1-2 |
+| **F24 邊界澄清** | **私訊爆 / 誤解 / trust reset** | **1**（月最多）|
+
+### Cases 新增
+
+- Case 22: 5/27 F24「一些說明」完整解構 + Mode C 5 變體對比
+
+### Lessons learned
+
+1. **Brand 邊界 = 信任引擎**（明確劃線反而讓鐵粉更信任）
+2. **F24 voice ≠ F22 vulnerable**（外在邊界 vs 內在焦慮）
+3. **編號 numbered list 在 Mode C 第一次出現**（之前都用 ── 分隔符或段落）
+4. **trust reset 月 1 次最多**（不能濫用 = 自我中心）
+
+---
+
+## v0.9.1 — 2026-05-31（🆕 R30 FB 社團 cross-post = 留言放大 5-10x）
+
+### 🚨 重大發現：社團 cross-post 留言爆 137x
+
+5/22 Claude in Chrome 一篇 cross-post 到 2 個 AI 社團合計：
+- Generative AI 技術交流中心：126 讚 / **425 留言** / 20 分享
+- Gemini AI Google：148 讚 / **531 留言** / 14 分享
+- **合計 956 留言 = 主帳號 timeline 同篇（7 留言）137x**
+
+5/29 Opus 4.8 dynamic workflows → Vibe Coding Taiwan：247 讚 / 39 分享（分享率 0.16）。
+
+### 🆕 R30：FB 社團 cross-post 策略
+
+主帳號 timeline 發完後 1-2h cross-post 主題對口社團 = 留言 5-10x / 觸及 2-3x。
+
+**操作鐵則**：
+1. 主帳號先發（鐵粉看原始）
+2. 1-2h 後 cross-post（不重寫）
+3. **每篇 ≤ 2 個社團**（≥ 3 = spam 警告）
+4. 主動回留言區 = 社團 algorithm 加權
+
+**社團 × archetype match**：
+- Vibe Coding Taiwan = F23 行業 / F6b
+- Generative AI 中心 = F22 工具發現 + 脆弱
+- Gemini AI Google = F21 答疑 / F23
+- Claude Code 台灣 = F6b / F15 mini
+- 自由工坊 = F18 作品 / F20 故事
+
+### 🎯 R29 + R30 三重組合戰略
+
+```
+凌晨主帳號 Mode C → 1-2h cross-post 社團 1 → 4-6h cross-post 社團 2
+```
+
+最大化 audience exposure，雙篇社團不洗同一個 niche 3+ 次。
+
+### Funnel 雙路強化推測
+
+社團 cross-post 拉的 Line 群成員 **quality 可能 > 主帳號鐵粉**（同 niche audience 精準度高）。待 5/31+ Line 群成長對照驗證。
+
+### Cases 新增
+
+- Case 21: 3 社團 cross-post 戰績完整解構 + archetype × 社團 match table
+
+### Lessons learned
+
+1. **社團 cross-post 留言文化 5-10x 主帳號**
+2. **archetype × 社團 match 影響觸及天花板**（F22 適合通用 AI 社團 / F23 適合 niche）
+3. **每篇 ≤ 2 個社團**（spam 警告線）
+4. **主動回留言 = 社團 algorithm 加權**
+
+---
+
+## v0.9.0 — 2026-05-26（🔧 全面 audit + 重構：SKILL.md -77% token + 規則編號統一）
+
+第二次大型 token 優化（v0.4 後）。用姐妹 skill code-cleanup-helper v0.2 跑完整 8 dimension audit，抓到 4 個 critical 問題後重構。
+
+### 🚨 Audit 抓到的 4 個問題
+
+| 問題 | 重構前 | 重構後 |
+|---|---|---|
+| SKILL.md 膨脹 | **565 行**（v0.4 曾 116）| **130 行（-77%）** |
+| 規則編號斷層 | R19 → R25（R20-R24 散在 case_studies）| **R1-R29 連續** |
+| 規則順序錯亂 | R1-R19 → R25-R29 → R15-R18 混排 | **速查表按序 + rules.md 完整** |
+| case_studies / formulas 過長 | 1,072 / 771 行 | 不動（只在案例/P2 階段載入）|
+
+### 🔧 Refactored
+
+- **SKILL.md 重構為 router + 速查表**（130 行）：
+  - 階段路由 + 安全閘 + 不要做
+  - **R1-R29 一句話速查表**（標 ⭐ 高頻 / 🚨 硬規則 / 🏆 最強）
+  - Viral 4 條件 + Hao 4 Mode 地圖
+  - 實用技巧 / 持續優化 / 快速查詢 / 常見踩雷
+- **新增 `references/rules.md`**（206 行）：R1-R29 完整定義 + 實證 + 操作細節
+  - **補回 R20-R24**（之前散在 case_studies.md，造成編號斷層）
+  - Viral 4 條件 + Readability 三檢查 + FB compose 段落鐵則
+- **P2 路由更新**：發文時載 `rules.md`（相關規則段）而非整個 SKILL.md
+
+### Token 節省
+
+| 場景 | v0.8.7 | v0.9.0 | 節省 |
+|---|---|---|---|
+| Skill 觸發（SKILL.md 載入）| ~565 行 | **~130 行** | **-77%** |
+| P2 發文 | SKILL 全載 | router + 目標規則段 | 更精準 |
+| 規則查詢 | 翻 SKILL.md 混排 | `rules.md` R1-R29 連續 | 更快 |
+
+### Changed
+
+- 規則編號 R20-R24 從 case_studies.md「歸納」段提到 rules.md，統一 R 系統
+- 廢除規則（R9/R21/R22）速查表保留標記，完整原因見 rules.md
+
+### Lessons learned
+
+1. **skill 自己會膨脹** — v0.4 優化到 116 行，4 週後膨脹回 565 行（每次 patch +10-40 行）
+2. **progressive disclosure 是 token 王道** — 速查表（每次載）+ 完整版（按需載）
+3. **規則散在 case_studies 造成編號斷層** — 規範規則應集中 rules.md
+4. **用 cleanup-helper audit 自己** — Mode A Dimension 4（過長）+ Dimension 2（編號）抓到問題
+
+---
+
+## v0.8.7 — 2026-05-26（🆕 Mode C 深度反思系列 + F20-F23 四變體 + R26-R29）
+
+5/22 + 5/25 共 4 篇 Mode C 範例，broke 鐵粉圈最高 94.5%（F23 Mode C 系列最強 10,022 觀眾 / 儲存 40）。Hao brand 解鎖第 4 種 funnel（Mode A 日常 / Mode B 純血 / **Mode C 深度反思** / Thread F19）。
+
+### 🆕 Mode C 深度反思 4 變體
+
+非 hype voice — 沒「殺瘋了」、沒「！！！」、沒攻擊性動詞。靠**故事 / 反命題 / 脆弱 confess / 行業洞察**驅動 viral。
+
+| F | 主題類型 | 5 月實證 | 廣度 |
+|---|---|---|---|
+| **F20 個人故事傳承** | 你被某 mentor 影響 | 403 觀眾 / 16% 非追蹤 | 鐵粉信任深化 |
+| **F21 Ship 答疑解構** | ship 後留言問怎麼用 | 1,058 / 24.7% | dev 圈 framework 儲存 |
+| **F22 工具發現 + 脆弱解套** | 新工具解決你長期卡點 | 5,850 / 91.5% | **broke 鐵粉圈廣 identity** |
+| **F23 行業洞察解構** 🏆 | 媒體寫了什麼但你不同意 | **10,022 / 94.5%** | **mega-viral broke + 儲存 40** |
+
+### 🆕 R26 ── 分隔符鐵則
+
+Mode C 長文型用 `── 段落標題 ──` 做視覺切分，比 paragraph break 更易掃讀。F23「一致性大戰」用 4 個 ── 分隔符 broke 94.5% 非追蹤。
+
+### 🆕 R27 個人脆弱 confess
+
+揭露真實卡點 / 焦慮 / 拖延（不是炫成就）= broke 鐵粉圈到 90%+。
+
+「我自己一直想 X，最大的卡點是 Y... 拖了大半年沒動」結構 = vulnerable + relatable + 普世議題 → identity 站隊廣度 5-10x。
+
+5/22 F22「YouTube 拖了大半年 / 出鏡焦慮」→ 91.5% 非追蹤。
+
+### 🆕 R28 行業反主流 framing
+
+反主流 + 趨勢預言 framework：
+- 「X 在 2026 已不是門檻，還拿這當賣點其實落伍」
+- 「X 大戰已打完，下一場是 Y 大戰」
+- 「不是 X，是 Y」reframing
+
+5/22 F23「一致性大戰已打完，下一場是工作流大戰」→ 10,022 觀眾 / 94.5% 非追蹤 / 儲存 40 = Mode C 系列最強。
+
+### 🆕 R29 Mode C 同日連發策略
+
+Mode C 同日 2 篇 OK，前提：
+1. 主題類別相關（同 niche）
+2. framing 角度互補（vulnerable vs insider / 故事 vs 解構）
+3. 不同 archetype 變體配對
+
+**5/22 vs 5/25 對照實證**：
+- 5/22 F22+F23 同 niche + 互補 framing → **雙篇 broke 91.5% / 94.5%**
+- 5/25 F20+F21 audience 分散 → 雙篇鎖鐵粉 16% / 24.7%
+
+**R1 細化**：
+- Mode B 純血 hype = 嚴格一天一篇（演算法判 spam）
+- Mode C 深度反思 = 同日 2 篇可行（同 niche + 不同 framing 互強）
+
+### Mode C 同日配對推薦表
+
+| 配對 | 預期 |
+|---|---|
+| F22 + F23 | ⭐⭐⭐⭐⭐ 互強雙 broke |
+| F22 + F21 同 niche | ⭐⭐⭐⭐ |
+| F23 + F21 同 niche | ⭐⭐⭐⭐ |
+| F21 + F20 分散 | ⭐⭐ 弱 |
+
+### Hao 完整 Mode 地圖
+
+| Mode | viral 機制 | 鐵粉/非追蹤 | 代表 |
+|---|---|---|---|
+| A 日常 | 鐵粉黏著 | 90%+ 鐵粉 | 短句吐槽 |
+| B 純血 | 擴散廣推 | 90%+ 非追蹤 | Day 1 / 5/5 |
+| **C 深度反思** 🆕 | 信任深化 + 儲存 trigger | **F23 94.5% 非追蹤** | F20/21/22/23 |
+| Thread F19 | Thread 轉發 | Thread 廣推 | 25/7 三篇 |
+
+### Cases 新增
+
+- Case 16 F20「消費不如生產」5/25 / Case 17 F21「AI 自動生影片」5/25
+- Case 18 F22「Google Flow self-avatar」5/22 / Case 19 F23「一致性大戰打完了」5/22
+- Case 20 同日連發效應對比（R29 推出依據）
+
+### Lessons learned
+
+1. **Mode C 同樣可達 Day 1 mega-viral 級** — 不只 Mode B 純血能爆
+2. **個人脆弱 confess > 炫成就** — 廣 identity 觸發 5-10x
+3. **行業反主流 framing** = Mode C 系列最強 archetype（F23 broke 94.5%）
+4. **── 分隔符**比 paragraph 更易掃讀 + 演算法 dwell 友好
+5. **同日連發 Mode C 配對選對**可雙篇 broke
+
+---
+
 ## v0.8.6 — 2026-05-19（🚨 R25 鐵則：FB / Threads 貼文絕不附外部連結）
 
 使用者 5/19 lock — AI 反覆把 GitHub 連結誤加進 viral 草稿，全部撤回 + 鎖死規則。

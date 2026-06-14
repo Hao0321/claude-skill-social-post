@@ -36,6 +36,20 @@
 
 > **v0.8.1 更新（2026-05-13）**：F19 排版精修 — v0.8 第一版誤把 F19 寫成 3 段空行（FB F6b 思維誤帶到 Thread），對照 Hao 3 篇真實爆款反向工程後修正為「**1 段不換行 / 連續逗號流 / 「！」最多 2 個 / 60-150 字**」。
 >
+> **🚀 v1.0.1（2026-06-10）真實 voice + keyword CTA**：新增 **R34 反 AI 腔**（元兇是抽象空詞不是標點 — `──`／`！！！` 是 proven 爆款裝置）+ **R35 keyword CTA broke 引擎** + **F26/F27 giveaway 系列**。雙 mega 實證：F21「不是 ComfyUI」R34+R35 版 **10,966 觀眾 / 82.5%**（vs 原版 1,058 = 10x）；F6b giveaway **42,103 觀眾 / 93.1% / 959 留言**（史上最高留言）。R34 真實 voice 跟 mega-viral 完全相容；R35「留言『關鍵詞』」公開 link 自助 = broke 無天花板 + account-safe。
+>
+> **🎉 v1.0.0（2026-05-31）月底 milestone**：41 天連續實戰 / 25 個 case / 32 條規則 / 4 個 Mode（A/B/C/Thread F19）/ 14 個 release。Line 群 800 → 4,568+ / Discord 6,930+ / FB 內容營利已啟動。框架穩定，後續 v1.x 補強不增 archetype。
+>
+> **v0.9.3 更新（2026-05-31）**：🌟 **F25 集體願景型 3 sub-variants + R32 反個人主義 framing**（5/26 manifest broke 39.7% 非追蹤 + 12 儲存 / 5/28 Line 5000 集體歸功 / 5/29 階段 review 集體 vision）。Mode C **完整 8 變體** 解鎖（F20-F25a/b/c），月內可配置 7-10 篇 viral 輪播。
+>
+> **v0.9.2 更新（2026-05-31）**：🆕 **F24 Brand 邊界澄清型 + R31 trust reset**（5/27「一些說明」5 點澄清文 2,754 觀眾 / 84 留言 / 42.4% 非追蹤）。Mode C 系列第 5 變體解鎖（F20-F24），跟 F22 confess 內在焦慮不同 — F24 confess 外在邊界（沒賣課/不接案/邊界期待）。
+>
+> **v0.9.1 更新（2026-05-31）**：🆕 **R30 FB 社團 cross-post = 留言放大 5-10x**（5/22 Claude in Chrome 同篇 cross-post 2 社團合計 956 留言 = 主帳號 137x）。主帳號發完後 1-2h cross-post 對口社團，archetype × 社團 match 表新增。
+>
+> **v0.9.0 更新（2026-05-26）**：🔧 全面 audit + 重構 — SKILL.md **565 → 130 行（-77% token）**，新增 `references/rules.md` 收錄 R1-R29 完整定義，規則編號統一連續（補回 R20-R24）。用姐妹 skill code-cleanup-helper v0.2 跑 8 dimension audit 後重構。
+>
+> **v0.8.7 更新（2026-05-26）**：🆕 **Mode C 深度反思系列 + F20-F23 四變體 + R26-R29**。非 hype voice 系列 broke 鐵粉圈最高 94.5%（F23「一致性大戰打完了」10,022 觀眾 / 儲存 40 = Mode C 最強）。Hao brand 解鎖第 4 種 funnel（Mode A / Mode B / **Mode C** / Thread F19）。
+>
 > **v0.8 更新（2026-05-13）**：第一個 minor release。新增 **F19 Threads 立場宣言型公式**（Hao 副帳號 @hao0321_studio 2025-07 實證 400 → 10K 粉一週，3 篇 26 萬/6.9 萬/12.7 萬瀏覽）+ **R19 Thread 轉發權重 + Keyword 機制** + **雙 brand 雙 funnel 戰略**（FB social-post brand + Thread 教學分享 brand 互補）。
 >
 > **v0.7.4 更新（2026-05-13）**：cleanup-helper v0.2 Mode B audit 抓到 v0.7.3 doc drift → 補 CHANGELOG/README v0.7.3 entry。雙 repo audit loop 閉環。
