@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.2 — 2026-06-23（🩹 數據誠實校正 + Cases 32-35）
+
+**數據校正**：私域社群數字更新至現況並修正先前膨脹寫法。
+- Line 4,998 → **5,000**｜Discord 6,930 → **9,400**（台灣最大 AI Discord，快破萬）
+- 🩹 Discord **不是「從 0」自然成長**，是從**既有受眾 seed（約 5,000）**長到 9,400 → 移除「15x funnel / 169 per day」那種乾淨倍數（膨脹寫法）。Line 與 Discord 跨平台有重疊，私域數字非去重加總。
+- 同步 `references/case_studies.md` Case 26 funnel 表 + 透明校正註。
+
+**新增 Cases 32-35**：台灣最大 milestone（superlative 放大器，57.9% broke）/ 工坊使者 F13 delegation / Fable 5 news-vulnerable（換 intent broke 回來）/ 同日 demo>claim A/B（**具體 demo 68% vs 抽象 claim 15%**，comments ≠ broke）+ R5 giveaway 疲勞實證。
+
+（v1.0.0 / v1.0.1 條目保留原樣作歷史；本條目為透明校正。）
+
+---
+
 ## v1.0.1 — 2026-06-10（🚀 真實 voice + keyword CTA：6/7-6/9 雙 mega-viral 實證）
 
 6/1-6/10 連續實戰打出兩篇 mega-viral，新增 R34（反 AI 腔）/ R35（keyword CTA）/ F26（作品集 reveal）/ F27（單品 giveaway）+ Cases 27-31。
