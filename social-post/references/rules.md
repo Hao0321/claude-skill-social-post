@@ -261,8 +261,6 @@ v0.8.4 誤判 F19 2025→2026 衰退 89%。真因：**沒連發累積 momentum**
 
 **必檢**：段 4 有 https:// → ❌ 不發，移留言區。
 
-📌 **YouTube 導流不是 R25 例外 ── 順 R25 設計**：YT link 走 FB 精選留言 / Threads 留言區（慎用、單則）/ IG link-in-bio，**正文維持無連結純表態**（吃 External Share，YT 端權重 88）。R35 管「領取資源」funnel，**不管「導去看片」**——導 YT 不用關鍵詞 funnel，用 F19 純表態 + 留言區 link 自助。完整協定見 [`youtube.md`](youtube.md)。
-
 ## R26：── 分隔符鐵則（Mode C 長文）
 
 `── 段落標題 ──` 做視覺切分，比 paragraph break 易掃讀。F23 用 4 個 ── broke 94.5%。
