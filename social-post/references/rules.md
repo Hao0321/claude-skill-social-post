@@ -42,6 +42,12 @@ AI/tech 創作者受眾夜貓族，FB 黃金 22:00-01:00（實證 02:13=72K / 09
 
 ⚠️ **題材系列疲勞**（v0.8.x 觀察）：連 5 篇繞「Line 群數字」鐵粉疲勞 → 同題材系列月內 ≤ 3-4 次。
 
+**🏆 6/9-6/15 giveaway 系列實證（demo > claim 可救疲勞）**：
+- 6/9 全公開（42K/93.1%）→ 6/10 POS（1,510/21.2%）→ 6/11 上午網紅製造機（2,153/**15.1% 鎖鐵粉**）= giveaway intent 連發第 3 次疲勞（R35「我要」衝 91 留言仍不 broke）
+- **但同日 6/11 下午自動剪輯 demo（7,584/68% broke / 45 儲存）** = 同 giveaway 主題，換成**具體 demo + 看得到的成品 + Fable 5 news hook** 立刻 broke
+- 6/13 Fable 5 被關（news+vulnerable，無 CTA）48.9% broke = 換 intent 也救
+- **結論**：intent 疲勞時靠（1）換 intent 或（2）**具體 demo + news hook** 重新 broke。**抽象 claim（「我很強」）= 鎖鐵粉；具體 demo（「看成品」）= broke**。comments ≠ broke（91 留言抽象篇仍 15.1%）。
+
 ## R6：評估看 4 指標 + 必須 48-72h plateau 才判定
 
 - **1-6h**：不下結論（underestimate 60-80%）
