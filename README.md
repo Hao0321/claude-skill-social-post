@@ -36,6 +36,8 @@
 
 > **v0.8.1 更新（2026-05-13）**：F19 排版精修 — v0.8 第一版誤把 F19 寫成 3 段空行（FB F6b 思維誤帶到 Thread），對照 Hao 3 篇真實爆款反向工程後修正為「**1 段不換行 / 連續逗號流 / 「！」最多 2 個 / 60-150 字**」。
 >
+> **🔧 v1.0.3（2026-06-30）全面強化**：工作流盤點 39 case 七維度，新增 **7 條規則 R36-R42**（R36 demo>claim 母規律：具體成品碾壓抽象自誇、comments≠broke ／ R37 value-prop-lead ／ R38 第三方戰績 ／ R39 分享 20x 引擎 ／ R40 dwell ／ R41 superlative ／ R42 archetype 飽和）+ **F28/F29** + 10 條規則寫更細。新證：自動剪輯 value-prop **MEGA 38K / 90.4% / 儲存 466**（史上最高）；Thread F19 破紀錄 **44 萬 / 轉發 1,197**。**R1-R42 / F1-F29 / Cases 1-39**。
+>
 > **🚀 v1.0.1（2026-06-10）真實 voice + keyword CTA**：新增 **R34 反 AI 腔**（元兇是抽象空詞不是標點 — `──`／`！！！` 是 proven 爆款裝置）+ **R35 keyword CTA broke 引擎** + **F26/F27 giveaway 系列**。雙 mega 實證：F21「不是 ComfyUI」R34+R35 版 **10,966 觀眾 / 82.5%**（vs 原版 1,058 = 10x）；F6b giveaway **42,103 觀眾 / 93.1% / 959 留言**（史上最高留言）。R34 真實 voice 跟 mega-viral 完全相容；R35「留言『關鍵詞』」公開 link 自助 = broke 無天花板 + account-safe。
 >
 > **🎉 v1.0.0（2026-05-31）月底 milestone**：41 天連續實戰 / 25 個 case / 32 條規則 / 4 個 Mode（A/B/C/Thread F19）/ 14 個 release。Line 群 800 → 4,568+ / Discord 6,930+ / FB 內容營利已啟動。框架穩定，後續 v1.x 補強不增 archetype。
