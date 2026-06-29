@@ -10,6 +10,41 @@
 
 ---
 
+## v1.0.3 — 2026-06-30（🔧 全面強化：broke 系統母規律 + 規則寫更細）
+
+工作流盤點 Cases 1-39 七維度，把散在 case 的 proven broke 模式正式編號 + 規則寫更細。
+
+### 🆕 7 條新規則 R36-R42
+
+- **R36 demo > claim 母規律**（broke 最強單一槓桿，4 案例同變數實證跨 FB/Thread）：具體成品 / 可驗證數字碾壓抽象「我很強」；**comments ≠ broke**（留言爆 ≠ 廣推）
+- **R37 value-prop-lead 開場**：「它幫你做什麼」碾壓 meta 故事（同工具 8x 觀眾 / 21x 儲存）
+- **R38 第三方具體戰績 social proof**（works-for-others > I'm great）
+- **R39 分享 = 20x 讚最強引擎**（內容強走反摩擦 CTA 分享路徑）
+- **R40 Dwell time 隱形王牌**
+- **R41 superlative 放大器**（台灣最大 / 史上最 / 破紀錄 → milestone broke 暴增）
+- **R42 archetype 飽和天花板**（🧪 emerging）
+
+### 🆕 2 公式 F28 / F29
+
+- **F28 第三方戰績 social proof 型**
+- **F29 再ship 揭露型**（閹割版 → 全公開 update 篇救星）
+
+### 📖 10 條現有規則寫更細
+
+R4 時段不可疊加 / R5 兩疲勞軸+override 風險 / R6 second push+niche 分流 / R7 飛輪閉環+回落≠失敗 / R16 留言≠broke+選詞 / R17 內容>格式 / R18 儲存階梯 / R19 stance 綁 artifact+cross-platform momentum / R34 不對齊硬檢+口語配額 / R35 反摩擦第二路徑。**Readability meta 層數統一 ≤ 1**（解文件矛盾）。
+
+### 📚 Cases 36-39
+
+閹割版再 ship（54.2%）/ 自動剪輯 value-prop MEGA（**38K / 90.4% / 儲存 466 史上最高**）/ 第三方戰績（83.3%）/ Thread F19 破紀錄（**44 萬 / 轉發 1,197**）。
+
+**R1-R42（R9/R21/R22 廢除）/ F1-F29 / Cases 1-39。**
+
+---
+
+## v1.0.2 — 2026-06-23（🩹 數據誠實校正 + Cases 32-35）
+
+---
+
 ## v1.0.1 — 2026-06-10（🚀 真實 voice + keyword CTA：6/7-6/9 雙 mega-viral 實證）
 
 6/1-6/10 連續實戰打出兩篇 mega-viral，新增 R34（反 AI 腔）/ R35（keyword CTA）/ F26（作品集 reveal）/ F27（單品 giveaway）+ Cases 27-31。
