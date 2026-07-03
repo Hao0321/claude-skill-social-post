@@ -140,6 +140,7 @@ viral = 4 段 4 句結構 + 純血 voice + 全新敘事意圖 + 黃金時段
 | FB 2026 演算法權重 + 4 指標 | `references/evaluation.md` |
 | 案例解剖（Day 1-7 + 5 月 Mode C）| `references/case_studies.md` |
 | F1-F29 公式 | `references/formulas.md` |
+| F19 部署包（工坊使者 Threads 破圈手冊）| `F19_DEPLOYMENT_KIT.md` |
 | 受眾畫像 + 活躍時段 | `style_profile.md` |
 | 今天 Day N + 戰績 | `content_plan.md` |
 
