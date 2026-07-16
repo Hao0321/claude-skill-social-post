@@ -8,7 +8,7 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 
 | 信號 | 權重 | 說明 |
 |---|---|---|
-| **私訊分享**（Messenger / WhatsApp） | **最高（"essential" 標籤）** | 🆕 立刻 trigger broader distribution |
+| **私訊分享**（Messenger / WhatsApp） | **最高（「essential」標籤）** | 🆕 立刻 trigger broader distribution |
 | **儲存（Save）** | **次高** | 「revisit 信號」= 內容值得回看 |
 | **5 字以上留言** | **3× 一般留言** | 「meaningful comment」深度對話信號 |
 | **公開分享（Story / Timeline）** | 高 | 「ultimate vote of confidence」|
@@ -95,7 +95,7 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 
 ---
 
-## 🏆 真正的 KPI：Line 社群 / GitHub star，不是讚
+## 🏆 真 KPI：Line 社群 / GitHub star，不是讚
 
 Day 1 實證：448 讚只是表面，**+1,150 Line 社群成員**才是真 ROI。
 

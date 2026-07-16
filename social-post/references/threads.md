@@ -19,10 +19,10 @@
 
 1. `navigate` → `https://www.threads.com/`，等 2 秒
 2. **先檢查是否被導向 `/login`**（2026-04 實證：即使 IG 別處登過，Threads 仍可能要求重登）。URL 或 title 含 `login` → 停手告知使用者手動登入，**不要自動輸入密碼**（系統硬規則）
-3. 登入狀態 OK 後，`find` "compose box 有什麼新鮮事" 或 "New thread button" 或 "建立" → `left_click`
+3. 登入狀態 OK 後，`find` 「compose box 有什麼新鮮事」 或 「New thread button」 或 「建立」 → `left_click`
 4. Modal 開後 `find` "thread compose textarea" → `left_click` 焦點 → `type` 內容
 5. 分串：打完第一則 → `find` "add to thread button or plus icon" → `left_click` → type 下一則；重複
-6. `find` "發佈 Post button in compose dialog" → `left_click` → `wait 3`
+6. `find` 「發佈 Post button in compose dialog」 → `left_click` → `wait 3`
 
 ## 取連結
 
@@ -127,8 +127,8 @@
 
 | 日期 | 瀏覽 | 讚 | 留言 | 轉發 | 分享 | 公式核心 |
 |---|---|---|---|---|---|---|
-| 25/7/8 | **26 萬** | 2,741 | 314 | **76** | 316 | 「我不靠 AI 課程賺錢...來幹掉所有付費課程」|
-| 25/7/9 | 6.9 萬 | 916 | 90 | 10 | 34 | 「我的 AI 教學都是免費的，但我不會教你怎麼賺錢...」|
+| 25/7/8 | **26 萬** | 2,741 | 314 | **76** | 316 | 「我不靠 AI 課程賺錢⋯⋯來幹掉所有付費課程」|
+| 25/7/9 | 6.9 萬 | 916 | 90 | 10 | 34 | 「我的 AI 教學都是免費的，但我不會教你怎麼賺錢⋯⋯」|
 | 25/7/13 | 12.7 萬 | 1,194 | 90 | **12** | 45 | 「最近黑粉都安靜了很多，我做免費 AI 教學就 TM 做真的！」|
 
 **3 篇共通**：

@@ -17,13 +17,13 @@
 ## UI 流程（2026-04 實證：新版是三步式）
 
 1. `navigate` → `https://www.facebook.com/`，等 2 秒
-2. `find` "status update input that says 在想些什麼 / What's on your mind" → `left_click` 開 modal
+2. `find` 「status update input that says 在想些什麼 / What's on your mind」 → `left_click` 開 modal
 3. 在 `建立貼文` modal 內 `find` "post compose textarea" → `left_click` 焦點 → `type` 內容（`\n` 換行，可連續 `！！！`）
 4. 若有圖：告知使用者「請把圖拖進剛開的 compose modal，傳完回我『圖已加』」，等回應
-5. **點「繼續」**（不是「發佈」！新版多一步）：`find` "繼續 Continue button" → `left_click`
+5. **點「繼續」**（不是「發佈」！新版多一步）：`find` 「繼續 Continue button」 → `left_click`
 6. 進到 `貼文設定` 頁（audience / 排程 / 分享到社團 / 加強推廣）。使用者沒特別要求就直接往下
 7. 可能要 `scroll` 一下讓「發佈」鈕可見：`scroll` down 3 ticks
-8. `find` "發佈 Publish button at bottom right" → `left_click` → `wait 4`
+8. `find` 「發佈 Publish button at bottom right」 → `left_click` → `wait 4`
 9. 回到動態牆，首頁第一篇即剛發
 
 ## 確認發佈成功
