@@ -117,6 +117,7 @@ viral = 4 段 4 句結構 + 純血 voice + 全新敘事意圖 + 黃金時段
 | **B 純血** | F6b / F15 mini | 擴散 + Line 群 | 90%+ 廣推 |
 | **C 深度反思** | F20/F21/F22/F23/F24/**F25a/b/c**/**F26**/**F27**/**F28**/**F29** | 信任深化 + 儲存 + trust reset + 集體 framing + 作品集 reveal + 單品 giveaway + 第三方戰績 + 再ship揭露 | 可 broke 94.5% |
 | **Thread F19** | 立場宣言 | Thread 轉發 | Thread 廣推 |
+| **活動宣傳** 🧪 | F30 | 報名轉化（**KPI 不是觸及**）| 天生 niche 封頂，不歸 broke 型 |
 
 ## 💡 實用技巧
 
