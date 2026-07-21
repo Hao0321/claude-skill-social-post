@@ -30,7 +30,7 @@
 - **Line 群 2,336 → 3,575（+1,239 人，94% 複製 Day 1 真 KPI）**
 - 月內第 5 個 F6b 但敘事意圖全新 → 推翻 v0.5「月配額硬限」假設
 
-**3 個變體 / 3 個 mega-viral / 都跨 90% 非追蹤者天花板**。這個 repo 就是 v0.7.2 版本，加上 14 天 / 13 篇 Hao 實戰累積 + 5 個外部 viral 範例逆向工程 + 2026 web 大數據整合。
+**3 個變體 / 3 個 mega-viral / 都跨 90% 非追蹤者天花板**。這個 repo 從 v0.7.2 的 14 天 / 13 篇 Hao 實戰與 5 個外部 viral 範例起步，目前已更新至 v1.1.1。
 
 > **姐妹 skill: [claude-skill-code-cleanup v0.2](https://github.com/Hao0321/claude-skill-code-cleanup)** — 雙模式 / 8 dimensions：Mode A 掃 codebase 找重複/命名/模組/過長；Mode B 跑 repo audit 檢查私公版 sync / release 一致性 / cross-link / 版本漂移。用來 maintain 這個 social-post skill 自己（已抓到 v0.7.3 doc drift → 推 v0.7.4 修）。
 
@@ -144,6 +144,21 @@ mv content_plan.example.md content_plan.md
 → Claude 讀今天的公式 → 問題材 → 生草稿 → 你回「確認」→ 自動發四平台。
 
 詳細 step-by-step：[`docs/setup.md`](docs/setup.md)
+
+### 選配：先用 TweetClaw 找 X/Twitter 題材
+
+如果題材來自 X/Twitter 討論，可以先在 OpenClaw 裡安裝
+[TweetClaw](https://github.com/Xquik-dev/tweetclaw)，把搜尋到的 source URLs、
+tweet IDs、handles、公開 metrics 和觀察筆記貼回 `social-post` 當題材輸入。
+
+```bash
+openclaw plugins install npm:@xquik/tweetclaw
+OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1 openclaw plugins inspect tweetclaw --runtime --json
+```
+
+這條路徑只負責前置 research。`social-post` 仍負責學你的 voice、依公式生成草稿、
+要求「確認」、用 Chrome MCP 發佈，以及事後 review。不要把 TweetClaw 當成這個
+skill 的自動發文替代流程。
 
 ---
 
