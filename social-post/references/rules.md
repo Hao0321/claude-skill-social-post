@@ -199,7 +199,7 @@ Reels 同日上傳 +50% 觸及 / 比 photo +135% / 比 video +22%。F18 作品 d
 | 6/11 demo | **1/10** | Claude 操作 CapCut 看得到成品 | 68% |
 | 6/14 F25b | 3/10 | 強 text milestone+superlative | **57.9% broke** |
 | 6/13 Fable5 | 2/10 | news+vulnerable 共鳴 | 48.9% broke |
-→ **強 text（F25b/F22/F23）carry 過 Reel 弱格式；弱內容（hype+外連結）套 Reel 也死**。Reel 排名（N/10）是格式內競爭力指標，不是 broke 保證。配 R33 任務面板 Reel 額度明牌。
+→ **強 text（F25b/F22/F23）carry 過 Reel 弱格式；弱內容（hype+外連結）套 Reel 也死**。**帳號級佐證（4/19-7/22 全期）：瀏覽組成文字 84.5% vs Reel 3.8%** —— 三百萬瀏覽是純文字打下來的，Reel 加成是戰術選項不是主戰場。Reel 排名（N/10）是格式內競爭力指標，不是 broke 保證。配 R33 任務面板 Reel 額度明牌。
 
 ## R18：儲存（Save）指標重視
 

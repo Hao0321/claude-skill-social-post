@@ -30,7 +30,10 @@
 - **Line 群 2,336 → 3,575（+1,239 人，94% 複製 Day 1 真 KPI）**
 - 月內第 5 個 F6b 但敘事意圖全新 → 推翻 v0.5「月配額硬限」假設
 
-**3 個變體 / 3 個 mega-viral / 都跨 90% 非追蹤者天花板**。這個 repo 就是 v0.7.2 版本，加上 14 天 / 13 篇 Hao 實戰累積 + 5 個外部 viral 範例逆向工程 + 2026 web 大數據整合。
+**3 個變體 / 3 個 mega-viral / 都跨 90% 非追蹤者天花板**。
+
+**🏁 95 天總帳（2026-04-19 開始做 skill → 07-22）**：帳號瀏覽 **3,094,691**（vs 前 95 天 ↑2,148%）／ 互動 39,485（↑955%）／ FB 淨追蹤 +2,167（↑5,185%）／ **全期 82.7% 瀏覽來自非追蹤者** —— 三百萬瀏覽是演算法推給陌生人的，不是對既有粉絲廣播的。內容類型文字佔 84.5%、Reel 僅 3.8%：**純文字打下來的三百萬**。
+這個 repo 就是 v0.7.2 版本，加上 14 天 / 13 篇 Hao 實戰累積 + 5 個外部 viral 範例逆向工程 + 2026 web 大數據整合。
 
 > **姐妹 skill: [claude-skill-code-cleanup v0.2](https://github.com/Hao0321/claude-skill-code-cleanup)** — 雙模式 / 8 dimensions：Mode A 掃 codebase 找重複/命名/模組/過長；Mode B 跑 repo audit 檢查私公版 sync / release 一致性 / cross-link / 版本漂移。用來 maintain 這個 social-post skill 自己（已抓到 v0.7.3 doc drift → 推 v0.7.4 修）。
 
@@ -163,7 +166,8 @@ cp -r social-post/references ~/.claude/skills/social-post/
 # Windows (PowerShell):
 Copy-Item "claude-skill-social-post\social-post\SKILL.md" "$env:USERPROFILE\.claude\skills\social-post\SKILL.md" -Force
 Copy-Item "claude-skill-social-post\social-post\F19_DEPLOYMENT_KIT.md" "$env:USERPROFILE\.claude\skills\social-post\" -Force
-Copy-Item "claude-skill-social-post\social-posteferences" "$env:USERPROFILE\.claude\skills\social-post\" -Recurse -Force
+Copy-Item "claude-skill-social-post\social-post
+eferences" "$env:USERPROFILE\.claude\skills\social-post\" -Recurse -Force
 ```
 
 第 3 步：重開 Claude Code 就生效。改了什麼看 [CHANGELOG.md](CHANGELOG.md)。
