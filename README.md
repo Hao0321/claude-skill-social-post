@@ -145,6 +145,33 @@ mv content_plan.example.md content_plan.md
 
 詳細 step-by-step：[`docs/setup.md`](docs/setup.md)
 
+### 升級（舊版 → 最新版）
+
+已經在用舊版的人，**不用重裝**，三步就好。你自己的 `style_profile.md` 跟 `content_plan.md` 是你的資料，升級**不會也不該**動到它們：
+
+```bash
+# 1. 回到當初 clone 的資料夾，拉最新版
+cd claude-skill-social-post
+git pull
+
+# 2. 只覆蓋 skill 檔，不碰你自己的 style_profile.md / content_plan.md
+# macOS / Linux:
+cp social-post/SKILL.md ~/.claude/skills/social-post/SKILL.md
+cp social-post/F19_DEPLOYMENT_KIT.md ~/.claude/skills/social-post/
+cp -r social-post/references ~/.claude/skills/social-post/
+
+# Windows (PowerShell):
+Copy-Item "claude-skill-social-post\social-post\SKILL.md" "$env:USERPROFILE\.claude\skills\social-post\SKILL.md" -Force
+Copy-Item "claude-skill-social-post\social-post\F19_DEPLOYMENT_KIT.md" "$env:USERPROFILE\.claude\skills\social-post\" -Force
+Copy-Item "claude-skill-social-post\social-posteferences" "$env:USERPROFILE\.claude\skills\social-post\" -Recurse -Force
+```
+
+第 3 步：重開 Claude Code 就生效。改了什麼看 [CHANGELOG.md](CHANGELOG.md)。
+
+> ⚠️ 當初直接下載 zip 而不是 clone 的人：重新下載最新 zip，一樣**只複製 `SKILL.md`、`F19_DEPLOYMENT_KIT.md`、`references/` 三樣**，別整包覆蓋。
+
+
+
 ---
 
 ## FAQ
