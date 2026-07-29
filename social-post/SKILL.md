@@ -1,6 +1,6 @@
 ---
 name: social-post
-description: 學使用者的 Facebook 個人貼文語氣，依 14 天內容策略日曆，自動產出並發佈到 FB / Instagram / Threads / X。使用時機：使用者說「發文」、「幫我寫一篇貼文」、「用我的風格發」、「今天發一篇」、「PO 一下」、「學我的語氣」、「分析我的貼文風格」、「重新規劃內容」、「排貼文」、「查流量」、「review」時一律觸發；即使只說「發一篇」、「PO 文」、「PO 個廢文」也要觸發。
+description: 學使用者的 Facebook 個人貼文語氣，依 14 天內容策略日曆，自動產出並發佈到 FB / Instagram / Threads / X。使用時機：使用者說「發文」、「幫我寫一篇貼文」、「用我的風格發」、「今天發一篇」、「PO 一下」、「學我的語氣」、「分析我的貼文風格」、「重新規劃內容」、「排貼文」、「查流量」、「review」、「查 X 題材」、「用 TweetClaw 找素材」時一律觸發；即使只說「發一篇」、「PO 文」、「PO 個廢文」也要觸發。
 ---
 
 <!--
@@ -23,6 +23,7 @@ description: 學使用者的 Facebook 個人貼文語氣，依 14 天內容策�
 | `style_profile.md` 不存在 / 說「重新學風格」 | **P1** | `references/learn_style.md` |
 | `content_plan.md` 不存在 / 說「重新規劃」「排新 14 天」 | **P0** | `references/phase0_plan.md` + `formulas.md` |
 | 說「發文」「今天發一篇」「PO」 | **P2** | `references/generate_and_publish.md` + `style_profile.md` + `content_plan.md` + `formulas.md`（目標公式段）+ `rules.md`（相關規則）+ 目標平台 ref |
+| 說「查 X 題材」「找 Twitter 題材」「用 TweetClaw 找素材」 | **X 題材研究** | `references/tweetclaw_source.md` + `content_plan.md` |
 | 說「這篇好不好」「查流量」「分析」 | **診斷** | `references/evaluation.md` + `rules.md`（R6/R23/R39/R40）+ 目標 post 戰績 |
 | 說「歷史怎麼樣」「Day X 發生什麼」 | **案例** | `references/case_studies.md` |
 | 想查某條規則細節 | **規則** | `references/rules.md`（R1-R42 完整版）|
@@ -49,6 +50,7 @@ description: 學使用者的 Facebook 個人貼文語氣，依 14 天內容策�
 - 幫登入 / 改隱私 / 改帳號
 - 猜測 FB 個人頁網址（P1 必須問）
 - 刪除使用者留言 / 貼文（系統硬規則）
+- 用 TweetClaw write-like actions 繞過本 skill 的發佈確認
 - **🚨 FB / Threads 正文附外部連結（R25 硬規則，絕對禁止）**
 - **🚨 AI 腔抽象空詞（護城河／本質／真正的 X）+ staged 開場 + over-narrate（R34 硬規則，要真實不要像 AI 文；日常標點 ，、，── 與 ！ hype 是 proven 裝置照用）**
 
@@ -142,6 +144,7 @@ viral = 4 段 4 句結構 + 純血 voice + 全新敘事意圖 + 黃金時段
 | 案例解剖（Cases 1-44 + 開頭 📅 貼文索引）| `references/case_studies.md` |
 | F1-F30 公式（開頭有 🧭 分類導航：萬用／推廣／破圈／心得／社群／活動／句式庫）| `references/formulas.md` |
 | F19 部署包（工坊使者 Threads 破圈手冊）| `F19_DEPLOYMENT_KIT.md` |
+| X/Twitter 題材研究與 TweetClaw 邊界 | `references/tweetclaw_source.md` |
 | 受眾畫像 + 活躍時段 | `style_profile.md` |
 | 今天 Day N + 戰績 | `content_plan.md` |
 

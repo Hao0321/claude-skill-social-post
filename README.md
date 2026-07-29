@@ -33,7 +33,7 @@
 **3 個變體 / 3 個 mega-viral / 都跨 90% 非追蹤者天花板**。
 
 **🏁 95 天總帳（2026-04-19 開始做 skill → 07-22）**：帳號瀏覽 **3,094,691**（vs 前 95 天 ↑2,148%）／ 互動 39,485（↑955%）／ FB 淨追蹤 +2,167（↑5,185%）／ **全期 82.7% 瀏覽來自非追蹤者** —— 三百萬瀏覽是演算法推給陌生人的，不是對既有粉絲廣播的。內容類型文字佔 84.5%、Reel 僅 3.8%：**純文字打下來的三百萬**。
-這個 repo 就是 v0.7.2 版本，加上 14 天 / 13 篇 Hao 實戰累積 + 5 個外部 viral 範例逆向工程 + 2026 web 大數據整合。
+這個 repo 從 v0.7.2 的 14 天 / 13 篇 Hao 實戰與 5 個外部 viral 範例起步，最新標記版本已更新至 v1.3.2。
 
 > **姐妹 skill: [claude-skill-code-cleanup v0.2](https://github.com/Hao0321/claude-skill-code-cleanup)** — 雙模式 / 8 dimensions：Mode A 掃 codebase 找重複/命名/模組/過長；Mode B 跑 repo audit 檢查私公版 sync / release 一致性 / cross-link / 版本漂移。用來 maintain 這個 social-post skill 自己（已抓到 v0.7.3 doc drift → 推 v0.7.4 修）。
 
@@ -174,7 +174,29 @@ eferences" "$env:USERPROFILE\.claude\skills\social-post\" -Recurse -Force
 
 > ⚠️ 當初直接下載 zip 而不是 clone 的人：重新下載最新 zip，一樣**只複製 `SKILL.md`、`F19_DEPLOYMENT_KIT.md`、`references/` 三樣**，別整包覆蓋。
 
+### 選配：先用 TweetClaw 找 X/Twitter 題材
 
+如果題材來自 X/Twitter 討論，可以先在 OpenClaw 安裝
+[TweetClaw](https://github.com/Xquik-dev/tweetclaw)，搜尋公開貼文、回覆、帳號與
+媒體，再把來源筆記交給 `social-post`。
+
+```bash
+openclaw plugins install clawhub:@xquik/tweetclaw
+openclaw config set tools.alsoAllow '["explore", "tweetclaw"]'
+openclaw plugins inspect tweetclaw --runtime --json
+openclaw skills info tweetclaw
+```
+
+ClawHub 不可用時，改用 `openclaw plugins install npm:@xquik/tweetclaw`。
+安裝後即使還沒設定憑證，也能先用免費的 `explore` 找可用讀取功能。完整設定與
+安全邊界見
+[`references/tweetclaw_source.md`](social-post/references/tweetclaw_source.md)。
+
+這條路徑只負責前置研究。`social-post` 仍負責 voice、草稿、確認、Chrome MCP
+發佈與 review。
+
+Xquik is an independent third-party service. Not affiliated with X Corp.
+"Twitter" and "X" are trademarks of X Corp.
 
 ---
 
