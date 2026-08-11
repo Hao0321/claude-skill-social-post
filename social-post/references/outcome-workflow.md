@@ -38,7 +38,7 @@
 - 時間使用 ISO 8601＋offset，例如 `2026-08-11T14:56:00+08:00`。
 - 百分比一律存 0–100，不存 0–1。
 - Missing value 用 `null`，不填 0。
-- maturity 使用 `early`、`developing`、`mature` 或 `plateau`。
+- maturity 使用 `early`、`early_not_plateau`、`developing`、`near_48h_not_final`、`mature` 或 `plateau`。
 - Evidence status 只用 `hypothesis`、`emerging`、`validated`、`deprecated`。
 - 同系列多集不等於獨立樣本；在 `independent_samples` 明示。
 

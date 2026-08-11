@@ -105,7 +105,9 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
             errors.append(f"{label} invalid captured_at (ISO 8601 with offset required)")
             continue
         maturity = snapshot.get("maturity")
-        if maturity is not None and maturity not in {"early", "developing", "mature", "plateau"}:
+        if maturity is not None and maturity not in {
+            "early", "early_not_plateau", "developing", "near_48h_not_final", "mature", "plateau",
+        }:
             errors.append(f"{label} invalid maturity {maturity}")
         hours = snapshot.get("hours_since_publish")
         if hours is not None and (not isinstance(hours, (int, float)) or hours < 0):

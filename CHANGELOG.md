@@ -9,6 +9,7 @@
 - 新增 `social_data.py`、`log_outcome.py`、`build_rule_registry.py` 與 dependency-free `self_test.py`。
 - 新增 dry-run、追加既有貼文快照、staged validation 與失敗 rollback。
 - 新增公開且完全虛構的 outcome bundle example。
+- maturity schema 保留 `early_not_plateau` 與 `near_48h_not_final`，相容尚未 plateau 的實務快照。
 
 ### Changed
 
