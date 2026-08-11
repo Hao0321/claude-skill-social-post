@@ -17,8 +17,10 @@ HEADING = re.compile(r"^## (R\d+)\s*[：:]\s*(.+)$", re.M)
 
 
 def build() -> dict:
-    sources = sorted(RULE_DIR.glob("R*.md")) if RULE_DIR.exists() else [SOURCE]
+    split_sources = sorted(RULE_DIR.glob("R*.md")) if RULE_DIR.exists() else []
+    sources = split_sources or [SOURCE]
     rules = []
+    seen: dict[str, str] = {}
     for source in sources:
         text = source.read_text(encoding="utf-8-sig")
         matches = list(HEADING.finditer(text))
@@ -26,15 +28,20 @@ def build() -> dict:
             end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
             section = text[match.end():end]
             heading = match.group(2).strip()
-            if "廢除" in heading or "撤回" in heading:
+            rule_id = match.group(1)
+            if rule_id in seen:
+                raise ValueError(f"duplicate rule id {rule_id}: {seen[rule_id]} and {source}")
+            seen[rule_id] = source.relative_to(ROOT).as_posix()
+            status_text = (heading + "\n" + section[:300]).casefold()
+            if any(token in status_text for token in ("廢除", "作廢", "撤回", "deprecated")):
                 status = "deprecated"
-            elif "🧪" in heading or "emerging" in heading.casefold():
+            elif "🧪" in status_text or "emerging" in status_text:
                 status = "emerging"
             else:
                 status = "active"
             sample_mentions = sorted({int(value) for value in re.findall(r"n\s*=\s*(\d+)", section, re.I)})
             rules.append({
-                "id": match.group(1),
+                "id": rule_id,
                 "title": heading,
                 "status": status,
                 "source_file": source.relative_to(ROOT).as_posix(),
@@ -42,7 +49,7 @@ def build() -> dict:
                 "sample_mentions": sample_mentions,
             })
     rules.sort(key=lambda item: int(item["id"][1:]))
-    source_of_truth = "references/rules/RNN.md" if RULE_DIR.exists() else "references/rules.md"
+    source_of_truth = "references/rules/RNN.md" if split_sources else "references/rules.md"
     return {"schema_version": "1.0", "source_of_truth": source_of_truth, "rules": rules}
 
 

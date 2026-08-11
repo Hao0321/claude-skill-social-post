@@ -36,8 +36,10 @@
 
 - ID 永久不改：`post_id`、`snapshot_id`、`experiment_id`。
 - 時間使用 ISO 8601＋offset，例如 `2026-08-11T14:56:00+08:00`。
+- `series_id`、`episode_number`、`duration_seconds` 是選填；一般圖文貼文不必偽裝成系列影片。
 - 百分比一律存 0–100，不存 0–1。
 - Missing value 用 `null`，不填 0。
+- Platform breakdown 可以是 partial；只有涵蓋貼文全部平台時才強制加總等於 total。
 - maturity 使用 `early`、`early_not_plateau`、`developing`、`near_48h_not_final`、`mature` 或 `plateau`。
 - Evidence status 只用 `hypothesis`、`emerging`、`validated`、`deprecated`。
 - 同系列多集不等於獨立樣本；在 `independent_samples` 明示。

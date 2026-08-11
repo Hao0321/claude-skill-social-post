@@ -9,6 +9,7 @@
 - P3 Log Outcome：每次洞察截圖保存成時間快照，不覆蓋舊數字。
 - P4 Optimize Patterns：跨貼文、跨集比較，明示變因、confound 與證據狀態。
 - `posts.jsonl`、`insight_snapshots.jsonl`、`experiments.jsonl` 三層資料模型。
+- 同一 schema 同時支援一般圖文與系列影片；系列欄位與片長不是硬塞給所有貼文的必填值。
 - 可重複執行的 validate、series summary、dry-run／atomic write 與 rule registry scripts。
 - 公開版不附作者的語氣檔、內容日曆、原始成效資料或私人草稿。
 
