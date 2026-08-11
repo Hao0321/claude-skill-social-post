@@ -1,0 +1,52 @@
+{
+  "post": {
+    "post_id": "demo-series-ep01",
+    "series_id": "demo-series",
+    "episode_number": 1,
+    "published_at": "2026-08-11T19:49:00+08:00",
+    "duration_seconds": 90,
+    "platforms": ["instagram", "facebook"],
+    "caption": "A fictional example caption.",
+    "caption_variant": "short"
+  },
+  "snapshot": {
+    "snapshot_id": "demo-series-ep01-24h",
+    "post_id": "demo-series-ep01",
+    "captured_at": "2026-08-12T19:49:00+08:00",
+    "captured_at_confidence": "high",
+    "hours_since_publish": 24,
+    "maturity": "developing",
+    "metrics": {
+      "plays": 1200,
+      "reached_accounts": 800,
+      "average_watch_seconds": 45,
+      "likes": 60,
+      "comments": 8,
+      "reposts": 2,
+      "shares": 5,
+      "saves": 12,
+      "followers": 4
+    },
+    "rates_reported": {
+      "skip_percent": 31.5
+    },
+    "traffic_sources_percent": {
+      "reels_tab": 70.0,
+      "explore": 12.0,
+      "profile": 10.0
+    },
+    "notes": ["Fictional data for schema demonstration only."]
+  },
+  "experiment": {
+    "experiment_id": "demo-caption-test",
+    "post_ids": ["demo-series-ep01"],
+    "hypothesis": "A shorter caption may improve cold-audience conversion.",
+    "variables": ["caption_length"],
+    "confounds": ["episode_number", "story_content"],
+    "independent_samples": 1,
+    "evidence": {
+      "status": "hypothesis"
+    },
+    "next_test": "Hold the opening and publish window constant."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "length_exceptions": [
+    "references/case_studies.md",
+    "references/formulas.md",
+    "references/rules.md"
+  ],
+  "navigation_exceptions": [
+    "references/case_studies.md",
+    "references/evaluation.md",
+    "references/facebook.md",
+    "references/formulas.md",
+    "references/rules.md",
+    "references/threads.md"
+  ],
+  "id_definition_scopes": {
+    "R": ["references/rules.md"],
+    "F": ["references/formulas.md"],
+    "CASE": ["references/case_studies.md"]
+  },
+  "range_claim_scopes": {
+    "R": [],
+    "F": [],
+    "CASE": []
+  },
+  "sync": {
+    "public_root": null,
+    "ignore": [
+      "style_profile.md",
+      "content_plan.md",
+      "drafts/**",
+      "data/**"
+    ]
+  },
+  "privacy": {
+    "tokens": [],
+    "allow": []
+  }
+}

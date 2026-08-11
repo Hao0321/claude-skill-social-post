@@ -1,0 +1,38 @@
+{
+  "length_exceptions": [
+    "social-post/references/case_studies.md",
+    "social-post/references/formulas.md",
+    "social-post/references/rules.md"
+  ],
+  "navigation_exceptions": [
+    "social-post/references/case_studies.md",
+    "social-post/references/evaluation.md",
+    "social-post/references/facebook.md",
+    "social-post/references/formulas.md",
+    "social-post/references/rules.md",
+    "social-post/references/threads.md"
+  ],
+  "id_definition_scopes": {
+    "R": ["social-post/references/rules.md"],
+    "F": ["social-post/references/formulas.md"],
+    "CASE": ["social-post/references/case_studies.md"]
+  },
+  "range_claim_scopes": {
+    "R": [],
+    "F": [],
+    "CASE": []
+  },
+  "sync": {
+    "public_root": null,
+    "ignore": [
+      "social-post/style_profile.md",
+      "social-post/content_plan.md",
+      "social-post/drafts/**",
+      "social-post/data/**"
+    ]
+  },
+  "privacy": {
+    "tokens": [],
+    "allow": []
+  }
+}
