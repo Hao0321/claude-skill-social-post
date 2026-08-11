@@ -1,20 +1,27 @@
-# Claude Code 個人資料（絕對不推）
-social-post/style_profile.md
-social-post/content_plan.md
-social-post/_scraped_posts_draft.md
-
-# Claude Code 設定（含本機權限清單）
-.claude/
-!.claude/skills/
-
-# OS / IDE
+# Personal tests and caches
+*.log
 .DS_Store
 Thumbs.db
-*.log
+
+# IDE
 .vscode/
 .idea/
 
-# Python / Node（若未來加腳本）
+# Node and temp files
+node_modules/
+*.tmp
+
+# Python
 __pycache__/
 *.pyc
-node_modules/
+
+# Local social-post data
+social-post/style_profile.md
+social-post/content_plan.md
+social-post/_scraped_posts_draft.md
+social-post/drafts/
+social-post/data/
+
+# Claude Code local permissions
+.claude/
+!.claude/skills/

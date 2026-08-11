@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.0.0 — 2026-08-11（結構化 outcome learning）
+
+### Added
+
+- 新增 P3 Log Outcome 與 P4 Optimize Patterns，將內容生成、發布與成效學習拆開。
+- 新增 `posts.jsonl`、`insight_snapshots.jsonl`、`experiments.jsonl` schema；同一貼文可累積多個時間快照。
+- 新增 `social_data.py`、`log_outcome.py`、`build_rule_registry.py` 與 dependency-free `self_test.py`。
+- 新增 dry-run、追加既有貼文快照、staged validation 與失敗 rollback。
+- 新增公開且完全虛構的 outcome bundle example。
+
+### Changed
+
+- SKILL.md 改為 P0–P4 progressive disclosure 路由。
+- 規則證據狀態統一為 `hypothesis`、`emerging`、`validated`、`deprecated`。
+- README 與 setup 同時支援 Codex 和 Claude Code，明示本機資料與公開 repo 的隱私邊界。
+
+### Privacy
+
+- v2.0.0 不包含作者的 `style_profile.md`、`content_plan.md`、drafts、原始洞察資料或新私人案例。
+
 ## v1.6.1 — 2026-08-10（🔒 把 v1.6.0 的保留條款補齊）
 
 v1.6.0 的結論本身沒問題，但幾個**保留與缺口**沒有跟著結論一起寫進去 —— 結論被引用時保留會掉，這在這個 repo 算 bug。
