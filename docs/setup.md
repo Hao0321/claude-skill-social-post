@@ -7,6 +7,14 @@ Clone repo，將 `social-post/` 複製到其中一個位置：
 - Codex：`~/.codex/skills/social-post/`
 - Claude Code：`~/.claude/skills/social-post/`
 
+若使用 Hermes Agent 且需要結構化 X/Twitter 工具，可另外安裝 Hermes Tweet：
+
+```bash
+hermes plugins install Xquik-dev/hermes-tweet --enable
+```
+
+先用讀取工具收集證據。私密讀取、監控、匯出與帳號動作仍須明確確認。
+
 Windows PowerShell（Codex）：
 
 ```powershell

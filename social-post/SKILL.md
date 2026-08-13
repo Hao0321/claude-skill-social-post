@@ -17,7 +17,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 |---|---|---|
 | 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋目標 formula |
 | 重新學語氣 | P1 Learn Voice | `references/learn_style.md`＋`style_profile.md` |
-| 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋單一 formula；確認後才讀平台 ref |
+| 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋單一 formula；確認後才讀平台 ref；X 結構化讀取或動作另讀 `references/hermes_tweet.md` |
 | 把數據訓練進來、記錄成效 | P3 Log Outcome | `references/outcome-workflow.md`＋`data/*.jsonl` |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules |
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |
