@@ -30,6 +30,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 |---|---|
 | 貼文／caption／發布條件 | `data/posts.jsonl` |
 | 洞察快照 | `data/insight_snapshots.jsonl` |
+| 帳號期間總覽 | `data/account_snapshots.jsonl` |
 | 跨篇假設與 confound | `data/experiments.jsonl` |
 | 規則正文 | `references/rules/RNN.md`；`references/rules.md` 是索引 |
 | 規則生命週期／實驗 backlink | `references/rules/metadata.json` |
@@ -48,6 +49,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 ## P3 Log Outcome
 
 1. 每組洞察圖建立新 snapshot；不覆蓋舊數字。
+   帳號 7／30／90 天總覽寫 `account_snapshots.jsonl`，不得綁到單篇貼文。
 2. 記 published_at、captured_at、hours_since_publish 與 maturity。
 3. IG／FB total 與可取得的拆分同時保存；missing 用 `null`。
 4. UI rate 與 derived rate 分開；留存曲線目測只寫 note。

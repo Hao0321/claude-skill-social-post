@@ -10,7 +10,10 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from social_data import DATA_DIR, EXPERIMENTS_FILE, POSTS_FILE, SNAPSHOTS_FILE, validate_store
+from social_data import (
+    ACCOUNT_SNAPSHOTS_FILE, DATA_DIR, EXPERIMENTS_FILE, POSTS_FILE, SNAPSHOTS_FILE,
+    validate_store,
+)
 from social_store import commit_records, load_jsonl, store_revision, write_jsonl
 
 
@@ -20,15 +23,18 @@ def prepare_records(
     base_revision = store_revision(data_dir)
     post = bundle.get("post")
     snapshot = bundle.get("snapshot")
+    account_snapshot = bundle.get("account_snapshot")
     experiment = bundle.get("experiment")
-    if snapshot is None and experiment is None:
-        raise ValueError("bundle requires a snapshot, an experiment, or both")
+    if snapshot is None and account_snapshot is None and experiment is None:
+        raise ValueError("bundle requires a post snapshot, account snapshot, experiment, or a combination")
 
     posts_file = data_dir / POSTS_FILE.name
     snapshots_file = data_dir / SNAPSHOTS_FILE.name
+    account_snapshots_file = data_dir / ACCOUNT_SNAPSHOTS_FILE.name
     experiments_file = data_dir / EXPERIMENTS_FILE.name
     posts = load_jsonl(posts_file)
     snapshots = load_jsonl(snapshots_file)
+    account_snapshots = load_jsonl(account_snapshots_file)
     experiments = load_jsonl(experiments_file)
     posts_by_id = {row.get("post_id"): row for row in posts}
     snapshot_ids = {row.get("snapshot_id") for row in snapshots}
@@ -52,6 +58,13 @@ def prepare_records(
     elif post is not None:
         raise ValueError("post cannot be supplied without a snapshot")
 
+    if account_snapshot is not None:
+        account_snapshot_id = account_snapshot.get("account_snapshot_id")
+        known_ids = {row.get("account_snapshot_id") for row in account_snapshots}
+        if account_snapshot_id in known_ids:
+            raise ValueError(f"duplicate account_snapshot_id: {account_snapshot_id}")
+        account_snapshots.append(account_snapshot)
+
     if experiment:
         experiment_id = experiment.get("experiment_id")
         prior = [row for row in experiments if row.get("experiment_id") == experiment_id]
@@ -67,6 +80,8 @@ def prepare_records(
     normalized: dict[str, Any] = {}
     if snapshot is not None:
         normalized["snapshot"] = snapshot
+    if account_snapshot is not None:
+        normalized["account_snapshot"] = account_snapshot
     if post is not None:
         normalized["post"] = post
     if experiment is not None:
@@ -74,6 +89,7 @@ def prepare_records(
     return {
         posts_file: posts,
         snapshots_file: snapshots,
+        account_snapshots_file: account_snapshots,
         experiments_file: experiments,
     }, normalized, base_revision
 

@@ -2,9 +2,16 @@
 
 一個可安裝到 Codex 或 Claude Code 的社群內容 skill：學習你的語氣、規劃內容、撰寫平台化貼文、經確認後發布，並把 Reels／貼文洞察變成可驗證的結構化學習資料。
 
-目前版本：**v2.1.0**。
+目前版本：**v2.1.1**。
 
-## v2.1.0 新增什麼
+## v2.1.1 新增什麼
+
+- 新增 `account_snapshots.jsonl`，帳號 7／30／90 天總覽不再偽裝成單篇貼文數據。
+- `log_outcome.py` 支援獨立 account snapshot，並納入 revision hash、lock、atomic commit 與 rollback。
+- Validator 檢查平台、時間窗、ID、時間與非負指標；self-test 覆蓋公開空資料與帳號快照寫入。
+- 私人 account snapshots 與原始洞察仍由 public export allowlist 排除。
+
+## v2.1.0 重點
 
 - 預設生成路徑改成 quick cards，只讀必要語氣、當前 brief 與一個公式；歷史案例不再灌進每次 context。
 - Outcome store 加上跨平台 schema 驗證、原子多檔 transaction、lock 與 optimistic revision，避免並發更新靜默蓋掉資料。

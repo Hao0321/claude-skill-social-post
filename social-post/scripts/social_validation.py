@@ -233,6 +233,49 @@ def validate_snapshots(
     return latest_by_post, latest_by_platform
 
 
+def validate_account_snapshots(
+    snapshots: list[dict[str, Any]], errors: list[str], warnings: list[str],
+) -> dict[str, dict[str, Any]]:
+    """Validate rolling account-level insights without pretending they belong to a post."""
+    seen: set[str] = set()
+    latest: dict[str, dict[str, Any]] = {}
+    for index, snapshot in enumerate(snapshots, start=1):
+        label = f"account_snapshots.jsonl:{index}"
+        for key in ("account_snapshot_id", "platform", "captured_at", "window_days", "metrics"):
+            if key not in snapshot:
+                errors.append(f"{label} missing {key}")
+        snapshot_id = snapshot.get("account_snapshot_id")
+        if not isinstance(snapshot_id, str) or not snapshot_id.strip():
+            errors.append(f"{label} account_snapshot_id must be a non-empty string")
+        elif snapshot_id in seen:
+            errors.append(f"{label} duplicate account_snapshot_id {snapshot_id}")
+        else:
+            seen.add(snapshot_id)
+        platform = snapshot.get("platform")
+        if platform not in PLATFORM_VALUES:
+            errors.append(f"{label} platform must be one of {sorted(PLATFORM_VALUES)}")
+        try:
+            captured = parse_time(snapshot.get("captured_at", ""))
+        except ValueError:
+            errors.append(f"{label} invalid captured_at (ISO 8601 with offset required)")
+            captured = None
+        window_days = snapshot.get("window_days")
+        if not isinstance(window_days, int) or isinstance(window_days, bool) or window_days < 1:
+            errors.append(f"{label} window_days must be a positive integer")
+        if snapshot.get("captured_at_confidence") not in (None, "low", "medium", "high"):
+            errors.append(f"{label} invalid captured_at_confidence {snapshot.get('captured_at_confidence')}")
+        metrics = snapshot.get("metrics")
+        if not isinstance(metrics, dict):
+            errors.append(f"{label} metrics must be an object")
+        else:
+            non_negative_numbers(metrics, f"{label}.metrics", errors)
+        if platform in PLATFORM_VALUES and captured is not None:
+            previous = latest.get(platform)
+            if previous is None or parse_time(previous["captured_at"]) < captured:
+                latest[platform] = snapshot
+    return latest
+
+
 def _validate_experiment_row(
     experiment: dict[str, Any],
     label: str,

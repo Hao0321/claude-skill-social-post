@@ -13,9 +13,10 @@
 
 1. `data/posts.jsonl`：貼文本體、發布條件、caption variant。
 2. `data/insight_snapshots.jsonl`：同一貼文可有多個時間快照，永遠保留 `captured_at` 與 maturity。
-3. `data/experiments.jsonl`：跨貼文假設、變因、confound、證據狀態與下一輪測試。
-4. `data/rule_registry.json`：由 `references/rules/RNN.md` 生成的導航，不是規則正文。
-5. `references/case_studies.md`：舊案例索引；個別全文在 `references/cases/`，只作歷史證據。
+3. `data/account_snapshots.jsonl`：帳號 7／30／90 天滾動總覽；不綁任何單篇貼文。
+4. `data/experiments.jsonl`：跨貼文假設、變因、confound、證據狀態與下一輪測試。
+5. `data/rule_registry.json`：由 `references/rules/RNN.md` 生成的導航，不是規則正文。
+6. `references/case_studies.md`：舊案例索引；個別全文在 `references/cases/`，只作歷史證據。
 
 不得再把新數據只寫進 prose。結構化資料是成效事實的 canonical source；Markdown 只留解讀與人類可讀摘要。
 
@@ -25,6 +26,7 @@
 
 1. 確認貼文 identity、平台、發布時間與時區。
 2. 每組截圖視為一個 snapshot，不覆蓋前一次。記錄截圖時間；不知道就標 `captured_at_confidence: low`，不要猜成最終值。
+   帳號期間總覽使用 `account_snapshot_id`、`platform`、`window_days` 與 `captured_at`；不要建立假的 `post_id`。
 3. IG／FB 合併面板保留 total，也記可取得的平台拆分。未拆出的 follower／follow 指標加 scope note。
 4. UI 顯示率保留在 `rates_reported`；手算 derived metric 不覆蓋 UI 值。
 5. Retention 圖沒有精確座標時只寫 curve note，不偽造百分比。

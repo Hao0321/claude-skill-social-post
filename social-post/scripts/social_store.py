@@ -14,7 +14,9 @@ from pathlib import Path
 from typing import Any, Iterator
 
 
-DATA_FILENAMES = ("posts.jsonl", "insight_snapshots.jsonl", "experiments.jsonl")
+DATA_FILENAMES = (
+    "posts.jsonl", "insight_snapshots.jsonl", "account_snapshots.jsonl", "experiments.jsonl",
+)
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:

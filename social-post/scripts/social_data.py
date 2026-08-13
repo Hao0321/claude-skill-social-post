@@ -10,13 +10,16 @@ from pathlib import Path
 from typing import Any
 
 from social_store import load_jsonl, store_revision
-from social_validation import validate_experiments, validate_posts, validate_snapshots
+from social_validation import (
+    validate_account_snapshots, validate_experiments, validate_posts, validate_snapshots,
+)
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = SKILL_ROOT / "data"
 POSTS_FILE = DATA_DIR / "posts.jsonl"
 SNAPSHOTS_FILE = DATA_DIR / "insight_snapshots.jsonl"
+ACCOUNT_SNAPSHOTS_FILE = DATA_DIR / "account_snapshots.jsonl"
 EXPERIMENTS_FILE = DATA_DIR / "experiments.jsonl"
 RULE_REGISTRY_FILE = DATA_DIR / "rule_registry.json"
 
@@ -39,6 +42,7 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
     data = root / "data"
     posts = load_jsonl(data / POSTS_FILE.name)
     snapshots = load_jsonl(data / SNAPSHOTS_FILE.name)
+    account_snapshots = load_jsonl(data / ACCOUNT_SNAPSHOTS_FILE.name)
     experiments = load_jsonl(data / EXPERIMENTS_FILE.name)
     errors: list[str] = []
     warnings: list[str] = []
@@ -46,6 +50,7 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
     latest, latest_by_platform = validate_snapshots(
         snapshots, posts_by_id, errors, warnings,
     )
+    latest_accounts = validate_account_snapshots(account_snapshots, errors, warnings)
     latest_experiments = validate_experiments(
         experiments, set(posts_by_id), _known_rule_ids(root), errors, warnings,
     )
@@ -55,6 +60,7 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
         "counts": {
             "posts": len(posts),
             "snapshots": len(snapshots),
+            "account_snapshots": len(account_snapshots),
             "experiment_events": len(experiments),
             "experiments": len(latest_experiments),
         },
@@ -62,6 +68,7 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
         "warnings": warnings,
         "latest_snapshots": latest,
         "latest_snapshots_by_platform": latest_by_platform,
+        "latest_account_snapshots": latest_accounts,
         "latest_experiments": latest_experiments,
     }
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.1.1 — 2026-08-13（account-level outcome snapshots）
+
+### Added
+
+- 新增 `data/account_snapshots.jsonl` schema，用於 Instagram／Facebook／YouTube 等平台的帳號期間總覽。
+- `log_outcome.py` 新增 `account_snapshot` bundle，與既有貼文快照共用鎖、revision 與 atomic commit。
+- 新增 account snapshot validator 與回歸測試，避免用假的 `post_id` 污染單篇資料。
+
+### Privacy
+
+- 公開版只提供 schema／工具；作者的帳號數據不進 public export，也不提交 repository。
+
 ## v2.1.0 — 2026-08-13（knowledge architecture hardening）
 
 ### Added
