@@ -1,6 +1,6 @@
 ---
 name: social-post
-description: 學習使用者的 Facebook／Instagram／YouTube／Threads／X 語氣與受眾，規劃內容、撰寫平台化貼文、經確認後發佈；並作為所有流量、演算法、留存與轉化學習的唯一結構化帳本，做跨平台／跨篇／跨集比較、實驗設計及規則升降級。使用者說「發文」「幫我寫」「用我的口氣」「排貼文」「查流量」「演算法」「分析 Reels／Shorts」「把數據訓練進去」「記錄成效」「比較這幾篇」「優化 pattern」「review」時使用。
+description: 學習使用者的 Facebook／Instagram／YouTube／Threads／X 語氣與受眾，規劃內容、撰寫平台化貼文、經確認後發佈；並作為所有流量、演算法、留存與轉化學習的唯一結構化帳本，做跨平台／跨篇／跨集比較、實驗設計及規則升降級。使用者說「發文」「幫我寫」「用我的口氣」「排貼文」「查流量」「演算法」「分析 Reels／Shorts」「把數據訓練進去」「記錄成效」「比較這幾篇」「優化 pattern」「查 X 題材」「用 TweetClaw 找素材」「review」時使用。
 ---
 
 # Social Post
@@ -20,6 +20,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋單一 formula；確認後才讀平台 ref |
 | 把數據訓練進來、記錄成效 | P3 Log Outcome | `references/outcome-workflow.md`＋`data/*.jsonl` |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules |
+| 查 X 題材、整理公開討論 | X Source Research | `references/tweetclaw_source.md`＋`current_brief.md` |
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |
 
 路由前用一句話告知正在做哪個 Mode。單純診斷不需要 Chrome。
