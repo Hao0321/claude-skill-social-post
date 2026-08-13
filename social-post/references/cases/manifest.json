@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": 1,
+      "title": "Day 1 F6b meta-ship mega-viral（2026-04-21 02:13）",
+      "path": "case-01.md",
+      "sha256": "e1b41d7c3edfdb93238e1af6d07a6d6b701e5911092452fec51d51e2690310c5"
+    },
+    {
+      "case_id": 2,
+      "title": "Day 2 F6b 續集「被誤判 flop」的深化文（2026-04-22 02:16）",
+      "path": "case-02.md",
+      "sha256": "e3fc70ae9b716729f8121aa7df156765bbea045e4df926cb5e3f38bee1f77a70"
+    },
+    {
+      "case_id": 3,
+      "title": "Day 3 Mode A 真 underperform（2026-04-23 09:48）",
+      "path": "case-03.md",
+      "sha256": "f30d5146906cb10395a97447118e6e1b0b7d352a87d3672f3f4dcc092d68aadb"
+    },
+    {
+      "case_id": 4,
+      "title": "Day 4 F4 投票「鐵粉限定觸及」（2026-04-24 21:00）",
+      "path": "case-04.md",
+      "sha256": "b1c67501d1b16ad269e8e8e8bc71b1d1f70fef69191c11bfcd3958d3f6393c04"
+    },
+    {
+      "case_id": 5,
+      "title": "Day 5 F11+F6b 反漏斗開源（2026-04-25 02:13）— 使用者 override 測試",
+      "path": "case-05.md",
+      "sha256": "cb67f87e7b1d9795fe57d1e0d7be6ab975a73135869553df00d13a080f19a253"
+    },
+    {
+      "case_id": 6,
+      "title": "Day 6 F6b 復盤型變體突破鐵粉圈（2026-04-28 02:13）",
+      "path": "case-06.md",
+      "sha256": "92c983cfdf915b6aba8bdebc7753eab12ed4b0e818937c52934d07d11614a518"
+    },
+    {
+      "case_id": 48,
+      "title": "2026-08-09～10 IG 七支橫斷面 — 題材各有主場，且第一次出現分享與儲存 🧪",
+      "path": "case-48.md",
+      "sha256": "81a1c7828cb818126359ebfb4f1f179a3b05953a98be08234df2f68dbd1f13d3"
+    },
+    {
+      "case_id": 47,
+      "title": "2026-08 Thread「不要再訂閱什麼自動剪輯了」— F19 + 樓中樓連結變體，9h 衝 9.3 萬 🆕",
+      "path": "case-47.md",
+      "sha256": "781f76d23ac53cd7816f48819750d526a8f1e477994b5353960079bd5869ab06"
+    },
+    {
+      "case_id": 46,
+      "title": "2026-07-30 ～ 08-08 IG Reels 首批（旅遊/小吃）— 破圈引擎不跨平台的第一手證據 🧪",
+      "path": "case-46.md",
+      "sha256": "090630c1852b2d642bcc68cbf18d87523d8457b9c601bf8231eccad789819665"
+    },
+    {
+      "case_id": 45,
+      "title": "2026-07-22（三）約 11:16 skill 更新 meta 公告文 — 同意圖連發第 4 篇的代價（23.7% ／ 儲存 12 > 分享 3）",
+      "path": "case-45.md",
+      "sha256": "680e8d93bf1895ea3143409032f85625991860556308254aaefd136e076e0e9e"
+    },
+    {
+      "case_id": 44,
+      "title": "2026-07-21（二）約 15:48 線下活動宣傳文 — 15.4% 非追蹤，踩在鐵粉限定門檻上（暴露 skill 缺活動文公式）🔴",
+      "path": "case-44.md",
+      "sha256": "0745e768bc0ddcda1934034aacb04dc522b3fc3741424b13b082b8cc1a129e8e"
+    },
+    {
+      "case_id": 43,
+      "title": "2026-07-21（二）上午 10:59 反賣課立場論述長文 — 9h 被我誤判深化型，38h 爬回 45.5%（R6 早判的自我打臉案）",
+      "path": "case-43.md",
+      "sha256": "c58741e96d2b026b764115d0a250e78b05a348a3cf0d9ba92f3fd2f43bde8ec6"
+    },
+    {
+      "case_id": 42,
+      "title": "2026-07-16 ～ 07-20 FB 三篇對照組 — 圖卡 news ／ 純 CTA ／ value-prop 長文（R37 教科書級實證）🏆",
+      "path": "case-42.md",
+      "sha256": "4185aa264b5b9becfb67b699d46a18462c4ab729720d117667acbe56967da168"
+    },
+    {
+      "case_id": 41,
+      "title": "2026-07-18（六）夥伴 E F19「被隱瞞的免費資源」— 轉發 1,689 破生態紀錄（中型基數首例）🏆",
+      "path": "case-41.md",
+      "sha256": "bbffe3ac09b64a998676f1c39000e794be9e16db86e3776e1366dcfe0aa47510"
+    },
+    {
+      "case_id": 40,
+      "title": "2026-07-01 夥伴帳號純血 F19「反付費課程」— 素人 500-600 粉打出 53 萬（F19 cross-account travels，proven）🏆",
+      "path": "case-40.md",
+      "sha256": "74edba1d5ec5bf7b8ec3ec34d004f6626c0140b236bac0ed3db0fc2a4580aa91"
+    },
+    {
+      "case_id": 39,
+      "title": "2026-06-25 Thread F19「幹掉付費課程 + 100 剪輯記憶開源」破史上紀錄 44 萬 → plateau 49.5 萬（v1.0.2+）🏆🏆🏆",
+      "path": "case-39.md",
+      "sha256": "f83b7d7983591914709825ead4fe36a54ac9b324028d688a3dc5d033776ea41b"
+    },
+    {
+      "case_id": 38,
+      "title": "2026-06-25 自動剪輯「全部開源」清楚 value prop — MEGA 38K / 90.4% / 儲存 466（史上最高）（v1.0.2+）🏆🏆",
+      "path": "case-38.md",
+      "sha256": "ce011bc08bd3c9b62c7219fb59c31b4fe528dc35355bccd294e3ae29f4e06744"
+    },
+    {
+      "case_id": 37,
+      "title": "2026-06-26 「夥伴拿它一篇衝 17.4 萬」第三方戰績 social proof — broke 25K / 83.3%（v1.0.2+）🏆",
+      "path": "case-37.md",
+      "sha256": "01acaf748a0a50e4cacfc346ec585e5e38323e2ba8afe9c81156d0f3d90bbcb9"
+    },
+    {
+      "case_id": 36,
+      "title": "2026-06-23 「Claude 幫我留一手」自動剪輯 0.4.0 全公開 — 閹割版揭露 + 再 ship（v1.0.2+）",
+      "path": "case-36.md",
+      "sha256": "7dc3b626c3fe137f1f799db892a666e7c5d175a040b90d8deb7ee200c91a79e3"
+    },
+    {
+      "case_id": 35,
+      "title": "2026-06-15 「工坊使者」F13 具名 + 團隊 delegation — scale 解法（v1.0.1）",
+      "path": "case-35.md",
+      "sha256": "7e8dfd662156a6a5c0abb6966c83f782ec18cccf90d55118bd6ae145cc988c6b"
+    },
+    {
+      "case_id": 34,
+      "title": "2026-06-13 「Fable 5 被關」news-reaction vulnerable — 換 intent broke 48.9%（v1.0.1）",
+      "path": "case-34.md",
+      "sha256": "3a43a9d97d5d78c8e570a1877dbdd4eba2437237e7530fcc91fac7461227e914"
+    },
+    {
+      "case_id": 33,
+      "title": "2026-06-11 同日 A/B — 抽象 claim（15.1%）vs 具體 demo（68%）：demo > claim（v1.0.1）🏆",
+      "path": "case-33.md",
+      "sha256": "3c48d80779323e8f059718c1f3646c5ac2ec49a7e40838efca5d40f12ed5f2e5"
+    },
+    {
+      "case_id": 32,
+      "title": "2026-06-14 F25b「自由工坊台灣最大 AI Discord」8,887 — superlative milestone + giveaway 收割（v1.0.1）",
+      "path": "case-32.md",
+      "sha256": "3f59a371e3f41ae9db1669a7f29b3c921c07a7bd2c1f574cbd9b552e1de38a04"
+    },
+    {
+      "case_id": 31,
+      "title": "2026-06-10 POS 單品 giveaway「輸入 0 元帶走」— 系列接力 + R35 漏接（v1.0.1）",
+      "path": "case-31.md",
+      "sha256": "42777846c7b7dbbf7318641e89db560e551b703e7ad30a0fba10f5a2e7074713"
+    },
+    {
+      "case_id": 30,
+      "title": "2026-06-09 F6b giveaway 純血 mega-viral 42,103 — R35-safe CTA 終極實證（v1.0.1）🏆🏆🏆",
+      "path": "case-30.md",
+      "sha256": "83f395a8fc10a7c2e6de3246d406aed5edca7b98115da69d298893e5731f2c22"
+    },
+    {
+      "case_id": 29,
+      "title": "2026-06-08 F24 限制說明「私訊被限制」— R35 天花板 + 危機轉 trust（v1.0.1）",
+      "path": "case-29.md",
+      "sha256": "ad3aecb10e8d933fb95343d1fc43ca2626060f6e66deccfa371297ee4e2b2e0f"
+    },
+    {
+      "case_id": 28,
+      "title": "2026-06-07 F21「不是 ComfyUI」R34+R35 版 mega-viral 10,966 — R35 推出（v1.0.1）",
+      "path": "case-28.md",
+      "sha256": "d28e26320e1d007716194403ab338d03bc881b56d53df5dab8f32d8cff1d712c"
+    },
+    {
+      "case_id": 27,
+      "title": "2026-06-08 隱藏作品集釋出「私下還默默做了很多東西」— F26 推出 + R34 voice 野外實證（v1.0.1）",
+      "path": "case-27.md",
+      "sha256": "03a1101e64800dba43c20b7f23986907819d2cb1787ecb6362917dd7c014fd3c"
+    },
+    {
+      "case_id": 26,
+      "title": "2026-05-31 假帳號退出 = quality 自然過濾 — R7 真 KPI 進階觀察（v1.0.0 後 insight）",
+      "path": "case-26.md",
+      "sha256": "e773c3c1c2bbee78f59dd0a20e27054c7a40c53070a7424ee39223a4d62abb08"
+    },
+    {
+      "case_id": 25,
+      "title": "2026-05-29 F25c 階段 review + 集體願景 — Mode C 8 變體完成（v0.9.3）",
+      "path": "case-25.md",
+      "sha256": "1438fdae1dfb9e668c495e7bc35e90db95465b731441da465ffeeb66cb0f11d6"
+    },
+    {
+      "case_id": 24,
+      "title": "2026-05-28 F25b Milestone + 集體歸功 — Line 5000 達標（v0.9.3）",
+      "path": "case-24.md",
+      "sha256": "7fd13bfdc863900a0861d0e5ba8059559c5b5b03798e55057cc45e6a72e49269"
+    },
+    {
+      "case_id": 23,
+      "title": "2026-05-26 F25a Ship 系列承諾 manifest — broke 鐵粉圈（v0.9.3）",
+      "path": "case-23.md",
+      "sha256": "e197bbcdfaf1c92a0c6230000074a7bc0dd047b23e9dbee5b49a661d95bbfa81"
+    },
+    {
+      "case_id": 22,
+      "title": "2026-05-27 F24 Brand 邊界澄清「一些說明」— R31 推出依據（v0.9.2）",
+      "path": "case-22.md",
+      "sha256": "4f516b551d263076f7ee16efbf6911c040f6cbdadc2f354101aae2f183386f4e"
+    },
+    {
+      "case_id": 21,
+      "title": "2026-05-22 + 5/29 FB 社團 cross-post 留言爆 137x — R30 推出依據（v0.9.1）",
+      "path": "case-21.md",
+      "sha256": "7e32eb33a652698b1982e569d33f225ccce835053a36eab976057a52eb13768c"
+    },
+    {
+      "case_id": 20,
+      "title": "5/22 vs 5/25 同日兩篇 Mode C 效應對比 — R29 推出依據（v0.8.7）",
+      "path": "case-20.md",
+      "sha256": "e0897eb7f1dd513499e020807360148329907b3a3afd5e3c489e93627d3aa03e"
+    },
+    {
+      "case_id": 19,
+      "title": "F23 行業洞察解構型 — Mode C 最強範例（5/22「一致性大戰打完了」v0.8.7）",
+      "path": "case-19.md",
+      "sha256": "9b02da7d2105747568fcb8d2b347c5fab656b9a071d26406c2cf68ae84633431"
+    },
+    {
+      "case_id": 18,
+      "title": "F22 工具發現 + 個人脆弱解套 — broke 鐵粉圈廣 identity（5/22「Google Flow self-avatar」v0.8.7）",
+      "path": "case-18.md",
+      "sha256": "6dc5ae9d1d7d9acb3a9983a1d029eb2d1e8ebf2c0d56cb4d757305827571c7e7"
+    },
+    {
+      "case_id": 17,
+      "title": "F21 Ship 答疑解構 — Reusable framework 型（5/25「AI 自動生影片」v0.8.7）",
+      "path": "case-17.md",
+      "sha256": "10b42910a19a301985c17c74178b9e1c41c4d71f84a25f741879e5655ddab07c"
+    },
+    {
+      "case_id": 16,
+      "title": "F20 個人故事傳承 — 鐵粉信任深化型（5/25「消費不如生產」v0.8.7）",
+      "path": "case-16.md",
+      "sha256": "bac3d7c5adbdfc35e7d4f0849c14ffcd834e6219ae873d2e829860d4216524df"
+    },
+    {
+      "case_id": 15,
+      "title": "我反覆誤加連結到 viral 草稿 — v0.8.6 R25 lock",
+      "path": "case-15.md",
+      "sha256": "4c2870586b5c62197bd4ef77fd86214a80bae3c6a872a51c7fe83b86d26c301f"
+    },
+    {
+      "case_id": 14,
+      "title": "2026-05-17 F19 純血 AI 取代論 — 跨年同公式衰退實證（v0.8.4）",
+      "path": "case-14.md",
+      "sha256": "83d9505c4e4409ad1a6ffbcd73259703a34f1e224b537ad10e6120862f615ef7"
+    },
+    {
+      "case_id": 13,
+      "title": "2026-05-16 第二篇 — F4 + F19 hint hybrid 漸進改進實證（v0.8.3）",
+      "path": "case-13.md",
+      "sha256": "8e68bba6378c3489ccfd293d4c2bd38a4b5a27a035e7eb313c804a54d4c665a8"
+    },
+    {
+      "case_id": 12,
+      "title": "2026-05-16 F4 in Thread 反面教材 — Claude Code 社群 3786 里程碑（v0.8.2 patch 基礎）",
+      "path": "case-12.md",
+      "sha256": "f05cc2acc1f69dfa908a87b0bab7e91fa83b4a573e2bb51c37b2b127f6239509"
+    },
+    {
+      "case_id": 11,
+      "title": "hao0321_studio Threads 立場宣言爆款專案（2025-07-08~13）— F19 公式起源",
+      "path": "case-11.md",
+      "sha256": "38bf201bde7d418816efae06fa0328d8fb24a69ff24874a56d82c62350405520"
+    },
+    {
+      "case_id": 10,
+      "title": "5/12 一天 4 篇對照組 — V3 fail / F19 second push break-through（v0.7.2 修正基礎）",
+      "path": "case-10.md",
+      "sha256": "68998f5d43ba8e2e32620c4ea32d54aa8c14b9e676f4b24277437e54c0519384"
+    },
+    {
+      "case_id": 9,
+      "title": "5/12 F6b 「self-criticism via AI」+ v0.7 全綠 — 仍 plateau 219 觀眾（v0.7.1 修正基礎）",
+      "path": "case-09.md",
+      "sha256": "2838e4e1c117182a32eab867ba41afea35a62147b2ad437e17ea8264f7a459d3"
+    },
+    {
+      "case_id": 8,
+      "title": "5/5 F6b 社群 social proof（變體 D）— 推翻 R9 月配額假設",
+      "path": "case-08.md",
+      "sha256": "b04b9db7bebb4f382f99d7a800cf29fa84465c19a28f0142afaafbae3c676610"
+    },
+    {
+      "case_id": 7,
+      "title": "Day 7 F6b 中間調 voice + 商業 ROI 主題（2026-04-29 02:13）— A/B test voice 變數",
+      "path": "case-07.md",
+      "sha256": "b395cddc8a199885ad71b57c772c6355a08cedccd352c7045b82d1f9ddcce8da"
+    }
+  ]
+}

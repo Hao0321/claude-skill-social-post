@@ -1,5 +1,9 @@
 # X 發文
 
+> last_verified: 2026-08-13
+> verification_scope: 官方一般／Premium 長文限制；UI selector 與速率是操作性 guard，實際操作前重驗。
+> official_source: https://help.x.com/en/using-x/types-of-posts
+
 ## 參數
 
 - 字數：**免費 280 / Premium 25,000**。預設當免費帳號，除非使用者說「我有 Premium」

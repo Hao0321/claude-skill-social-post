@@ -1,6 +1,13 @@
 # 貼文評估框架
 
-本檔用於 Phase 2 發完後評估表現、以及使用者問「這篇好不好」時的判斷依據。
+本檔給 Phase 2 發完後評估表現用，也是使用者問「這篇好不好」時的判斷依據。
+
+## 目錄
+
+- FB 演算法訊號、benchmark、4 指標與 flop 紅線
+- 非追蹤比例、貼文類型與真 KPI
+- 排名、早期訊號、plateau 與 second push
+- IG Reel 評估口徑、AI 短劇三集基準與 caption 因果
 
 ## 🧠 FB 2026 演算法訊號權重（v0.7.2 更新，2026-05 web 大數據驗證）
 
@@ -8,7 +15,7 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 
 | 信號 | 權重 | 說明 |
 |---|---|---|
-| **私訊分享**（Messenger / WhatsApp） | **最高（「essential」標籤）** | 🆕 立刻 trigger broader distribution |
+| **私訊分享**（Messenger / WhatsApp） | **最高（"essential" 標籤）** | 🆕 立刻 trigger broader distribution |
 | **儲存（Save）** | **次高** | 「revisit 信號」= 內容值得回看 |
 | **5 字以上留言** | **3× 一般留言** | 「meaningful comment」深度對話信號 |
 | **公開分享（Story / Timeline）** | 高 | 「ultimate vote of confidence」|
@@ -23,7 +30,7 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 
 **Hao funnel implications**：
 - 之前 R7「真 KPI 是 Line 群」對應的「留言區拉群」CTA → 應加「分享給朋友」（私訊分享）混用
-- F19 mid-viral 4 個儲存數遠超 v0.6 視為 minor 指標的權重
+- F19 mid-viral 的 4 個儲存，權重遠高於 v0.6 當時視為 minor 指標的認定
 - F6b 純血 hype hook 引發短留言（「+1」「拉我」）不是 5 字 + 長留言 → 演算法權重低
 
 ---
@@ -42,13 +49,6 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 ---
 
 ## 🎯 4 指標評估法（取代絕對讚數判斷）
-
-⚠️ **本檔的指標 ＝ FB 面板口徑**。Thread 看轉發率 ／ 分享 ／ 流量來源（R19④），短影音看鉤住率 ／ 略過率 ／ 完播曲線（R17）。**三套尺不可互套。**
-
-⚠️ **IG 端另有欄位陷阱**（Case 48）：
-
-- **IG 前台的讚數與留言數是 IG ＋ FB 合計**（**這條是 proven，不是 🧪**）：實測前台「87 讚 ／ 59 留言」拆開是 **IG 讚 32 ＋ FB 心情 55 ＝ 87**、**IG 留言 0 ＋ FB 留言 59 ＝ 59** —— 兩組獨立欄位、兩組精確恆等式，而且 IG 端留言根本是 0，前台卻顯示 59，不可能是標籤問題。**判斷 IG 表現一律開 insights 看拆解，別看前台。**
-- insights 的「瀏覽次數」另含一個不進「瀏覽人數」的 Facebook 分項（🧪）。→ **跨平台比較一律用「瀏覽人數 ／ 觸及」。**
 
 **不要看讚絕對數**。看這四個：
 
@@ -94,7 +94,7 @@ Meta 2024-11 推「Unconnected Distribution」指標（**佔 feed 50%**）。讚
 | 非追蹤者比例 | > 70% | < 40% |  ⚠️ 此列為**非追蹤者**比例，越高越好
 | 讚 | 高 | 低 |
 | 互動率 | 中 | **更高** |
-| 連結點擊率 | 極低（0.016%）| **極高（2%+）** |
+| 連結點擊率 | 極低（0.01%）| **極高（2%+）** |
 | 實際功能 | 大量路人觸及 | 鐵粉真的 star / fork / 入群 |
 | 公式範例 | F6b / F10 / F8 | F4 / F6b 續集 / F13 |
 
@@ -119,8 +119,6 @@ Day 1 實證：448 讚只是表面，**+1,150 Line 社群成員**才是真 ROI�
 ## 📝 排名指標（最近 10 篇相對表現）
 
 FB Insights 會顯示「這篇在最近 10 篇中排名第 N」。使用這個比絕對讚數有意義：
-
-🔴 **這是本 repo 對 N/10 的唯一權威定義：依「表現」排出來的名次，不是發文順序、不是批次順位、不是格式內競爭力。** 任何把它讀成別的意思的敘述都以本段為準。→ **因為名次是從表現導出來的，所以不可以反過來用名次解釋表現**（那是循環論證，2026-08-10 已刪掉一條這樣的規則，見 rules.md R17）。
 
 - **排名 1-3**：表現突出，分析原因複製
 - **排名 4-6**：正常範圍
@@ -184,3 +182,14 @@ FB Insights 會顯示「這篇在最近 10 篇中排名第 N」。使用這個�
 **實證**：Day 4 1h 6% 非追蹤者 → 58h 變 29%（second push 把貼文重新拋給 1,000+ 陌生人）。
 
 **戰略**：發文後 **24-48h 內回留言、引發討論串** = 主動 trigger second push。Plateau 期評估時要把這個窗口考慮進去。
+
+---
+
+## 📱 IG Reel 評估口徑
+
+1. 先跑 `scripts/social_data.py summary --series <series>`；最新數字只從 structured ledger 取得。
+2. 比較相近 maturity，依序看 watch quality、distribution、conversion、content／packaging。
+3. 平均觀看占片長、略過、首段與片尾曲線分開判讀；圖上沒有座標就只記形狀。
+4. UI rate 存 `rates_reported`，手算值存 derived；不覆蓋平台口徑。
+5. 連載要記 standalone premise、cliffhanger、下一集 CTA 與 episode return。Caption 長短與劇情／首幀同時改變時，不稱 A/B。
+6. 同系列多集不是獨立樣本；規則升級走 experiment revision 與 rule backlink。AI 短劇目前候選見 R43。

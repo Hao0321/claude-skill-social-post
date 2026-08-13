@@ -1,12 +1,25 @@
 # Instagram 發文
 
+> last_verified: 2026-08-13
+> verification_scope: 官方 carousel／hashtag 基本能力；caption 折疊與桌面 UI 是操作性觀察，發布前以當前畫面為準。
+> official_sources: https://www.facebook.com/help/269314186824048/ ; https://www.facebook.com/help/351460621611097/
+
 ## 參數
 
-- 字數：2,200 字上限，**前 125 字後被折疊**，重點前置
-- Hashtag：5-15 個甜蜜點（上限 30，太多像 spam）
+- 字數：沿用 2,200 字操作 guard；折疊位置會依介面變動，重點一律前置
+- Hashtag：內部策略用 **2-5 個高度相關標籤**；官方目前允許 caption／留言放 hashtag，硬上限與產品行為仍可能調整
 - **必須有圖/影片**，純文字發不了
 - 連結：內文不可點（只有 bio 可點），導流用 link-in-bio 或 Threads
 - 排版：換行、emoji，**無 markdown**；中文空行常被吃
+
+## IG → YouTube 導流（cross-ref）
+
+IG 導 YT 三條路（IG 是導流平台優先序 **#2**，次於 Threads）：
+1. **link-in-bio** 放當期 YT 影片
+2. **限動 link sticker**
+3. caption 導去 **Threads**，再走 Threads→YT（主力）
+
+⚠️ IG 內文連結不可點，**別在 caption 塞裸 URL**。完整協定見 [`youtube.md`](youtube.md)。
 
 ## 生成調性
 
@@ -14,9 +27,17 @@
 - hashtag 放文末空行隔開
 - 比 FB 更視覺化、更短
 
+## Hao AI 短劇 Reel 路由
+
+- 私人實測只從 `data/*.jsonl` 與 `scripts/social_data.py summary --series <series>` 讀；本檔不保存快照數字。
+- 同系列不同集、不同 maturity、不同首幀與 caption 不是乾淨 A/B。先列 confound，再看 R43 的 standalone premise 假設。
+- Caption 可提供題材詞與單一 CTA，但全球陌生分發仍優先看影片留存、略過與推薦來源。
+- 純 AI 短劇只發布 IG＋FB，不發 YouTube；實拍 Shorts 不受此限制。
+- 介面若出現廣告受眾字樣，在是否 boost 確認前，不把人口輪廓宣稱為純自然 TAM。
+
 ## 沒圖就停
 
-使用者沒圖時告知選項：（A）給我圖（B）跳過 IG（C）改 Threads。**不要自己決定。**
+使用者沒圖時告知選項：(A) 給我圖 (B) 跳過 IG (C) 改 Threads。**不要自己決定。**
 
 ## UI 流程
 

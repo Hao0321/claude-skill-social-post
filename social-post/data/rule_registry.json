@@ -1,0 +1,415 @@
+{
+  "schema_version": "2.0",
+  "source_of_truth": {
+    "prose": "references/rules/RNN.md",
+    "lifecycle": "references/rules/metadata.json"
+  },
+  "rules": [
+    {
+      "id": "R1",
+      "title": "一天一篇 + 強制輕重交替（v0.7.2 細化）",
+      "status": "active",
+      "source_file": "references/rules/R01.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R2",
+      "title": "爆款後 24h 冷卻",
+      "status": "active",
+      "source_file": "references/rules/R02.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R3",
+      "title": "突破鐵粉圈（連 3 篇 < 15% 非追蹤者）",
+      "status": "active",
+      "source_file": "references/rules/R03.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R4",
+      "title": "時段按受眾分流",
+      "status": "active",
+      "source_file": "references/rules/R04.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R5",
+      "title": "敘事意圖冷卻（核心規則，5 案例升級）",
+      "status": "active",
+      "source_file": "references/rules/R05.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R6",
+      "title": "評估看 4 指標 + 必須 48-72h plateau 才判定",
+      "status": "active",
+      "source_file": "references/rules/R06.md",
+      "source_line": 1,
+      "sample_mentions": [
+        1,
+        2
+      ],
+      "experiment_ids": []
+    },
+    {
+      "id": "R7",
+      "title": "真 KPI 是社群轉化，不是讚",
+      "status": "active",
+      "source_file": "references/rules/R07.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R8",
+      "title": "Voice Lock — 僅 Mode B 爆款型用 Day 1 純血格式",
+      "status": "active",
+      "source_file": "references/rules/R08.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R9",
+      "title": "~~Mode B 月配額硬限~~ → 廢除（併入 R5）",
+      "status": "deprecated",
+      "source_file": "references/rules/R09.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R10",
+      "title": "Hype 詞輪替",
+      "status": "active",
+      "source_file": "references/rules/R10.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R11",
+      "title": "金句密度（從 F14 偷學）",
+      "status": "active",
+      "source_file": "references/rules/R11.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R12",
+      "title": "量化稀缺 hook",
+      "status": "active",
+      "source_file": "references/rules/R12.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R13",
+      "title": "反命題 hook",
+      "status": "active",
+      "source_file": "references/rules/R13.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R14",
+      "title": "Hook punch 詞庫",
+      "status": "active",
+      "source_file": "references/rules/R14.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R15",
+      "title": "私訊分享 trigger（2026 最強信號）",
+      "status": "active",
+      "source_file": "references/rules/R15.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R16",
+      "title": "5 字以上長留言 trigger（3× 權重）",
+      "status": "active",
+      "source_file": "references/rules/R16.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R17",
+      "title": "Reels 策略（2026 +50% 同日加成）",
+      "status": "active",
+      "source_file": "references/rules/R17.md",
+      "source_line": 1,
+      "sample_mentions": [
+        2,
+        3
+      ],
+      "experiment_ids": [
+        "exp-reborn-driver-ep01-43h-to-68h-late-growth"
+      ]
+    },
+    {
+      "id": "R18",
+      "title": "儲存（Save）指標重視",
+      "status": "active",
+      "source_file": "references/rules/R18.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R19",
+      "title": "Threads 轉發權重 + Keyword 機制",
+      "status": "active",
+      "source_file": "references/rules/R19.md",
+      "source_line": 1,
+      "sample_mentions": [
+        1
+      ],
+      "experiment_ids": []
+    },
+    {
+      "id": "R20",
+      "title": "漸進改進原則（F4 → F19 5 階段，v0.8.3）",
+      "status": "active",
+      "source_file": "references/rules/R20.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R21",
+      "title": "~~公式跨年衰退 -80%~~ → 撤回（v0.8.5）",
+      "status": "deprecated",
+      "source_file": "references/rules/R21.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R22",
+      "title": "~~keyword 過 peak~~ → 部分撤回",
+      "status": "deprecated",
+      "source_file": "references/rules/R22.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R23",
+      "title": "per-view 追蹤轉化率（保留，新評估指標）",
+      "status": "active",
+      "source_file": "references/rules/R23.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R24",
+      "title": "純血公式可連發，但主題須各換（v0.8.5 → 🧪 2026-07 大幅降級）",
+      "status": "emerging",
+      "source_file": "references/rules/R24.md",
+      "source_line": 1,
+      "sample_mentions": [
+        1
+      ],
+      "experiment_ids": []
+    },
+    {
+      "id": "R25",
+      "title": "🚨 FB / Threads 貼文絕不附外部連結（硬規則）",
+      "status": "active",
+      "source_file": "references/rules/R25.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R26",
+      "title": "── 分隔符鐵則（Mode C 長文）",
+      "status": "active",
+      "source_file": "references/rules/R26.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R27",
+      "title": "個人脆弱 confess（Mode C 廣 identity）",
+      "status": "active",
+      "source_file": "references/rules/R27.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R28",
+      "title": "行業反主流 framing（Mode C 最強）",
+      "status": "active",
+      "source_file": "references/rules/R28.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R29",
+      "title": "Mode C 同日連發策略",
+      "status": "active",
+      "source_file": "references/rules/R29.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R30",
+      "title": "FB 社團 cross-post 策略（v0.9.1，5/22 + 5/29 實證）",
+      "status": "active",
+      "source_file": "references/rules/R30.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R31",
+      "title": "Brand 邊界澄清時機（v0.9.2，5/27 F24 實證）",
+      "status": "active",
+      "source_file": "references/rules/R31.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R32",
+      "title": "集體 framing trigger（v0.9.3，5/26-5/29 三實證）",
+      "status": "active",
+      "source_file": "references/rules/R32.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R33",
+      "title": "FB 週任務情報 = 演算法獎勵訊號（🧪 候選，6/1 實證）",
+      "status": "emerging",
+      "source_file": "references/rules/R33.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R34",
+      "title": "真實 voice — 反 AI 腔（🚨 硬規則，6/1 使用者鎖定，永久不可覆寫）",
+      "status": "active",
+      "source_file": "references/rules/R34.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R35",
+      "title": "關鍵詞留言索取 CTA = broke 鐵粉圈引擎（🏆 6/7 實證，最強 CTA）",
+      "status": "active",
+      "source_file": "references/rules/R35.md",
+      "source_line": 1,
+      "sample_mentions": [
+        1
+      ],
+      "experiment_ids": []
+    },
+    {
+      "id": "R36",
+      "title": "demo > claim 鐵律（broke 鐵粉圈最強單一槓桿，🏆 4 案例同變數實證，跨 FB/Thread）",
+      "status": "active",
+      "source_file": "references/rules/R36.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R37",
+      "title": "value-prop-lead 開場 —「它幫你做什麼」碾壓 meta 故事 / 好奇 hook（🏆 6/25 實證，史上最高儲存）",
+      "status": "active",
+      "source_file": "references/rules/R37.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R38",
+      "title": "第三方具體戰績 social proof 🧪 emerging（n=1，且與 R36 共用 Case 33-A 對照組） —「別人用我的東西做出的誇張成績」> 自誇（🏆 6/26 實證）",
+      "status": "emerging",
+      "source_file": "references/rules/R38.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R39",
+      "title": "分享（Share）= 跨粉絲圈最強引擎（20x 讚 / FB 2026 Unconnected Reach 核心 / 內容強時走分享路徑）",
+      "status": "active",
+      "source_file": "references/rules/R39.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R40",
+      "title": "Dwell time（停留秒數）= 第三廣推信號 / 隱形王牌（提取自 formulas.md 訊號表）",
+      "status": "active",
+      "source_file": "references/rules/R40.md",
+      "source_line": 1,
+      "sample_mentions": [
+        1
+      ],
+      "experiment_ids": []
+    },
+    {
+      "id": "R41",
+      "title": "superlative hook 🧪 emerging（n=1，confound 未分離） —「最大 / 第一 / 史上最 / 破紀錄」= milestone / 成果 broke 放大器（6/14 實證）",
+      "status": "emerging",
+      "source_file": "references/rules/R41.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R42",
+      "title": "archetype 飽和天花板 —「強化 hook ≠ 換 archetype」（5/12 V3 fail 實證）",
+      "status": "emerging",
+      "source_file": "references/rules/R42.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": []
+    },
+    {
+      "id": "R43",
+      "title": "連載短劇每集必須能被陌生觀眾單獨看懂（🧪 emerging）",
+      "status": "emerging",
+      "source_file": "references/rules/R43.md",
+      "source_line": 1,
+      "sample_mentions": [],
+      "experiment_ids": [
+        "exp-reborn-driver-ep01-03-caption-and-continuity",
+        "exp-reborn-driver-ep01-03-series-distribution"
+      ]
+    }
+  ]
+}

@@ -2,16 +2,16 @@
 
 一個可安裝到 Codex 或 Claude Code 的社群內容 skill：學習你的語氣、規劃內容、撰寫平台化貼文、經確認後發布，並把 Reels／貼文洞察變成可驗證的結構化學習資料。
 
-目前版本：**v2.0.0**。
+目前版本：**v2.1.0**。
 
-## v2.0.0 新增什麼
+## v2.1.0 新增什麼
 
-- P3 Log Outcome：每次洞察截圖保存成時間快照，不覆蓋舊數字。
-- P4 Optimize Patterns：跨貼文、跨集比較，明示變因、confound 與證據狀態。
-- `posts.jsonl`、`insight_snapshots.jsonl`、`experiments.jsonl` 三層資料模型。
-- 同一 schema 同時支援一般圖文與系列影片；系列欄位與片長不是硬塞給所有貼文的必填值。
-- 可重複執行的 validate、series summary、dry-run／atomic write 與 rule registry scripts。
-- 公開版不附作者的語氣檔、內容日曆、原始成效資料或私人草稿。
+- 預設生成路徑改成 quick cards，只讀必要語氣、當前 brief 與一個公式；歷史案例不再灌進每次 context。
+- Outcome store 加上跨平台 schema 驗證、原子多檔 transaction、lock 與 optimistic revision，避免並發更新靜默蓋掉資料。
+- 實驗採 append-only revision，規則狀態改由明確 metadata 管理，並要求 experiment ↔ rule 雙向 backlink。
+- Rules／formulas／cases 拆成單檔索引；mutable 成效只進 JSONL，Markdown 不再複製「最新數字」。
+- 新增設定式 public export allowlist、架構 layers 與 required dependency gates。
+- 平台 reference 加入查核日期與範圍，區分平台硬規格、內部策略與未驗證演算法假設。
 
 舊版累積的公式、平台規則與公開案例仍保留在 [`social-post/references`](social-post/references)。
 
@@ -39,7 +39,7 @@ Copy-Item style_profile.example.md style_profile.md
 Copy-Item content_plan.example.md content_plan.md
 ```
 
-`style_profile.md`、`content_plan.md` 與日後產生的 `data/` 都是你的本機資料，不要提交到公開 fork。
+接著把 `voice_quick.md` 與 `current_brief.md` 的 placeholder 換成自己的語氣與平台方向。`style_profile.md`、`content_plan.md`、個人化 quick cards 與日後產生的 outcome data 都是你的本機資料，不要提交回公開 fork。
 
 ## 五個 Mode
 

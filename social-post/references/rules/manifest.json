@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "R1",
+      "title": "一天一篇 + 強制輕重交替（v0.7.2 細化）",
+      "path": "R01.md",
+      "sha256": "76cbf930157082de17e946a7125b683a51b9c4159c336e4ddc1e98e7cdec3705"
+    },
+    {
+      "rule_id": "R2",
+      "title": "爆款後 24h 冷卻",
+      "path": "R02.md",
+      "sha256": "a38c368f66c501e1763d8eab82bfc00db851a86ec168adf0c7dc3912cc970634"
+    },
+    {
+      "rule_id": "R3",
+      "title": "突破鐵粉圈（連 3 篇 < 15% 非追蹤者）",
+      "path": "R03.md",
+      "sha256": "5875935ea926a651d962108c45a22b5dddd31948d7980a616f14d68ba29e992b"
+    },
+    {
+      "rule_id": "R4",
+      "title": "時段按受眾分流",
+      "path": "R04.md",
+      "sha256": "63986a21a836bf93f06523239e61ab367e17336c6a83811cc90739d964af6b5f"
+    },
+    {
+      "rule_id": "R5",
+      "title": "敘事意圖冷卻（核心規則，5 案例升級）",
+      "path": "R05.md",
+      "sha256": "e761606ebbeac317310f9075dcc19616ba7bf714f614fd3b32ff5256e30ab369"
+    },
+    {
+      "rule_id": "R6",
+      "title": "評估看 4 指標 + 必須 48-72h plateau 才判定",
+      "path": "R06.md",
+      "sha256": "927b39e49f06f7865eb35bed1703065116c54fd1fc1d8ea4a6445320d9af1e29"
+    },
+    {
+      "rule_id": "R7",
+      "title": "真 KPI 是社群轉化，不是讚",
+      "path": "R07.md",
+      "sha256": "e2f0d8edfcf18d9f4206561f2d462272c218961e07d7e4ca7c67cfa7e1f58308"
+    },
+    {
+      "rule_id": "R8",
+      "title": "Voice Lock — 僅 Mode B 爆款型用 Day 1 純血格式",
+      "path": "R08.md",
+      "sha256": "b2b46bf1453f30546c3c7c1830db2cc34bc632d9e7d21ff4e93d753debc3a6af"
+    },
+    {
+      "rule_id": "R9",
+      "title": "~~Mode B 月配額硬限~~ → 廢除（併入 R5）",
+      "path": "R09.md",
+      "sha256": "776dc605dbfd1c865c08c0884e205f6344b954bd35188ac6a0dfc074809046fb"
+    },
+    {
+      "rule_id": "R10",
+      "title": "Hype 詞輪替",
+      "path": "R10.md",
+      "sha256": "dca25e661e42dc85bdf4dfabb58bf62a4f9745026cabe53754cad4ac5840e2e2"
+    },
+    {
+      "rule_id": "R11",
+      "title": "金句密度（從 F14 偷學）",
+      "path": "R11.md",
+      "sha256": "4d63c9408d70e1c324b10298af43e43a786105e9628d6b418e1c52ab64bcc79f"
+    },
+    {
+      "rule_id": "R12",
+      "title": "量化稀缺 hook",
+      "path": "R12.md",
+      "sha256": "f394d7189dd49e503a4ff994d73c34765fdaca30a6cf9487d8f3ff0b3f855c79"
+    },
+    {
+      "rule_id": "R13",
+      "title": "反命題 hook",
+      "path": "R13.md",
+      "sha256": "c8478058c7ce476fcefb5fa23808068dc164505354ad30689e9002771de8bfea"
+    },
+    {
+      "rule_id": "R14",
+      "title": "Hook punch 詞庫",
+      "path": "R14.md",
+      "sha256": "5c4d1ac3a6b066f67880a5108e042e6e4426911d72eddbdd16c145cbf9f920df"
+    },
+    {
+      "rule_id": "R15",
+      "title": "私訊分享 trigger（2026 最強信號）",
+      "path": "R15.md",
+      "sha256": "177ede69bb840b53ecafc41851877c7ab24d901b12f04c03618f0e7374277d4c"
+    },
+    {
+      "rule_id": "R16",
+      "title": "5 字以上長留言 trigger（3× 權重）",
+      "path": "R16.md",
+      "sha256": "8beec6c3a50015ac6000ec400ad43984e3e5f300b0b5bb0bd268fb48954bfaa4"
+    },
+    {
+      "rule_id": "R17",
+      "title": "Reels 策略（2026 +50% 同日加成）",
+      "path": "R17.md",
+      "sha256": "4c472a5a48c0457a2e84cf82b63e24dd42d08771e2540d9e3792bb755fc44ec9"
+    },
+    {
+      "rule_id": "R18",
+      "title": "儲存（Save）指標重視",
+      "path": "R18.md",
+      "sha256": "3693b249910156161ed53bd1dc85060becd25ad3563aeb5ce959f9faf03b4412"
+    },
+    {
+      "rule_id": "R19",
+      "title": "Threads 轉發權重 + Keyword 機制",
+      "path": "R19.md",
+      "sha256": "219cfd009a7b91ba5a20e66ecb2ab3ce0b54f5089b34fa29a397d12a66474562"
+    },
+    {
+      "rule_id": "R20",
+      "title": "漸進改進原則（F4 → F19 5 階段，v0.8.3）",
+      "path": "R20.md",
+      "sha256": "16db5aeb9f488bde0fdd494953dd737644dfee8d9a5014de75fc96ff5dc3df49"
+    },
+    {
+      "rule_id": "R21",
+      "title": "~~公式跨年衰退 -80%~~ → 撤回（v0.8.5）",
+      "path": "R21.md",
+      "sha256": "ab8624fcbb6a26d0d8cbc694df6020d7143a4a49cd8a78906933f6c4b81bbe2a"
+    },
+    {
+      "rule_id": "R22",
+      "title": "~~keyword 過 peak~~ → 部分撤回",
+      "path": "R22.md",
+      "sha256": "af2d5347905ce4a6e4413729f02a80def840c4a177487f2157f93bf7450cd5b0"
+    },
+    {
+      "rule_id": "R23",
+      "title": "per-view 追蹤轉化率（保留，新評估指標）",
+      "path": "R23.md",
+      "sha256": "74e8e27bb4719eb0c6c6135049db3e05e66c0b4128e7514ef510f96639e14776"
+    },
+    {
+      "rule_id": "R24",
+      "title": "純血公式可連發，但主題須各換（v0.8.5 → 🧪 2026-07 大幅降級）",
+      "path": "R24.md",
+      "sha256": "95a537b4e81b1a035dae1abcf601d36a61f6fbb8b743e277f0100a32ee08b10e"
+    },
+    {
+      "rule_id": "R25",
+      "title": "🚨 FB / Threads 貼文絕不附外部連結（硬規則）",
+      "path": "R25.md",
+      "sha256": "e265ebd319576eaaaf18bdee6477697f71cd6b3ef3bbb40f6ae3665aaffd2895"
+    },
+    {
+      "rule_id": "R26",
+      "title": "── 分隔符鐵則（Mode C 長文）",
+      "path": "R26.md",
+      "sha256": "c5a18f0c3e0266b9bbad3b0e5c1d14338929e4b1b9fdfedd8fc5a2bc03c0f544"
+    },
+    {
+      "rule_id": "R27",
+      "title": "個人脆弱 confess（Mode C 廣 identity）",
+      "path": "R27.md",
+      "sha256": "a341196fcfce14da6d6f09d15866577a8128dadbc5232f732d88e4b57f449ccc"
+    },
+    {
+      "rule_id": "R28",
+      "title": "行業反主流 framing（Mode C 最強）",
+      "path": "R28.md",
+      "sha256": "3fb5689aa5aad35498bb030799609932d7a58a6cf3f77188bb1a8b475738ee5e"
+    },
+    {
+      "rule_id": "R29",
+      "title": "Mode C 同日連發策略",
+      "path": "R29.md",
+      "sha256": "05f2ebb91b0b691d7c7fed42d9294b89ea95ef502e7b6d02e2d4137b23cb3f28"
+    },
+    {
+      "rule_id": "R30",
+      "title": "FB 社團 cross-post 策略（v0.9.1，5/22 + 5/29 實證）",
+      "path": "R30.md",
+      "sha256": "d586fc09a1e85094a98fd319f42c593c510ab357f2bc5696de8edd4fd5a10f22"
+    },
+    {
+      "rule_id": "R31",
+      "title": "Brand 邊界澄清時機（v0.9.2，5/27 F24 實證）",
+      "path": "R31.md",
+      "sha256": "4f45b7e520105c1e4088a0a1c95d3d5aa731600609b35e1601c9c6deb27ef66a"
+    },
+    {
+      "rule_id": "R32",
+      "title": "集體 framing trigger（v0.9.3，5/26-5/29 三實證）",
+      "path": "R32.md",
+      "sha256": "bc1118e50262c64d63ca836e3077743ef9bd71d2e6391d57310a4fec0ce0f8a9"
+    },
+    {
+      "rule_id": "R33",
+      "title": "FB 週任務情報 = 演算法獎勵訊號（🧪 候選，6/1 實證）",
+      "path": "R33.md",
+      "sha256": "bc562ae5ad949efd3f3dcf24fa5a663c9a9295c59e5343a8d4016e3d4de2fba1"
+    },
+    {
+      "rule_id": "R34",
+      "title": "真實 voice — 反 AI 腔（🚨 硬規則，6/1 使用者鎖定，永久不可覆寫）",
+      "path": "R34.md",
+      "sha256": "70b4284f92b73bb8126b7717140e0dc2d880a25b33830892113c7bdca53537b9"
+    },
+    {
+      "rule_id": "R35",
+      "title": "關鍵詞留言索取 CTA = broke 鐵粉圈引擎（🏆 6/7 實證，最強 CTA）",
+      "path": "R35.md",
+      "sha256": "eaadf53fad06357167a70bc5d0fb3fe0d3016b02aaf2a8468e0fc94fb385ea84"
+    },
+    {
+      "rule_id": "R36",
+      "title": "demo > claim 鐵律（broke 鐵粉圈最強單一槓桿，🏆 4 案例同變數實證，跨 FB/Thread）",
+      "path": "R36.md",
+      "sha256": "83ef5c6e285dbc5e8e74686bfb5b3234b027556bf2a19013e8393a79d11a5167"
+    },
+    {
+      "rule_id": "R37",
+      "title": "value-prop-lead 開場 —「它幫你做什麼」碾壓 meta 故事 / 好奇 hook（🏆 6/25 實證，史上最高儲存）",
+      "path": "R37.md",
+      "sha256": "43b388a269c693f3ba87f0950623a37aa0e78c12de4b3c8a0bd937dad305a150"
+    },
+    {
+      "rule_id": "R38",
+      "title": "第三方具體戰績 social proof 🧪 emerging（n=1，且與 R36 共用 Case 33-A 對照組） —「別人用我的東西做出的誇張成績」> 自誇（🏆 6/26 實證）",
+      "path": "R38.md",
+      "sha256": "978aec80e2ca38687dec277cb7e03979f09e9bd52b4d24e72871a88b5958a441"
+    },
+    {
+      "rule_id": "R39",
+      "title": "分享（Share）= 跨粉絲圈最強引擎（20x 讚 / FB 2026 Unconnected Reach 核心 / 內容強時走分享路徑）",
+      "path": "R39.md",
+      "sha256": "cbb72b0cf91bcb2a34ab66e10e519c1dd5db1b031c8c1001a0e1cfbe368d05e0"
+    },
+    {
+      "rule_id": "R40",
+      "title": "Dwell time（停留秒數）= 第三廣推信號 / 隱形王牌（提取自 formulas.md 訊號表）",
+      "path": "R40.md",
+      "sha256": "fddc1210d4e8b4bd2a6bf2328aaa903015200983f86dbf67ec53bc4db8980f20"
+    },
+    {
+      "rule_id": "R41",
+      "title": "superlative hook 🧪 emerging（n=1，confound 未分離） —「最大 / 第一 / 史上最 / 破紀錄」= milestone / 成果 broke 放大器（6/14 實證）",
+      "path": "R41.md",
+      "sha256": "cd68b8f64b6f84c697350574f31130c408ccf778ba1fd23ca97dbc5f8f9e34e0"
+    },
+    {
+      "rule_id": "R42",
+      "title": "archetype 飽和天花板 —「強化 hook ≠ 換 archetype」（5/12 V3 fail 實證）",
+      "path": "R42.md",
+      "sha256": "90ad80df27eb08938b3fbc5b60772508c269d8be71b0432f020a0e9ad4405023"
+    },
+    {
+      "rule_id": "R43",
+      "title": "連載短劇每集必須能被陌生觀眾單獨看懂（🧪 emerging）",
+      "path": "R43.md",
+      "sha256": "3712487b8a18b1b86e6b4e135bcff021cf979bf72c868c2876643cde8349fad4"
+    }
+  ]
+}

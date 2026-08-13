@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "source_of_truth": "references/formulas/FNN.md",
+  "formulas": [
+    {
+      "id": "F1",
+      "title": "Day-N 開發日誌",
+      "path": "F01.md"
+    },
+    {
+      "id": "F2",
+      "title": "截圖先丟再講",
+      "path": "F02.md"
+    },
+    {
+      "id": "F3",
+      "title": "實測翻車版",
+      "path": "F03.md"
+    },
+    {
+      "id": "F4",
+      "title": "社群里程碑 + 投票",
+      "path": "F04.md"
+    },
+    {
+      "id": "F5",
+      "title": "工具對打",
+      "path": "F05.md"
+    },
+    {
+      "id": "F6",
+      "title": "Mode B 爆款（有 a/b 兩版，各有場景）",
+      "path": "F06.md"
+    },
+    {
+      "id": "F7",
+      "title": "POV 吐槽（Threads 專屬）",
+      "path": "F07.md"
+    },
+    {
+      "id": "F8",
+      "title": "Credibility Piggyback（外部實體標記挑戰）",
+      "path": "F08.md"
+    },
+    {
+      "id": "F9",
+      "title": "Public L-taking（我錯了反轉文）",
+      "path": "F09.md"
+    },
+    {
+      "id": "F10",
+      "title": "Controversy Middle Ground（兩派戰爭居中開炮）",
+      "path": "F10.md"
+    },
+    {
+      "id": "F11",
+      "title": "Counter-Funnel Giveaway（反漏斗教學）",
+      "path": "F11.md"
+    },
+    {
+      "id": "F12",
+      "title": "Timestamp Live-ops（時間戳 + 過程直播）",
+      "path": "F12.md"
+    },
+    {
+      "id": "F13",
+      "title": "Named Gratitude Chain（具名致謝鍊結）",
+      "path": "F13.md"
+    },
+    {
+      "id": "F14",
+      "title": "演講濃縮型（thought leadership 長文）",
+      "path": "F14.md"
+    },
+    {
+      "id": "F15-mini",
+      "title": "極簡開源型（5/12 F19 實證 mid-viral）🆕 v0.7.2",
+      "path": "F15-mini.md"
+    },
+    {
+      "id": "F15",
+      "title": "源材料公開型（稀缺資源分享）",
+      "path": "F15.md"
+    },
+    {
+      "id": "F16",
+      "title": "精選彙整型（weekly baseline）",
+      "path": "F16.md"
+    },
+    {
+      "id": "F17",
+      "title": "極簡轉發型（⚠️ Hao 不建議模仿）",
+      "path": "F17.md"
+    },
+    {
+      "id": "F18",
+      "title": "AIGC 作品 demo + Reels 變體（5/12 探索 + 2026 演算法 +50%）🆕 v0.7.2",
+      "path": "F18.md"
+    },
+    {
+      "id": "F19",
+      "title": "Threads 立場宣言型（敵人 + 英雄 + 純粹動機）🆕 v0.8 / 排版精修 v0.8.1",
+      "path": "F19.md"
+    },
+    {
+      "id": "F20",
+      "title": "個人故事傳承型（v0.8.7）",
+      "path": "F20.md"
+    },
+    {
+      "id": "F21",
+      "title": "Ship 答疑解構型（v0.8.7）",
+      "path": "F21.md"
+    },
+    {
+      "id": "F22",
+      "title": "工具發現 + 個人脆弱解套型（v0.8.7）⭐ 廣 identity",
+      "path": "F22.md"
+    },
+    {
+      "id": "F23",
+      "title": "行業洞察解構型（v0.8.7）🏆 Mode C 最強",
+      "path": "F23.md"
+    },
+    {
+      "id": "F24",
+      "title": "Brand 邊界澄清型（v0.9.2，5/27 實證）🛡️ Trust reset 工具",
+      "path": "F24.md"
+    },
+    {
+      "id": "F25",
+      "title": "集體願景型（v0.9.3，5/26-5/29 三實證）🌟 反個人主義 broke trigger",
+      "path": "F25.md"
+    },
+    {
+      "id": "F26",
+      "title": "隱藏作品集釋出型（v1.0.1，6/8 實證）🆕 portfolio reveal + 免費 manifest",
+      "path": "F26.md"
+    },
+    {
+      "id": "F27",
+      "title": "單品 spotlight giveaway（v1.0.1，6/10 實證）🆕 giveaway 系列接力單元",
+      "path": "F27.md"
+    },
+    {
+      "id": "F28",
+      "title": "第三方戰績 social proof 型（v1.0.2+，6/26 實證）🆕 works-for-others broke hook",
+      "path": "F28.md"
+    },
+    {
+      "id": "F29",
+      "title": "再ship 揭露型（「閹割版揭露 → 全公開」，v1.0.2+，6/23 實證）🆕 update 篇救星",
+      "path": "F29.md"
+    },
+    {
+      "id": "F30",
+      "title": "活動宣傳型（線下／線上活動）🆕 🧪 emerging",
+      "path": "F30.md"
+    }
+  ]
+}

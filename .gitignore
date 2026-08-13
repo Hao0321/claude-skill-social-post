@@ -20,7 +20,8 @@ social-post/style_profile.md
 social-post/content_plan.md
 social-post/_scraped_posts_draft.md
 social-post/drafts/
-social-post/data/
+social-post/data/*
+!social-post/data/rule_registry.json
 
 # Claude Code local permissions
 .claude/

@@ -1,38 +1,39 @@
 {
-  "length_exceptions": [
-    "social-post/references/case_studies.md",
-    "social-post/references/formulas.md",
-    "social-post/references/rules.md"
-  ],
+  "exclude": [".git/**", "__pycache__/**", "*.pyc"],
+  "length_exceptions": [],
   "navigation_exceptions": [
-    "social-post/references/case_studies.md",
-    "social-post/references/evaluation.md",
-    "social-post/references/facebook.md",
-    "social-post/references/formulas.md",
-    "social-post/references/rules.md",
-    "social-post/references/threads.md"
+    "social-post/references/rules/R*.md",
+    "social-post/references/formulas/F*.md",
+    "social-post/references/cases/case-*.md"
   ],
   "id_definition_scopes": {
-    "R": ["social-post/references/rules.md"],
-    "F": ["social-post/references/formulas.md"],
-    "CASE": ["social-post/references/case_studies.md"]
+    "R": ["social-post/references/rules/R*.md"],
+    "F": ["social-post/references/formulas/F*.md"],
+    "CASE": ["social-post/references/cases/case-*.md"]
   },
   "range_claim_scopes": {
-    "R": [],
+    "R": ["social-post/references/rules.md"],
     "F": [],
-    "CASE": []
+    "CASE": ["social-post/references/case_studies.md"]
   },
-  "sync": {
-    "public_root": null,
-    "ignore": [
-      "social-post/style_profile.md",
-      "social-post/content_plan.md",
-      "social-post/drafts/**",
-      "social-post/data/**"
+  "sync": {"public_root": null, "ignore": []},
+  "privacy": {"tokens": [], "patterns": ["C:[/\\\\]Users[/\\\\]"]},
+  "architecture": {
+    "function_warning_lines": 80,
+    "function_severe_lines": 160,
+    "layers": [
+      {"name": "domain", "patterns": ["social-post/scripts/social_validation.py"], "may_depend_on": []},
+      {"name": "storage", "patterns": ["social-post/scripts/social_store.py"], "may_depend_on": []},
+      {"name": "application", "patterns": ["social-post/scripts/social_data.py"], "may_depend_on": ["domain", "storage"]},
+      {"name": "cli", "patterns": ["social-post/scripts/log_outcome.py"], "may_depend_on": ["application", "storage"]},
+      {"name": "test", "patterns": ["social-post/scripts/self_test.py"], "may_depend_on": ["application", "storage", "cli", "tools"]},
+      {"name": "tools", "patterns": ["social-post/scripts/build_rule_registry.py", "social-post/scripts/split_*.py"], "may_depend_on": []}
+    ],
+    "required_dependencies": [
+      {"source": "social-post/scripts/log_outcome.py", "target": "social-post/scripts/social_store.py"},
+      {"source": "social-post/scripts/log_outcome.py", "target": "social-post/scripts/social_data.py"},
+      {"source": "social-post/scripts/social_data.py", "target": "social-post/scripts/social_validation.py"},
+      {"source": "social-post/scripts/social_data.py", "target": "social-post/scripts/social_store.py"}
     ]
-  },
-  "privacy": {
-    "tokens": [],
-    "allow": []
   }
 }

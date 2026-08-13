@@ -1,5 +1,27 @@
 # Changelog
 
+## v2.1.0 — 2026-08-13（knowledge architecture hardening）
+
+### Added
+
+- 新增 `social_store.py` 與 `social_validation.py`，分離儲存、schema policy 與應用層責任。
+- 新增 store lock、revision guard、staged multi-file commit 與 rollback；self-test 覆蓋 stale writer。
+- 新增 explicit rule lifecycle metadata、experiment revisions 與 reciprocal backlinks。
+- 新增 quick voice／current brief cards，以及 rules、formulas、cases 的單檔索引。
+- 新增 config-driven public sync dry-run／write、architecture layers 與 required dependency assertions。
+
+### Changed
+
+- 常用 P2 路徑從約 1,595 行降到 232 行核心內容；公式按需讀取，不再載入整個 archive。
+- Mutable 成效以 JSONL 為唯一真值；legacy Markdown 僅保留索引、歷史脈絡或產生檢視。
+- 自測改驗 invariants／minimum baseline，不再因合法新增資料而誤判失敗。
+- 平台 references 補 `last_verified` 與 verification scope，移除把未驗證演算法敘事當硬規格的寫法。
+
+### Validation
+
+- 新增並發寫入、規則↔實驗 backlink、public empty-store 與 required dependency 回歸測試。
+- 私版與公開版分別執行 self-test、data validation、skill validation 與 cleanup dogfood。
+
 ## v2.0.0 — 2026-08-11（結構化 outcome learning）
 
 ### Added

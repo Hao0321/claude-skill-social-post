@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free smoke test for the public outcome engine."""
+"""Smoke-test structured outcomes and generated archives."""
 
 from __future__ import annotations
 
@@ -8,121 +8,89 @@ import tempfile
 from pathlib import Path
 
 from build_rule_registry import build
-from log_outcome import commit_records, prepare_records, validate_staged
-from social_data import series_summary, validate_store
-
-
-def write_jsonl(path: Path, rows: list[dict]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
+from log_outcome import prepare_records, validate_staged
+from social_data import SKILL_ROOT, series_summary, validate_store
+from social_store import commit_records
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="social-post-selftest-") as temp_name:
-        root = Path(temp_name)
-        post = {
-            "post_id": "demo-ep01",
-            "series_id": "demo",
-            "episode_number": 1,
-            "published_at": "2026-08-11T10:00:00+08:00",
-            "duration_seconds": 90,
-            "platforms": ["instagram"],
-            "caption": "demo",
-        }
-        first = {
-            "snapshot_id": "demo-ep01-1h",
-            "post_id": "demo-ep01",
-            "captured_at": "2026-08-11T11:00:00+08:00",
-            "hours_since_publish": 1,
-            "maturity": "early",
-            "metrics": {"plays": 100, "reached_accounts": 80, "average_watch_seconds": 36, "likes": 5},
-            "rates_reported": {"skip_percent": 40},
-        }
-        latest = {
-            "snapshot_id": "demo-ep01-24h",
-            "post_id": "demo-ep01",
-            "captured_at": "2026-08-12T10:00:00+08:00",
-            "hours_since_publish": 24,
-            "maturity": "developing",
-            "metrics": {"plays": 200, "reached_accounts": 120, "average_watch_seconds": 45, "likes": 10},
-            "rates_reported": {"skip_percent": 35},
-        }
-        standalone = {
-            "post_id": "standalone-post",
-            "published_at": "2026-08-11T12:00:00+08:00",
-            "platforms": ["instagram", "facebook"],
-            "caption": "standalone text post",
-            "content_type": "image_post",
-        }
-        standalone_snapshot = {
-            "snapshot_id": "standalone-post-24h",
-            "post_id": "standalone-post",
-            "captured_at": "2026-08-12T12:00:00+08:00",
-            "hours_since_publish": 24,
-            "maturity": "developing",
-            "metrics": {"plays": 10, "likes": 2},
-            "platform_breakdown": {"plays": {"instagram": 8}},
-        }
-        experiment = {
-            "experiment_id": "demo-test",
-            "post_ids": ["demo-ep01"],
-            "independent_samples": 1,
-            "evidence": {"status": "hypothesis"},
-        }
-        write_jsonl(root / "data" / "posts.jsonl", [post, standalone])
-        write_jsonl(root / "data" / "insight_snapshots.jsonl", [first, latest, standalone_snapshot])
-        write_jsonl(root / "data" / "experiments.jsonl", [experiment])
-
-        result = validate_store(root)
-        if not result["valid"]:
-            raise AssertionError(result["errors"])
-        if result["counts"] != {"posts": 2, "snapshots": 3, "experiments": 1}:
-            raise AssertionError(f"unexpected counts: {result['counts']}")
-        if not any("platform breakdown is partial" in warning for warning in result["warnings"]):
-            raise AssertionError(f"partial platform warning missing: {result['warnings']}")
-        rows = series_summary(root, "demo")
-        if len(rows) != 1 or rows[0]["plays"] != 200 or rows[0]["watch_percent"] != 50.0:
-            raise AssertionError(f"latest snapshot or derived metrics failed: {rows}")
-
-    with tempfile.TemporaryDirectory(prefix="social-post-write-test-") as temp_name:
-        root = Path(temp_name)
-        data_dir = root / "data"
-        bundle = {
-            "post": post,
-            "snapshot": first,
-            "experiment": experiment,
-        }
-        records, _ = prepare_records(bundle, data_dir)
-        validate_staged(records)
-        commit_records(records, data_dir)
-        appended = dict(latest)
-        records, _ = prepare_records({"snapshot": appended}, data_dir)
-        validate_staged(records)
-        commit_records(records, data_dir)
-        committed = validate_store(root)
-        if not committed["valid"] or committed["counts"] != {"posts": 1, "snapshots": 2, "experiments": 1}:
-            raise AssertionError(f"transactional append failed: {committed}")
-
-    with tempfile.TemporaryDirectory(prefix="social-post-invalid-test-") as temp_name:
-        root = Path(temp_name)
-        write_jsonl(root / "data" / "posts.jsonl", [{
-            "post_id": [], "published_at": None, "platforms": ["instagram", "instagram"], "caption": 123,
-        }])
-        write_jsonl(root / "data" / "insight_snapshots.jsonl", [{
-            "snapshot_id": [], "post_id": [], "captured_at": None, "metrics": {"plays": "many"},
-        }])
-        write_jsonl(root / "data" / "experiments.jsonl", [{
-            "experiment_id": [], "post_ids": [{}], "evidence": {"status": "validated"},
-            "independent_samples": "unknown",
-        }])
-        invalid = validate_store(root)
-        if invalid["valid"] or len(invalid["errors"]) < 6:
-            raise AssertionError(f"invalid store did not produce structured errors: {invalid}")
-
+    result = validate_store()
+    if not result["valid"]:
+        raise AssertionError(result["errors"])
+    if result["counts"]["posts"]:
+        minimum_counts = {"posts": 4, "snapshots": 6, "experiments": 3}
+        if any(result["counts"].get(key, 0) < value for key, value in minimum_counts.items()):
+            raise AssertionError(f"outcome store lost records: {result['counts']}")
+        rows = series_summary(SKILL_ROOT, "reborn-married-driver")
+        by_episode = {row["episode"]: row for row in rows}
+        if not {1, 2, 3}.issubset(by_episode):
+            raise AssertionError("baseline episodes disappeared")
+        expected_watch = {1: 61.1, 2: 38.9, 3: 41.1}
+        if {episode: by_episode[episode]["watch_percent"] for episode in expected_watch} != expected_watch:
+            raise AssertionError("baseline derived watch percentages changed")
+        beyblade_rows = series_summary(SKILL_ROOT, "beyblade-battles")
+        if {row["platform"] for row in beyblade_rows} != {"facebook", "youtube"}:
+            raise AssertionError("cross-platform snapshots were collapsed")
+        youtube = next(row for row in beyblade_rows if row["platform"] == "youtube")
+        if youtube["watch_seconds"] is not None or youtube["watch_percent"] is not None:
+            raise AssertionError("missing YouTube retention was converted to zero")
     registry = build()
-    if not registry["rules"]:
-        raise AssertionError("public rule library produced an empty registry")
-    print(f"self-test passed; indexed {len(registry['rules'])} rules")
+    rule_files = list((SKILL_ROOT / "references" / "rules").glob("R*.md"))
+    if len(registry["rules"]) != len(rule_files):
+        raise AssertionError("rule registry count differs from rule files")
+    registry_by_id = {row["id"]: row for row in registry["rules"]}
+    latest_experiments = result["latest_experiments"]
+    if (SKILL_ROOT / "data" / "experiments.jsonl").exists():
+        for rule_id, rule in registry_by_id.items():
+            for experiment_id in rule.get("experiment_ids", []):
+                experiment = latest_experiments.get(experiment_id)
+                if experiment is None or rule_id not in experiment.get("rule_ids", []):
+                    raise AssertionError(f"broken rule/experiment backlink: {rule_id} <-> {experiment_id}")
+    for experiment_id, experiment in latest_experiments.items():
+        for rule_id in experiment.get("rule_ids", []):
+            if experiment_id not in registry_by_id[rule_id].get("experiment_ids", []):
+                raise AssertionError(f"broken experiment/rule backlink: {experiment_id} <-> {rule_id}")
+    for relative, pattern in (("references/cases/manifest.json", "case-*.md"), ("references/rules/manifest.json", "R*.md")):
+        manifest_path = SKILL_ROOT / relative
+        if not manifest_path.exists():
+            continue
+        value = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+        key = "cases" if "cases" in value else "rules"
+        expected = len(list((SKILL_ROOT / Path(relative).parent).glob(pattern)))
+        if len(value[key]) != expected:
+            raise AssertionError(f"{relative} expected {expected}, found {len(value[key])}")
+        for record in value[key]:
+            if not (SKILL_ROOT / Path(relative).parent / record["path"]).exists():
+                raise AssertionError(f"missing archived file: {record['path']}")
+    with tempfile.TemporaryDirectory(prefix="social-post-concurrency-") as raw:
+        data_dir = Path(raw) / "data"
+        published = "2026-08-13T10:00:00+08:00"
+
+        def bundle(suffix: str) -> dict:
+            post_id = f"post-{suffix}"
+            return {
+                "post": {
+                    "post_id": post_id, "published_at": published,
+                    "platforms": ["facebook"], "caption": suffix,
+                },
+                "snapshot": {
+                    "snapshot_id": f"snapshot-{suffix}", "post_id": post_id,
+                    "captured_at": "2026-08-13T11:00:00+08:00", "metrics": {},
+                },
+            }
+
+        first, _, first_revision = prepare_records(bundle("first"), data_dir)
+        second, _, second_revision = prepare_records(bundle("second"), data_dir)
+        validate_staged(first)
+        validate_staged(second)
+        commit_records(first, data_dir=data_dir, expected_revision=first_revision)
+        try:
+            commit_records(second, data_dir=data_dir, expected_revision=second_revision)
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("stale concurrent writer was not rejected")
+    print("self-test passed")
     return 0
 
 

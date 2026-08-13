@@ -1,11 +1,21 @@
 # Facebook 發文
 
+> last_verified: 2026-08-13
+> verification_scope: 官方發文基本流程；桌面 UI selector 仍以本機 2026-04 最後觀察為準，實際操作前重讀畫面。
+> official_source: https://www.facebook.com/help/www/104116419688026
+
+## 目錄
+
+- 參數與生成調性
+- 發佈、確認、取連結與 fallback
+- 留言輸入、發前檢查與原生排程
+
 ## 參數
 
-- 字數：實務 ≤ 500 字（超過折疊「顯示更多」）
+- 字數：內部可讀性目標 ≤ 500 字；這不是平台硬上限
 - Hashtag：0-2 個（FB 氛圍不靠 tag 擴散）
 - 圖片：0-多張，多張 ≤ 10
-- 連結：自動抓 OG 預覽，可從文字刪除原 URL 只留預覽卡
+- 連結：自動抓 OG 預覽，可以把原 URL 從文字裡刪掉，只留預覽卡
 - 排版：換行、emoji，**無 markdown**
 
 ## 生成調性
@@ -18,7 +28,7 @@
 
 1. `navigate` → `https://www.facebook.com/`，等 2 秒
 2. `find` 「status update input that says 在想些什麼 / What's on your mind」 → `left_click` 開 modal
-3. 在 `建立貼文` modal 內 `find` "post compose textarea" → `left_click` 焦點 → `type` 內容（`\n` 換行，可連續 `！！！`）
+3. 在 `建立貼文` modal 內 `find` 「post compose textarea」 → `left_click` 焦點 → `type` 內容（`\n` 換行，可連續 `！！！`）
 4. 若有圖：告知使用者「請把圖拖進剛開的 compose modal，傳完回我『圖已加』」，等回應
 5. **點「繼續」**（不是「發佈」！新版多一步）：`find` 「繼續 Continue button」 → `left_click`
 6. 進到 `貼文設定` 頁（audience / 排程 / 分享到社團 / 加強推廣）。使用者沒特別要求就直接往下
@@ -98,7 +108,7 @@ FB 的「貼文設定」頁有「排程選項」（預設：立即發佈）。**
 
 **好處**：
 - 不需要我的 cron / wake-up 腳本；FB 自己送出
-- 使用者「確認」在設排程時給（符合 skill 硬規則），發佈行為在排定時間由 FB 執行
+- 使用者「確認」在設排程時就給了（符合 skill 硬規則），時間一到 FB 自動發佈
 - 使用者不用熬夜、不用筆電一直開 Claude Code
 
 **注意**：

@@ -80,7 +80,7 @@ docH 不再變大、底部出現 skeleton 但不解析 → FB 停止 feed 投放
 
 完整覆寫，但**保留 `<!-- user-edit -->` 以下的使用者自訂段**（如果既有檔案有）。
 
-格式參考 `style_profile.example.md`：一句話語氣、句式、標點、開頭/收尾、emoji、主題、hashtag、人稱、避免領域、兩種模式的 few-shot 原文、身分線索。
+格式參考現有 `style_profile.md`（駱君昊的版本）：一句話語氣、句式、標點、開頭/收尾、emoji、主題、hashtag、人稱、避免領域、兩種模式的 few-shot 原文、身分線索。
 
 ## 7. 給使用者 3 條確認重點
 

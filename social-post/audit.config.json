@@ -1,38 +1,43 @@
 {
-  "length_exceptions": [
-    "references/case_studies.md",
-    "references/formulas.md",
-    "references/rules.md"
-  ],
-  "navigation_exceptions": [
-    "references/case_studies.md",
-    "references/evaluation.md",
-    "references/facebook.md",
-    "references/formulas.md",
-    "references/rules.md",
-    "references/threads.md"
-  ],
+  "exclude": [".git/**", "__pycache__/**", "*.pyc"],
+  "thresholds": {
+    "skill_warning": 200,
+    "skill_severe": 400,
+    "reference_warning": 400,
+    "reference_severe": 800,
+    "code_warning": 500,
+    "code_severe": 1000
+  },
+  "length_exceptions": [],
+  "navigation_exceptions": ["references/rules/R*.md", "references/formulas/F*.md", "references/cases/case-*.md"],
   "id_definition_scopes": {
-    "R": ["references/rules.md"],
-    "F": ["references/formulas.md"],
-    "CASE": ["references/case_studies.md"]
+    "R": ["references/rules/R*.md"],
+    "F": ["references/formulas/F*.md"],
+    "CASE": ["references/cases/case-*.md"]
   },
   "range_claim_scopes": {
-    "R": [],
+    "R": ["references/rules.md"],
     "F": [],
-    "CASE": []
+    "CASE": ["references/case_studies.md"]
   },
-  "sync": {
-    "public_root": null,
-    "ignore": [
-      "style_profile.md",
-      "content_plan.md",
-      "drafts/**",
-      "data/**"
+  "sync": {"public_root": null, "ignore": []},
+  "privacy": {"tokens": [], "patterns": ["C:[/\\\\]Users[/\\\\]"]},
+  "architecture": {
+    "function_warning_lines": 80,
+    "function_severe_lines": 160,
+    "layers": [
+      {"name": "domain", "patterns": ["scripts/social_validation.py"], "may_depend_on": []},
+      {"name": "storage", "patterns": ["scripts/social_store.py"], "may_depend_on": []},
+      {"name": "application", "patterns": ["scripts/social_data.py"], "may_depend_on": ["domain", "storage"]},
+      {"name": "cli", "patterns": ["scripts/log_outcome.py"], "may_depend_on": ["application", "storage"]},
+      {"name": "test", "patterns": ["scripts/self_test.py"], "may_depend_on": ["application", "storage", "cli", "tools"]},
+      {"name": "tools", "patterns": ["scripts/build_rule_registry.py", "scripts/split_*.py"], "may_depend_on": []}
+    ],
+    "required_dependencies": [
+      {"source": "scripts/log_outcome.py", "target": "scripts/social_store.py"},
+      {"source": "scripts/log_outcome.py", "target": "scripts/social_data.py"},
+      {"source": "scripts/social_data.py", "target": "scripts/social_validation.py"},
+      {"source": "scripts/social_data.py", "target": "scripts/social_store.py"}
     ]
-  },
-  "privacy": {
-    "tokens": [],
-    "allow": []
   }
 }
