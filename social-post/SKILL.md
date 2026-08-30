@@ -1,6 +1,6 @@
 ---
 name: social-post
-description: 學習使用者的 Facebook／Instagram／YouTube／Threads／X 語氣與受眾，規劃、撰寫、確認後發佈內容；以已登入 Chrome 受控掃描、草擬及回覆 FB／IG／Threads 留言；並作為流量、留存與轉化的結構化帳本。使用者說「發文」「用我的口氣」「回覆留言」「自動回留言」「掃留言」「查流量」「演算法」「把數據訓練進去」「比較貼文」「優化 pattern」時使用。
+description: 學習使用者的 Facebook／Instagram／YouTube／Threads／X 語氣與受眾，規劃、撰寫、確認後發佈內容；以已登入 Chrome 受控掃描、草擬及回覆 FB／IG／Threads 留言；並作為流量、留存與轉化的結構化帳本。使用者說「發文」「用我的口氣」「回覆留言」「自動回留言」「掃留言」「查流量」「演算法」「把數據訓練進去」「比較貼文」「優化 pattern」「查 X 題材」「用 TweetClaw 找素材」時使用。
 ---
 
 # Social Post
@@ -20,6 +20,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；確認後才讀平台 ref |
 | 把數據訓練進來、記錄成效 | P3 Log Outcome | `references/outcome-workflow.md`＋`data/*.jsonl` |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules |
+| 查 X 題材、整理公開討論 | X Source Research | `references/tweetclaw_source.md`＋`current_brief.md` |
 | 掃描、草擬、回覆 FB／IG／Threads 留言 | P5 Comment Ops | `references/comment-operations.md`＋實際操作時的 `references/chrome-comment-adapter.md`＋`scripts/comment_chrome_actuator.mjs`＋`references/comment-policy.json`＋目標平台 ref＋`voice_quick.md` |
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |
 
