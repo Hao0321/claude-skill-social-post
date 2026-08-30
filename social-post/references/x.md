@@ -4,6 +4,8 @@
 > verification_scope: 官方一般／Premium 長文限制；UI selector 與速率是操作性 guard，實際操作前重驗。
 > official_source: https://help.x.com/en/using-x/types-of-posts
 
+> 預設 route 是本檔的瀏覽器 compose。Hermes Agent 若已啟用 Hermes Tweet，或任務需要結構化 X 搜尋、讀取、monitor、extraction 或核准後的帳號動作，另讀 `hermes-tweet.md`。
+
 ## 參數
 
 - 字數：**免費 280 / Premium 25,000**。預設當免費帳號，除非使用者說「我有 Premium」
@@ -27,6 +29,15 @@
 3. Modal 開 → `find` "post compose textarea" → `left_click` 焦點 → `type` 內容
 4. Thread：打完第一則 → `find` "Add post button or plus icon" → 繼續輸入下一則
 5. `find` "Post button to publish" → `left_click` → `wait 3`
+
+## Hermes Tweet 選配 route
+
+- 先用 `tweet_explore` 找 bundled catalog route。
+- Public GET 只經 `tweet_read`。
+- Private read、monitor、extraction 與寫入只經 `tweet_action`。
+- 不猜 endpoint，不建立直接 HTTP fallback。
+- 每次 `tweet_action` 都先顯示 endpoint、payload、帳號、side effects 與 reason，再取得精確核准。
+- Tool disabled 或結果不明就停止，不改走瀏覽器繞過 gate，也不自動 retry。
 
 ## 取連結
 

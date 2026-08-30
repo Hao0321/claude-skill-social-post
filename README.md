@@ -64,6 +64,14 @@ Copy-Item content_plan.example.md content_plan.md
 
 再把 `voice_quick.md` 與 `current_brief.md` 的 placeholder 換成自己的方向。
 
+Hermes Agent 可選配 [Hermes Tweet](https://github.com/Xquik-dev/hermes-tweet)，用 Xquik 做結構化 X 搜尋、讀取、monitor 與核准後的帳號動作：
+
+```bash
+hermes plugins install Xquik-dev/hermes-tweet --enable
+```
+
+這條 route 不取代預設瀏覽器流程。每次 `tweet_action` 都要顯示完整 endpoint、payload、帳號與 side effects，再取得精確核准。詳細邊界見 [`hermes-tweet.md`](social-post/references/hermes-tweet.md)。
+
 ## 六個 Mode
 
 | Mode | 用途 |
