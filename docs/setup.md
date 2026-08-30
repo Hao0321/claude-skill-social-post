@@ -7,6 +7,16 @@ Clone repo，將 `social-post/` 複製到其中一個位置：
 - Codex：`~/.codex/skills/social-post/`
 - Claude Code：`~/.claude/skills/social-post/`
 
+Hermes Agent 若需要結構化 X 搜尋、讀取、monitor 或核准後的帳號動作，可另裝 Hermes Tweet：
+
+```bash
+hermes plugins install Xquik-dev/hermes-tweet --enable
+hermes plugins list
+hermes tools list
+```
+
+在 Hermes runtime host 設定 `XQUIK_API_KEY`，不要把值貼進對話。`tweet_action` 預設停用；只有明確操作需要時才設定 `HERMES_TWEET_ENABLE_ACTIONS=true`。每次 action 仍需確認完整 endpoint 與 payload。
+
 Windows PowerShell（Codex）：
 
 ```powershell

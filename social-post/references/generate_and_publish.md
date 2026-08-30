@@ -36,13 +36,15 @@
 ## 確認與發布
 
 1. 把最終 copy 與平台清單完整顯示給使用者。
-2. 取得當前對話的明確確認；若使用者本 session 已授權免逐次確認，依 SKILL.md 執行。
-3. 讀本次目標平台 reference 與 `last_verified`。UI／限制若可能已變，先查官方來源。
-4. 依序發布；每個平台回報結果與連結。任何平台失敗就停，說明已完成與卡住項目。
+2. 讀本次目標平台 reference 與 `last_verified`。UI／限制若可能已變，先查官方來源。
+3. 取得當前對話的明確確認；若使用者本 session 已授權免逐次確認，依 SKILL.md 執行。
+4. X 若在 Hermes Agent 使用結構化 route，另讀 `hermes-tweet.md`。先用 `tweet_explore` 找 catalog route，再顯示完整 endpoint、payload、帳號、side effects 與 reason。每次 `tweet_action` 都要重新確認，不沿用 session 的瀏覽器免問授權。
+5. 依序發布；每個平台回報結果與連結。任何平台失敗就停，說明已完成與卡住項目。
 
 ## 發布後
 
 - 發布事實用 outcome bundle 寫 `posts.jsonl`；還沒有洞察時可建立 awaiting snapshot，missing 用 `null`。
+- X 走 Hermes Tweet 時，把工具實際回傳的 URL 或 post ID 與 route 寫進同一筆 outcome。不從 request 推測成功，也不另建檔案。
 - 不更新 `content_plan.md` 的績效 row。新數據只進 structured ledgers。
 - 使用者回傳洞察時切 P3；跨篇比較切 P4。
 

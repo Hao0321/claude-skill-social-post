@@ -15,9 +15,9 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 
 | 觸發 | Mode | 必讀 |
 |---|---|---|
-| 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋目標 formula |
+| 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋目標 formula；Hermes Agent 的結構化 X 研究另讀 `references/hermes-tweet.md` |
 | 重新學語氣 | P1 Learn Voice | `references/learn_style.md`＋`style_profile.md` |
-| 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；確認後才讀平台 ref |
+| 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；確認後才讀平台 ref；Hermes Agent 的 X route 另讀 `references/hermes-tweet.md` |
 | 把數據訓練進來、記錄成效 | P3 Log Outcome | `references/outcome-workflow.md`＋`data/*.jsonl` |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules |
 | 掃描、草擬、回覆 FB／IG／Threads 留言 | P5 Comment Ops | `references/comment-operations.md`＋實際操作時的 `references/chrome-comment-adapter.md`＋`scripts/comment_chrome_actuator.mjs`＋`references/comment-policy.json`＋目標平台 ref＋`voice_quick.md` |
@@ -76,10 +76,11 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 
 ## 實際發佈與留言安全閘
 
-只有 P2 的實際發布與 P5 的實際掃描／回覆需要 `chrome:control-chrome` 與已登入狀態；草稿、規劃、分析、資料回填與 P5 ledger 操作不需要。
+只有 P2 的瀏覽器發布與 P5 的實際掃描／回覆需要 `chrome:control-chrome` 與已登入狀態。P2 的 Hermes Tweet 選配 X route 使用其獨立 toolset，不需要 Chrome。草稿、規劃、分析、資料回填與 P5 ledger 操作也不需要 Chrome。
 
 - 發佈前必須在當前對話取得明確「確認」。
 - 使用者若在當前 session 明示「你自己操作不用問」，私人版可免逐次確認；不跨 session。
+- 上一條不適用於 Hermes Tweet 的 `tweet_action`。每次都要確認完整 endpoint、payload、帳號、side effects 與 reason。
 - 不幫登入、不改帳號／隱私、不刪文、不自動按讚／follow／大量留言。
 - P5 掃描前先以當前 session 建立有期限的 browser scan request，Chrome receipt 只能回綁既定帳號／貼文 scope，完成掃描即追加可區分零留言的 completion event。production scan 模組不含 fixture factory，只接受 source-controlled、trusted-host-resolved、版本化、deep-frozen 且 process-branded 的 FB／IG／Threads plan；目前 live adapter 全部 unavailable。完整展開必須由 versioned exhaustion contract 證明 cursor traversal、monotonic discovered count、explicit terminal 與 terminal coverage；兩次空 viewport read、raw selector、fake tab、caller resolver 或 `threadExpansionComplete` 宣告都無效。P5 預設 `batch_confirm`；`bounded_auto` 只在當前 session 明示平台、帳號、貼文與本輪範圍後，以有期限、指定 scope、有限次數的 ledger grant 啟用。每則回覆都要一次性 permit；重算 reply hash，綁定 action／fresh locator／正確父留言與零 exact-own baseline；reply thread 在碰 trigger、消耗 durable claim、finish 與 recovery reinspection 前都要另以 version 1 exhaustion 證明 target-scoped cursor／count／traversal／terminal stable coverage，`0` reply 或 `0` expander 不構成 absence。later page／lazy expander、無 terminal、virtualization 或 same-fingerprint replacement 一律零 submit click、claim 前發現則零 claim，recovery 不得推導 not-sent。之後才可經 durable atomic claim、process-wide 單次送出及完整畫面驗證。finish／reconcile 另須由 shell:false branded bridge 持有 versioned 一次性 capability；ledger 只存 nonce hash、scope binding 與 receipt digest。裸 `WRITE_OK`、raw／fixture receipt、偽 nonce、重播 capability、未全展開或不可檢查的回覆串一律拒絕；分批執行不得重置 grant 上限。
 - 正式版 `comment-policy.json` 的 `live_browser_actuation_enabled` 預設為 `false`：仍可建立 scan request、執行 dry-run／草稿與產生 action，但 `browser-scan --write`、`browser-begin --write`、`browser-finish --write`、`browser-reconcile --write` 在受控 Browser fixture 與登入 canary 完成前一律拒絕。使用者核准回覆不會繞過這個維護者 kill switch。

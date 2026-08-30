@@ -10,6 +10,8 @@
 - Product-native JavaScript architecture gate with an exact 41-module role manifest, 103 measured internal static edges, one exact reviewed external lazy dependency, cycle detection, required-edge checks and atomic receipt plus detached hash evidence.
 - Eighty calibrated architecture checks covering the exact browser-client source/specifier/kind/cardinality boundary, eager or drifted imports, graph-digest coverage, template-expression parsing, common loader aliases and member calls, inventory drift, role boundaries, receipt path safety and atomic-write failure cases.
 - Explicit internal obligations for a trusted Chrome host resolver and stable node/frame mapping before any authenticated browser canary.
+- Optional Hermes Tweet route for catalog-discovered Xquik reads, bounded research, monitoring and explicitly approved X actions.
+- Offline Hermes integration contract tests covering discovery, read, action, setup and managed-file boundaries.
 
 ### Changed
 
@@ -21,10 +23,12 @@
 - Changed screenshot provenance from order-dependent digests to an exact path-to-SHA-256 manifest in the private ledger; path and digest data remain outside the public export and generation context.
 - Pinned browser-client revision, size and SHA-256 before dynamic import, with missing or drifted runtime bytes failing closed.
 - Reclassified the four browser/live canary obligations as `unmeasured` until their internal host prerequisites and real evidence exist.
+- Kept browser publishing as the default X route while requiring exact endpoint, payload, account and side-effect approval for every Hermes `tweet_action`.
 
 ### Boundary
 
 - The three-platform Browser journey passed only against localhost fixtures with in-memory test authority. `capability_promotion_eligible` and `live_browser_actuation_enabled` remain `false`; trusted Chrome host resolution, stable live node/frame mapping, authenticated draft-only evidence and live canaries remain open. No authenticated Facebook, Instagram or Threads reply was sent during validation.
+- Hermes Tweet uses its own default-disabled action gate. Session-wide browser permission cannot authorize `tweet_action`, retries or future operations.
 
 ## v2.5.0 — 2026-08-28
 
