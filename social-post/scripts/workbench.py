@@ -7,6 +7,7 @@ import argparse
 import hmac
 import json
 import secrets
+import socket
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -33,6 +34,12 @@ BODY_LIMIT = 128 * 1024
 class WorkbenchServer(ThreadingHTTPServer):
     daemon_threads = True
     request_queue_size = 16
+    allow_reuse_address = False
+
+    def server_bind(self):
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
 
     def __init__(self, root: Path, port: int, static_root: Path | None = None):
         self.service = WorkbenchService(root)

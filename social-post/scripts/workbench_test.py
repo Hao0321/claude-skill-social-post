@@ -276,6 +276,12 @@ class HttpTests(unittest.TestCase):
         finally:
             connection.close()
 
+    def test_second_server_cannot_share_live_loopback_port(self):
+        with self.assertRaises(OSError):
+            WorkbenchServer(Path(self.temp.name), self.server.server_port)
+        status, _, _ = self.request("GET", "/api/catalog", authenticated=True)
+        self.assertEqual(status, 200)
+
     def test_native_same_origin_positive_task(self):
         status, headers, body = self.request("POST", "/api/task", {"mode": "P2", "platform": "facebook",
             "topic": "Fictional launch", "format": "C"}, authenticated=True)

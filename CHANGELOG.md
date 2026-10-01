@@ -24,6 +24,8 @@
 
 ### Changed
 
+- Workbench now rejects duplicate listeners on one loopback port, using exclusive-address binding on Windows. Prevents an older process from serving stale catalog or session state while a newer process appears to launch successfully.
+
 - Split long scan/send/domain contracts and platform readers into focused modules while preserving prior exports and guards. Bind every extracted authority dependency into canary and promotion source inventories.
 - Separate pure document checks from runtime authority and DOM-CUA node identity from send-policy/context validation, preserving prior exports and exact source-hash inventories. No length threshold or exception was added for these changes.
 - Split surface/textarea tests and move the reinspection JSON example into the validation reference without changing its fields. Live adapter candidate revision is `2026-08-31.6`; runtime authority revision is `2026-08-31.2`.
