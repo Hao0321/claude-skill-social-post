@@ -1,6 +1,6 @@
 ---
 name: social-post
-description: 依使用者真實貼文與成效寫 Facebook／Instagram／YouTube／Threads／X 文案，包含 ChatGPT Chat 的「寫文」「Mode C」「用我的格式／口氣」「黑底白字」；規劃、確認後發布、留言回覆及成效學習。使用者說「發文」「文案」「回覆留言」「查流量」「把數據訓練進去」「比較貼文」「優化 pattern」時使用。
+description: 依使用者真實貼文與成效寫 Facebook／Instagram／YouTube／Threads／X 文案，包含 ChatGPT Chat 的「寫文」「Mode C」「用我的格式／口氣」「黑底白字」；本機工作台、規劃、確認後發布、留言回覆及成效學習。使用者說「發文」「文案」「Social Post 介面」「回覆留言」「查流量」「把數據訓練進去」「比較貼文」「優化 pattern」時使用。
 ---
 
 # Social Post
@@ -17,6 +17,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 
 | 觸發 | Mode | 必讀 |
 |---|---|---|
+| 開啟 Social Post 工作台／介面、看模式導覽 | Workbench | [references/workbench.md](references/workbench.md)；只啟動本機 GUI，不暗中執行 AI 或解鎖外部操作 |
 | 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋目標 formula；X 題材另讀 `references/x.md` 的演算法邊界 |
 | 重新學語氣 | P1 Learn Voice | `references/learn_style.md`＋`style_profile.md` |
 | 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；X 草稿先讀 `references/x.md` 的策略段，實際發布前再核對平台 UI |
@@ -26,6 +27,8 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |
 
 路由前用一句話告知正在做哪個 Mode。單純診斷不需要 Chrome。
+
+工作流程 P0–P5、寫法 A／B／C、創作公式 F 是三個不同選擇。GUI 只列本機已安裝的公式；不把作者私人公式庫公開。純文字撰稿可直接在當前聊天依 P2 完成，不強迫每次開 GUI。介面目前用任務複製／貼回交接 AI，不能宣稱按鈕已自動呼叫 Codex／Claude。
 
 ## Source of truth
 

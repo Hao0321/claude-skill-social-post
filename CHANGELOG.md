@@ -4,6 +4,10 @@
 
 ### Added
 
+- Local Content Workbench 0.1.0: dependency-free editorial UI with six workflow guides, separate A/B/C format and installed F-formula selectors, explicit Codex/Claude task handoff, private draft save/reopen, deterministic text checks and labelled black-card preview.
+- Outcome JSON preview/explicit commit using the existing locked store, exact-cohort comparison, unsaved-body navigation protection, loopback-only HTTP with same-origin/session/CSRF controls, and calibrated HTTP/architecture/real Chromium journeys.
+- A source-only hosted-service proposal separating paid draft generation from authorized local browser workers. No model executor, public commercial API, billing or production automation is enabled by this UI.
+
 - Source-owned, one-attempt Chrome reconnect on the exact cached-browser unavailable error only; working or empty tabs, timeouts, stale tabs and denial do not reselect. One real recovery was followed by a successful source-owned read of the original target, without clearing claims or resending.
 - Exact-URL reuse for target-only intake: uniquely matching existing tabs are read and retained, absent targets use an owned temporary tab, and ambiguous or drifting handles fail closed. Send/reconciliation tab lifecycles are unchanged.
 - A separate strict Threads semantic-SVG reply-icon node binder with hidden/mixed text, multiple-icon, label, identity-collision and drift regressions. Generic and Instagram text identity behavior is unchanged; the helper cannot click or authorize a send.

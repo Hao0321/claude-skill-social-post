@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="sp-csrf" content="__CSRF_TOKEN__">
+  <meta name="color-scheme" content="light">
+  <title>Social Post — Content Workbench</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/layout.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到內容</a>
+  <aside class="sidebar">
+    <a class="brand" href="#home" aria-label="Social Post 首頁">
+      <span class="brand-mark">SP<span>/</span></span>
+      <span class="brand-caption">SOCIAL POST<br>CONTENT WORKBENCH</span>
+    </a>
+    <div class="nav-caption">YOUR WORKSPACE</div>
+    <nav id="nav" aria-label="主要導覽"></nav>
+    <div class="side-bottom">
+      <div class="side-line"></div>
+      <p>你的聲音。你的資料。<br>你的創作主導權。</p>
+      <span class="mono">LOCAL FIRST / OPEN SOURCE</span>
+    </div>
+  </aside>
+  <div class="shell">
+    <header class="topbar">
+      <span class="top-label">THE CONTENT STUDIO</span>
+      <div class="top-right"><span class="local-label">本機工作空間</span><span id="version" class="mono">V —</span></div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div class="loading-state"><p class="eyebrow">CONNECTING TO YOUR WORKSPACE</p><h1>讀取本機工作台</h1><p>資料不會上傳到雲端。</p></div>
+    </main>
+    <footer class="footer"><span>SOCIAL POST / A SYSTEM FOR YOUR VOICE</span><span>PRIVATE DATA. PUBLIC ENGINE.</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

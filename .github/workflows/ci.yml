@@ -49,3 +49,7 @@ jobs:
           python social-post/scripts/social_data.py coverage
       - name: Offline data and comment regression
         run: python social-post/scripts/self_test.py
+      - name: Workbench HTTP, storage and routing regression
+        run: python -B social-post/scripts/workbench_test.py
+      - name: Workbench JavaScript architecture
+        run: node social-post/scripts/workbench_architecture_test.mjs

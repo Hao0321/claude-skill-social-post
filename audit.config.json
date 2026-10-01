@@ -70,6 +70,16 @@
     "function_warning_lines": 80,
     "function_severe_lines": 160,
     "layers": [
+      {"name": "workbench-contract", "patterns": ["social-post/scripts/workbench_contract.py"], "may_depend_on": []},
+      {"name": "workbench-storage", "patterns": ["social-post/scripts/workbench_store.py"], "may_depend_on": ["workbench-contract", "storage"]},
+      {"name": "workbench-resource", "patterns": ["social-post/scripts/workbench_formulas.py"], "may_depend_on": ["workbench-contract", "workbench-storage"]},
+      {"name": "workbench-application", "patterns": ["social-post/scripts/workbench_service.py"], "may_depend_on": ["workbench-contract", "workbench-storage", "workbench-resource", "application", "domain", "storage", "cli"]},
+      {"name": "workbench-http", "patterns": ["social-post/scripts/workbench.py"], "may_depend_on": ["workbench-contract", "workbench-storage", "workbench-application"]},
+      {"name": "workbench-test", "patterns": ["social-post/scripts/workbench_test.py", "social-post/scripts/workbench_architecture_test.mjs", "social-post/scripts/workbench_browser_test.mjs"], "may_depend_on": ["workbench-contract", "workbench-storage", "workbench-resource", "workbench-application", "workbench-http", "domain", "storage", "tools"]},
+      {"name": "workbench-ui-data", "patterns": ["social-post/workbench/api.js"], "may_depend_on": []},
+      {"name": "workbench-ui-view", "patterns": ["social-post/workbench/ui.js"], "may_depend_on": []},
+      {"name": "workbench-ui-editor", "patterns": ["social-post/workbench/editor.js"], "may_depend_on": ["workbench-ui-data", "workbench-ui-view"]},
+      {"name": "workbench-ui-app", "patterns": ["social-post/workbench/app.js"], "may_depend_on": ["workbench-ui-data", "workbench-ui-view", "workbench-ui-editor"]},
       {
         "name": "domain",
         "patterns": [

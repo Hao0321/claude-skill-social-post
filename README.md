@@ -107,6 +107,24 @@ Copy-Item content_plan.example.md content_plan.md
 | P4 Optimize Patterns | 對齊 maturity 後做跨篇／跨平台比較 |
 | P5 Comment Ops | 以 Chrome 受控掃描、草擬與核准；live 回覆需另經 canary 解鎖 |
 
+## 本機工作台 0.1.0
+
+新增黑／暖白／鈷藍的 editorial 介面，沒有表情符號、遠端字型或額外 npm 執行依賴。六個流程各有用途、輸入與產出導覽；P2 可另外選 A／B／C 寫法及本機已安裝的 F 公式。這是 main 上的 source candidate，不是新 stable Release。
+
+從 repo 根目錄啟動：
+
+~~~bash
+python -B social-post/scripts/workbench.py
+~~~
+
+開啟 http://127.0.0.1:8766，或在 Codex／Claude Code 呼叫 Social Post 並說「開啟工作台」。需要 Python 3.10+；只監聽本機，不提供手機遠端入口。
+
+目前撰稿流程是「選平台／寫法／公式 → 填題材 → 建立並複製任務 → Codex／Claude Code 依 Skill 寫完整 → 貼回編輯、保存」。介面尚未自動呼叫 AI 或接收 AI 結果；不要把任務預覽誤認為生成文案。草稿可保存、重開、複製、下載；黑底白字預覽明示不是 Facebook 的實際排版。
+
+P3 支援先驗證再明確追加 outcome JSON，保留原始歷史並拒絕過期、重播與資料版本衝突；P4 讀取最近 exact-cohort 案例，不假造資料或預測流量。P5 只建立回覆草擬任務；UI 不會自動發布或送留言，也不改既有 production 開關。
+
+詳見 [工作台導覽](social-post/references/workbench.md)。[收費服務架構](social-post/references/service-architecture.md) 是設計提案，沒有部署商業 API、計費或多租戶服務；不要把本機服務直接暴露到公開網路。
+
 ## Comment Ops 快速開始
 
 P5 不串 Meta API，也不匯出 Chrome Cookie 或 session。預設是 `batch_confirm`，不提供 24/7 背景監聽或無邊界全自動模式。`main` 的受控掃描與送出採獨立政策；核准回覆不會繞過 default-off 送出開關。實際 Chrome 操作需要 `chrome:control-chrome`、使用者既有登入狀態與來源綁定 adapter。已驗證的單則 IG canary 不代表其他留言、平台或批次路徑已驗證。
@@ -135,7 +153,7 @@ python scripts/log_outcome.py references/outcome-bundle.example.json
 python scripts/self_test.py
 python scripts/social_data.py validate
 python scripts/social_data.py coverage
-python scripts/social_data.py summary --series demo-series
+python scripts/social_data.py summary --series fictional-workbench-example
 ```
 
 正式寫入時才加 `--write`。修正既有 event 可參考 [`correction-bundle.example.json`](social-post/references/correction-bundle.example.json)。

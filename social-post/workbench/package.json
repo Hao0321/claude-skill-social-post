@@ -1,0 +1,8 @@
+{
+  "name": "social-post-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dependency-free local Social Post interface",
+  "engines": {"node": ">=18"}
+}

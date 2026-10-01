@@ -8,6 +8,7 @@ Social Post 開放所有人提交貢獻，Hao 保留唯一的最高管理權與�
 
 | 方向 | 入口 | 合適的貢獻 |
 |---|---|---|
+| 介面與導覽 | [工作台](social-post/references/workbench.md)、social-post/workbench/、workbench_test.py | P／A-B-C／F 的區分、無表情符號設計、可存取性、私人草稿與匯入流程 |
 | 文案、語氣與版型 | [撰稿流程](social-post/references/generate_and_publish.md)、[公開語氣卡](social-post/voice_quick.md) | Mode A／B／C、長度、換行、標點、黑底白字、未校準提示 |
 | 成效與學習 | [資料工具](social-post/scripts/social_data.py)、[成效流程](social-post/references/outcome-workflow.md) | 日期／星期／分鐘、snapshot、maturity、完整欄位、可重現分析 |
 | 平台與演算法 | [FB](social-post/references/facebook.md)、[IG](social-post/references/instagram.md)、[Threads](social-post/references/threads.md)、[X](social-post/references/x.md)、[YouTube](social-post/references/youtube.md) | 官方來源、查證日期、平台適配與有界假設 |
@@ -38,9 +39,13 @@ python -m unittest discover -s tools -p "test_*.py"
 python social-post/scripts/social_data.py validate
 python social-post/scripts/social_data.py coverage
 python social-post/scripts/self_test.py
+python social-post/scripts/workbench_test.py
+node social-post/scripts/workbench_architecture_test.mjs
 ~~~
 
 self_test.py 包含既有資料、同步隱私、留言契約及 JavaScript 回歸測試。測試只用本機匿名 fixture，不操作社群帳號。公開版沒有私人 canonical capability ledger，因此部分私人校準明示為不適用，公開 projection 的驗證不等於 live 驗收。
+
+工作台額外測試使用隔離的 fictional 資料。真實瀏覽器導覽可用 workbench_browser_test.mjs 指定 Python、已安裝 Playwright 與私有輸出目錄；不要把 renderer 截圖、任務下載或 receipts 提交至公開 repo。介面不得以假 AI 結果或本機測試宣稱已接通生成／社群送出。
 
 文件修正先檢查連結與語義，CI 仍跑公開檢查。改資料／文案分析補相應重現案例；改留言 adapter 保留既有 guard、來源綁定與不明結果停損。不要為了測試變綠而放寬核准、去重、capability 或隱私規則。
 
