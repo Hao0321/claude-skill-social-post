@@ -1,0 +1,33 @@
+name: 強化提案
+description: 提出使用情境、修改邊界與驗收方式。
+title: "[Proposal] "
+body:
+  - type: markdown
+    attributes:
+      value: "請只分享可公開的內容。大改資料契約、架構或 live 行為時，先討論再實作。"
+  - type: textarea
+    id: benefit
+    attributes:
+      label: 誰遇到什麼問題
+      description: 具體場景、目前行為、改善後行為。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 提案與修改範圍
+      description: 模組、相依性、相容性與可採用的替代方案。
+    validations:
+      required: true
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: 怎麼知道變好了
+      description: 改前／改後的相同輸入、正／負情境、成功條件、成本；缺量測時明示。
+    validations:
+      required: true
+  - type: textarea
+    id: involvement
+    attributes:
+      label: 參與方式
+      description: 你想協助開發、研究、文案、設計或測試哪一段？

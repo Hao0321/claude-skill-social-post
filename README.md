@@ -2,6 +2,14 @@
 
 一個可安裝到 Codex 或 Claude Code 的社群內容 Skill；另提供精簡的 ChatGPT Chat 版。可學習本機聲線、規劃內容、撰寫平台化貼文、經確認後發布，以已登入 Chrome 受控管理 FB／IG／Threads 留言，並把跨平台洞察保存成可驗證的結構化資料。
 
+## 一起共創 Social Post
+
+所有人都能用 Issue 提案、透過 fork → Pull Request 提交改善；Hao 保留唯一的最高管理權、合併審查與正式發布權。認可的夥伴可參與模組開發和審查，專案維持 MIT 開源。
+
+先看 [共創指南](CONTRIBUTING.md)、[治理與協作權限](GOVERNANCE.md) 和 [共創路線圖](ROADMAP.md)。每份 PR 說明要改善的使用情境、改前／改後證據及限制，再經測試與維護者審查合併。私人語氣、真實貼文、帳號成效與留言留在各自本機；公開測試使用 fictional 資料。
+
+討論想法可到 [Discussions](https://github.com/Hao0321/claude-skill-social-post/discussions)，可重現問題與正式提案使用 [Issues](https://github.com/Hao0321/claude-skill-social-post/issues/new/choose)。
+
 目前穩定標籤：**v2.5.0**；`main` 已同步 **Unreleased candidate**。
 
 Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime revision／雜湊、架構自校準與單次送出／異常恢復的回歸測試。另已完成一次 IG 真實單次送出、原生子回覆查證與唯讀 recovery 對帳，以及一次 Chrome 斷線後的來源連線恢復與原目標讀取；這些證據不代表三平台 live Meta 回覆已解鎖。

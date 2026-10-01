@@ -1,0 +1,39 @@
+name: 問題與重現
+description: 用 fictional 資料描述可重現的錯誤。
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Issue 是公開的。請勿貼私人原文、真實留言／數據、帳號資訊、截圖或憑證；使用 fictional 資料。"
+  - type: input
+    id: revision
+    attributes:
+      label: 版本與環境
+      description: Commit／tag、ChatGPT Chat／Codex／Claude Code、OS、Python／Node（適用才填）。
+    validations:
+      required: true
+  - type: dropdown
+    id: module
+    attributes:
+      label: 相關方向
+      options:
+        - 文案與版型
+        - 成效資料與學習
+        - 平台 reference
+        - 留言與瀏覽器
+        - ChatGPT Chat
+        - 安裝、測試與文件
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 最小重現
+      description: 步驟、fictional 輸入、預期結果、實際結果。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 證據與已排除原因
+      description: 可公開的輸出與相關測試；未測處如實標記。

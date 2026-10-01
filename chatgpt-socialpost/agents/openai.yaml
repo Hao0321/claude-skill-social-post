@@ -1,0 +1,6 @@
+interface:
+  display_name: "Social Post (Chat)"
+  short_description: "Draft social posts with supplied voice and formatting rules."
+  default_prompt: "Use $socialpost to draft a post with my supplied voice samples and formatting requirements."
+policy:
+  allow_implicit_invocation: true

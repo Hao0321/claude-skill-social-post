@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 共創討論
+    url: https://github.com/Hao0321/claude-skill-social-post/discussions
+    about: 分享方向、找分工或討論尚未定案的設計；只使用可公開內容。
+  - name: 貢獻與隱私指南
+    url: https://github.com/Hao0321/claude-skill-social-post/blob/main/CONTRIBUTING.md
+    about: 開 Issue 前先了解如何使用 fictional 資料重現。
