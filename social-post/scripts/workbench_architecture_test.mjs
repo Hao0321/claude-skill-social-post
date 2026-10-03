@@ -1,14 +1,15 @@
-// Reuse the existing calibrated lexer. This gate covers the four UI modules only.
+// Reuse the calibrated lexer; explicit UI ownership and required edges.
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join, dirname, posix } from "node:path";
 import { parseStaticModuleSpecifiers, sha256 } from "./comment_js_architecture_core.mjs";
 
-const names = ["api.js", "ui.js", "editor.js", "app.js"];
+const names = ["api.js", "ui.js", "editor.js", "governance.js", "app.js"];
 const allowed = {
   "api.js": [], "ui.js": [], "editor.js": ["api.js", "ui.js"],
-  "app.js": ["api.js", "ui.js", "editor.js"],
+  "governance.js": ["api.js", "ui.js"],
+  "app.js": ["api.js", "ui.js", "editor.js", "governance.js"],
 };
 
 export function evaluate(modules) {

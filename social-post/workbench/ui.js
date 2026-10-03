@@ -63,7 +63,7 @@ export function renderNav(catalog, current) {
   const nav = document.querySelector("#nav");
   nav.replaceChildren();
   const rows = [{ id: "home", index: "00", name: "工作台總覽" }, ...catalog.modes,
-    { id: "drafts", index: "07", name: "私人草稿" }];
+    { id: "drafts", index: "07", name: "私人草稿" }, { id: "learning", index: "08", name: "資料分區與審核" }];
   for (const row of rows) {
     const link = el("a", "nav-item");
     link.href = "#" + row.id;

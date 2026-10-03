@@ -9,13 +9,13 @@ from typing import Any
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from social_post_analysis import CONFIDENCE_VALUES, HEX_256, validate_post_analysis
+from social_primitives import PLATFORM_VALUES, parse_time
 
 
 MATURITY_VALUES = {
     "early", "early_not_plateau", "developing", "near_48h_not_final", "mature", "plateau",
 }
 EVIDENCE_VALUES = {"hypothesis", "emerging", "validated", "deprecated"}
-PLATFORM_VALUES = {"facebook", "instagram", "youtube", "threads", "x"}
 POST_SCHEMA_VERSIONS = frozenset({"1.0"})
 SNAPSHOT_SCHEMA_VERSIONS = frozenset({"1.0"})
 ACCOUNT_SNAPSHOT_SCHEMA_VERSIONS = frozenset({"1.0"})
@@ -45,15 +45,6 @@ def validate_schema_version(
         errors.append(f"{label}.schema_version must be one of {sorted(supported)}")
         return False
     return True
-
-
-def parse_time(value: str) -> datetime:
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError("timestamp must be a non-empty string")
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if parsed.utcoffset() is None:
-        raise ValueError("timestamp must include a UTC offset")
-    return parsed
 
 
 def _localize_with_named_timezone(
@@ -260,6 +251,16 @@ def materialize_corrections(
 
 
 def _validate_post(post: dict[str, Any], label: str, post_ids: set[str], errors: list[str], warnings: list[str]) -> None:
+    from social_cohorts import media_family
+
+    if post.get("owner_scope", "own") != "own":
+        errors.append(f"{label} external records belong in the separate learning ledger, not own posts")
+    try:
+        family = media_family(post)
+        if "media_family" in post and family == "unknown":
+            errors.append(f"{label} media family conflicts with content type or surface")
+    except ValueError as exc:
+        errors.append(f"{label} {exc}")
     validate_schema_version(post, label, POST_SCHEMA_VERSIONS, errors)
     for key in ("post_id", "published_at", "platforms", "caption"):
         if key not in post:

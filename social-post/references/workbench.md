@@ -56,6 +56,14 @@ generated copy. Saving is local and does not publish.
 
 ## Outcomes and external actions
 
+The media-family selector separates text/image and video for task handoffs and
+exact-cohort comparison. The "資料分區與審核" navigation shows five platforms ×
+two media channels, private contract status and candidate before/after evidence.
+Approve and activate are separate owner actions; the UI never approves new data
+automatically. Read writing-governance.md before using these controls. The editor
+can check a chosen F against the active revision; semantic review still belongs
+to the host agent. Original data and formula files are preserved.
+
 P3 validates an outcome bundle without writing. A separate confirmation
 consumes a ten-minute preview and appends through the canonical locked writer;
 stale, invalid, expired or replayed commits are rejected. The bundled sample

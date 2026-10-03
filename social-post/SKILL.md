@@ -11,6 +11,10 @@ P5 執行前核對 `references/chrome-comment-adapter.md` 的當前狀態。CUA 
 
 ## Session 啟動
 
+P0–P4 先讀 [references/writing-governance.md](references/writing-governance.md)，核對 `scripts/social_governance.py status`。既有 voice、F 公式、規則正文以私人版本契約鎖定；禁止 P1／P4 或新爆款案例直接覆寫。新分析只能建立同平台／媒體 scope 的候選，經使用者審核精確 diff／digest，另行啟用後才變成正式有效版本。當輪要求改一篇草稿不是永久規則更新授權。
+
+P2 必須讀 `context` 輸出的完整有效 F 與 voice，按固定段落功能、順序、標點與 CTA 寫，交付前核對同 revision 的 `check-draft` 並完成語義／事實 QA。F06 必須分清 F06a／F06b。結構 PASS 不等於模仿成功；未核對、契約漂移或 F 結構不符不得聲稱正式文案已完成。
+
 P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要求深度仿寫，或 quick card 無法裁決時，才完整讀 `style_profile.md` 或使用者明確指定的 voice Skill。ChatGPT Chat 若沒有本機檔案／shell，依 `references/generate_and_publish.md` 的降階流程；只讀到公開範本或 GitHub repo，不代表已載入使用者的私人 voice。安全與使用者明示 > voice quick／明確指定的 voice Skill > 公式。
 
 ## 路由
@@ -39,6 +43,9 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 帳號期間總覽 | `data/account_snapshots.jsonl` |
 | 跨篇假設與 confound | `data/experiments.jsonl` |
 | 事實修正事件 | `data/corrections.jsonl`；原始 event 不覆寫 |
+| 圖文／影片分區 | `scripts/social_cohorts.py` 的平台 × media family × content type × surface × maturity；不混合排名 |
+| 第三方參考／候選與審核 | `data/learning_events.jsonl`；外部觀測與自有 KPI 嚴格分離 |
+| 正式有效寫作契約 | `data/author_contract.json`＋`data/author_contracts/`；凍結原始來源、審核後 scoped override，保留前版 |
 | 規則正文 | `references/rules/RNN.md`；`references/rules.md` 是索引 |
 | 規則生命週期／實驗 backlink | `references/rules/metadata.json` |
 | 規則機器索引 | `data/rule_registry.json`（生成檔） |
@@ -68,6 +75,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 5. 記 published_at、captured_at、hours_since_publish 與 maturity。IG／FB total 與可取得的拆分同時保存；missing 用 `null`。
 6. UI rate 與 derived rate 分開；留存曲線目測只寫 note。縮寫、上限或目測數字用 `metric_qualifiers` 標成 `rounded／upper_bound／visual_estimate`，不得冒充 exact。`metrics` 內的值直接用欄位名；其他巢狀值使用 dotted path（例如 `benchmarks_reported.views_more_than_usual_approx`）。
 7. 先 dry-run `scripts/log_outcome.py`，明確寫入時才加 `--write`；寫完執行 `scripts/social_data.py validate`，caption hash、deterministic counts、日期／星期／分鐘或 analysis eligibility 任一不一致都不得通過。
+8. 新數據不自動改寫作者契約。第三方資料用 `social_governance.py record-reference`，不得冒充自有 post；圖文與影片分區未知或衝突時不納入學習。新的寫作／F 改善建議用候選審核流程，不直接改 voice 或 F 原檔。
 
 ## P4 Optimize Patterns
 

@@ -26,6 +26,7 @@ STATIC_FILES = {
     "/ui.js": ("ui.js", "text/javascript; charset=utf-8"),
     "/editor.js": ("editor.js", "text/javascript; charset=utf-8"),
     "/api.js": ("api.js", "text/javascript; charset=utf-8"),
+    "/governance.js": ("governance.js", "text/javascript; charset=utf-8"),
     "/favicon.svg": ("favicon.svg", "image/svg+xml"),
 }
 BODY_LIMIT = 128 * 1024
@@ -128,6 +129,8 @@ class WorkbenchHandler(BaseHTTPRequestHandler):
                 result = self.server.service.catalog()
             elif route == "/api/overview":
                 result = self.server.service.overview()
+            elif route == "/api/governance":
+                result = self.server.service.governance()
             elif route == "/api/drafts":
                 result = list_drafts(self.server.service.root)
             elif route == "/api/outcome/example":

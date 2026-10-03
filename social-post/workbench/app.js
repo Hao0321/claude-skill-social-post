@@ -1,6 +1,7 @@
 import { api, copyText, download } from "./api.js";
 import { el, button, notice, heading, panel, field, renderNav, home, workflowHead, outputPanel } from "./ui.js";
 import { editor } from "./editor.js";
+import { governancePage } from "./governance.js";
 
 const main = document.querySelector("#main");
 let catalog, overview, pendingDraft;
@@ -37,6 +38,8 @@ function taskBuilder(mode, draft) {
   const form = el("form");
   form.addEventListener("submit", event => event.preventDefault());
   const platform = field("目標平台", "platform", { options: catalog.platforms, value: draft?.platform || "facebook" });
+  const media = field("媒體資料分區", "media_family", { options: catalog.media_families, value: "text_image",
+    hint: "圖文與影片的成效分開；再依版型與觀測階段選同類證據。" });
   const topic = field(mode.id === "P1" ? "這批樣本的用途" : "題材或任務主題", "topic", {
     placeholder: mode.id === "P2" ? "例如：下一版自動剪輯的開發進度" : "這次想完成什麼？", value: draft?.title || "",
   });
@@ -55,7 +58,7 @@ function taskBuilder(mode, draft) {
   details.input.required = ["P1", "P5"].includes(mode.id);
   const pair = el("div", "field-pair");
   pair.append(platform.wrapper, goal.wrapper);
-  form.append(topic.wrapper, pair);
+  form.append(topic.wrapper, pair, media.wrapper);
   if (mode.id === "P2") {
     const picker = el("div", "format-picker");
     const guidance = el("p", "format-guidance");
@@ -87,7 +90,7 @@ function taskBuilder(mode, draft) {
   const url = field("參考網址", "url", { placeholder: "選填；網址只當素材，不會由服務抓取" });
   form.append(url.wrapper);
   node.append(form);
-  return { node, form, platform, topic, details, goal, url, formula };
+  return { node, form, platform, media, topic, details, goal, url, formula };
 }
 
 function wireTask(mode, builder, output) {
@@ -97,6 +100,7 @@ function wireTask(mode, builder, output) {
     if (!builder.form.reportValidity()) return;
     const result = await api("/api/task", {
       mode: mode.id, platform: builder.platform.input.value,
+      media_family: builder.media.input.value,
       format: mode.id === "P2" ? selectedFormat : "",
       formula: ["P0", "P2"].includes(mode.id) ? builder.formula.input.value : "",
       topic: builder.topic.input.value, details: builder.details.input.value,
@@ -151,6 +155,8 @@ function drafting(mode, draft) {
   const drafts = el("div", "draft-list");
   const edit = editor({
     format: () => selectedFormat, platform: () => builder.platform.input.value,
+    media: () => builder.media.input.value, formula: () => builder.formula.input.value,
+    contract: () => overview.writing_contract,
     title: () => builder.topic.input.value, draft, run, toast,
     onSaved: async () => { await draftList(drafts); overview = await api("/api/overview"); },
   });
@@ -237,6 +243,7 @@ function comparing() {
   const controls = panel("設定可比範圍", "EXACT COHORT ONLY");
   const fields = {
     platform: field("平台", "platform", { options: catalog.platforms, value: "facebook" }),
+    media_family: field("媒體分區", "media_family", { options: catalog.media_families, value: "text_image" }),
     content_type: field("內容類型", "content_type", { placeholder: "請填資料庫使用的內容類型", value: overview.content_types[0] || "" }),
     surface: field("版型／發布表面", "surface", { placeholder: "請填資料庫使用的 surface", value: overview.surfaces[0] || "" }),
     maturity: field("成效觀測階段", "maturity", { options: catalog.maturities, value: "developing" }),
@@ -256,13 +263,13 @@ function comparing() {
   }
   const output = panel("最近可比案例", "NOT A PERFORMANCE RANKING");
   const list = el("div", "compare-list");
-  list.append(notice("四個條件要對齊", "只比較同平台、內容類型、版型與觀測階段。沒有樣本時會直接顯示，不補造案例。"));
+  list.append(notice("五個條件要對齊", "只比較同平台、圖文／影片分區、內容類型、版型與觀測階段。沒有樣本時不回退到混合資料。"));
   for (const { input } of Object.values(fields)) input.addEventListener("input", () => {
     list.replaceChildren(notice("比較條件已變更", "請重新讀取，舊結果不代表新的比較範圍。"));
   });
   const load = button("讀取可比案例", () => run(load, async () => {
     const query = Object.fromEntries(Object.entries(fields).map(([key, value]) => [key, value.input.value]));
-    if (Object.values(query).some(value => !value.trim())) throw new Error("請完整填入四個比較條件。");
+    if (Object.values(query).some(value => !value.trim())) throw new Error("請完整填入五個比較條件。");
     const response = await api("/api/compare", query);
     if (Object.entries(fields).some(([key, value]) => value.input.value !== query[key])) {
       throw new Error("讀取期間比較條件已變更，請重新讀取。");
@@ -298,9 +305,14 @@ async function render() {
   dirtyGuard = null;
   activeRoute = route;
   const mode = catalog.modes.find(item => item.id === route);
-  renderNav(catalog, mode ? route : route === "drafts" ? "drafts" : "home");
+  renderNav(catalog, mode ? route : ["drafts", "learning"].includes(route) ? route : "home");
   main.replaceChildren();
-  if (route === "drafts") {
+  if (route === "learning") {
+    overview = await api("/api/overview");
+    const page = await governancePage({ run, toast, overview });
+    if (request !== renderVersion) return;
+    main.append(page);
+  } else if (route === "drafts") {
     main.append(heading("私人草稿", "YOUR LOCAL ARCHIVE", "保存版本不會自動發布"));
     const list = el("div", "draft-list"); main.append(list);
     await draftList(list);

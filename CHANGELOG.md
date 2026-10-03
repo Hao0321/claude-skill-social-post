@@ -4,6 +4,11 @@
 
 ### Added
 
+- Local Content Workbench 0.2.0: ten platform/media learning channels, scoped candidate diffs, separate author approval and activation, and selected-formula checks in the editor. No host-model execution or live social account permission is enabled.
+- Frozen, private author contracts covering installed voice, F formulas and rule sources, with immutable parent versions, drift/stale-revision rejection and complete effective-context handoff. Structural checks remain separate from mandatory host semantic/factual review.
+- Separate external-reference learning events and non-destructive legacy migration. Unknown/conflicting media and combined-platform observations cannot become pooled own-performance advice.
+- Eighteen native positive/negative governance tests and 28 source-bound isolated renderer checks, including approve-not-activate, scoped activation preserving originals and mobile revision wrapping. Fictional fixtures do not certify real-account browser capabilities.
+
 - Local Content Workbench 0.1.0: dependency-free editorial UI with six workflow guides, separate A/B/C format and installed F-formula selectors, explicit Codex/Claude task handoff, private draft save/reopen, deterministic text checks and labelled black-card preview.
 - Outcome JSON preview/explicit commit using the existing locked store, exact-cohort comparison, unsaved-body navigation protection, loopback-only HTTP with same-origin/session/CSRF controls, and calibrated HTTP/architecture/real Chromium journeys.
 - A source-only hosted-service proposal separating paid draft generation from authorized local browser workers. No model executor, public commercial API, billing or production automation is enabled by this UI.

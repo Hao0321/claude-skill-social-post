@@ -1,7 +1,7 @@
 import { api, copyText, download } from "./api.js";
 import { el, field, panel, button, notice } from "./ui.js";
 
-export function editor({ format, platform, title, draft, run, toast, onSaved }) {
+export function editor({ format, platform, media, formula, contract, title, draft, run, toast, onSaved }) {
   const node = panel("文案編輯", "PRIVATE DRAFT");
   const body = field("貼文正文", "draft", { rows: 10,
     placeholder: "把 AI 完成的文案貼進來，或直接從這裡開始寫。", value: draft?.text || "" });
@@ -44,6 +44,21 @@ export function editor({ format, platform, title, draft, run, toast, onSaved }) 
   }));
   const exportButton = button("下載文字", () => download(body.input.value, "social-post-draft.txt"));
   row.append(save, copy, exportButton);
+  const contractResult = el("p", "inline-status", "保存草稿不代表通過 F 檢查；正式交付還要審查語義與事實。");
+  const check = button("核對正式 F 契約", () => run(check, async () => {
+    if (contract().status !== "locked") throw new Error("此工作空間尚未建立正式作者契約。");
+    if (!formula()) throw new Error("請選擇實際使用的 F 公式，不以自動選擇代替檢查。");
+    const captured = JSON.stringify([body.input.value, formula(), format(), platform(), media()]);
+    const result = await api("/api/writing/check", { text: body.input.value, formula: formula(), format: format(),
+      revision: contract().revision, platform: platform(), media_family: media() });
+    if (captured !== JSON.stringify([body.input.value, formula(), format(), platform(), media()])) {
+      throw new Error("文案或條件已變更，請重新核對。");
+    }
+    contractResult.textContent = result.structural_pass ? "結構檢查通過；仍需主機閱讀完整 F 正文，審查語義順序、語氣與事實。" :
+      "結構檢查未通過：" + result.failures.join("、");
+  }, contractResult));
+  row.append(check);
+  body.input.addEventListener("input", () => { contractResult.textContent = "文案已變更，請重新核對正式 F 契約。"; });
   const previewToggle = button("查看黑底白字版型", () => {
     preview.hidden = !preview.hidden;
     previewToggle.setAttribute("aria-expanded", String(!preview.hidden));
@@ -82,7 +97,7 @@ export function editor({ format, platform, title, draft, run, toast, onSaved }) 
     debounce = setTimeout(updateAnalysis, 250);
     renderPreview();
   });
-  node.append(body.wrapper, counters, message, row, el("div", "stack-gap"), previewToggle, preview);
+  node.append(body.wrapper, counters, message, row, contractResult, el("div", "stack-gap"), previewToggle, preview);
   if (draft) node.append(notice("已開啟保存版本", "修改後保存會建立新的私人版本，不覆蓋原草稿。"));
   updateAnalysis();
   return { node, input: body.input,

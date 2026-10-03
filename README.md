@@ -22,6 +22,11 @@ Cleanup 保留固定的程式長度警告與未測項，不以調高門檻消除
 
 ## Unreleased on main
 
+- 工作台更新至 0.2.0：五平台 × 圖文／影片共十個學習分區；同平台仍按 content type、surface 與 maturity 選取可比較案例，不用其他分區的贏家補空缺。外部案例與自己的成效分開保存。
+- 新增私人寫作契約：凍結已安裝的聲線、F 寫法與規則來源，寫稿綁定指定 F／格式與正式版本。F 變體分開選擇，過期版本、來源漂移及結構違規會被拒絕；結構檢查不能代替 AI 的語義與事實審查。
+- 新資料只成為觀測或候選修改。正式更新採「完整前後文與證據 → 作者審核指定版本 → 另行啟用」，僅影響核准的平台／媒體分區；原始來源和前版保留。介面新增「資料分區與審核」及編輯器的 F 契約核對。
+- 新流程通過 18 項原生治理測試與 28 項隔離 Chromium 介面檢查；介面測試使用 fictional 資料，並非 Meta 實帳號發布或回覆驗收。
+
 - 共用掃描、送出、領域驗證與各平台 DOM reader 已模組化；所有新增執行依賴仍納入來源雜湊與精確公開清單。模組與依賴數由當次架構測試產生，不用舊報告冒充本版證據。
 - 新增來源持有的 Chrome 明確斷線恢復：只在 cached browser 的精確斷線錯誤後重選一次，同一來源與 Chrome family，不清除防重送紀錄。空分頁、一般逾時、頁面失效及權限拒絕不觸發重連；已完成一次真實恢復後的指定留言讀取，不保證所有斷線原因均已排除。
 - 指定留言的唯讀 intake 優先使用唯一 exact-URL 分頁，重新核對 handle／URL 並保留既有分頁；沒有相符分頁才建立暫時分頁，多個相符則停止。送出與對帳流程不因此變更。
@@ -96,6 +101,16 @@ Copy-Item content_plan.example.md content_plan.md
 
 再把 `voice_quick.md` 與 `current_brief.md` 的 placeholder 換成自己的方向。
 
+完成自己的聲線、規則與已安裝 F 寫法設定後，明確建立本機初始契約；這不是從公開範本學會任何作者的個人語氣：
+
+```powershell
+python -B scripts/social_governance.py bootstrap --write
+python -B scripts/social_governance.py status
+python -B scripts/social_governance.py channels
+```
+
+只有首次設定使用 `bootstrap`。之後新增爆款案例不直接改原檔，改走候選、作者審核、另行啟用；遇到來源漂移不可用重新初始化掩蓋。契約、學習紀錄、候選與審核事件都只存本機 `data/`，不要提交至公開 repo。完整流程見 [寫作契約與分區學習](social-post/references/writing-governance.md)。
+
 ## 六個 Mode
 
 | Mode | 用途 |
@@ -107,7 +122,7 @@ Copy-Item content_plan.example.md content_plan.md
 | P4 Optimize Patterns | 對齊 maturity 後做跨篇／跨平台比較 |
 | P5 Comment Ops | 以 Chrome 受控掃描、草擬與核准；live 回覆需另經 canary 解鎖 |
 
-## 本機工作台 0.1.0
+## 本機工作台 0.2.0
 
 新增黑／暖白／鈷藍的 editorial 介面，沒有表情符號、遠端字型或額外 npm 執行依賴。六個流程各有用途、輸入與產出導覽；P2 可另外選 A／B／C 寫法及本機已安裝的 F 公式。這是 main 上的 source candidate，不是新 stable Release。
 
@@ -119,7 +134,7 @@ python -B social-post/scripts/workbench.py
 
 開啟 http://127.0.0.1:8766，或在 Codex／Claude Code 呼叫 Social Post 並說「開啟工作台」。需要 Python 3.10+；只監聽本機，不提供手機遠端入口。
 
-目前撰稿流程是「選平台／寫法／公式 → 填題材 → 建立並複製任務 → Codex／Claude Code 依 Skill 寫完整 → 貼回編輯、保存」。介面尚未自動呼叫 AI 或接收 AI 結果；不要把任務預覽誤認為生成文案。草稿可保存、重開、複製、下載；黑底白字預覽明示不是 Facebook 的實際排版。
+目前撰稿流程是「選平台／圖文或影片／寫法／公式 → 填題材 → 建立並複製任務 → Codex／Claude Code 讀取正式契約並依 Skill 寫完整 → 貼回核對、編輯、保存」。介面尚未自動呼叫 AI 或接收 AI 結果；不要把任務預覽誤認為生成文案。草稿可保存、重開、複製、下載；黑底白字預覽明示不是 Facebook 的實際排版。
 
 P3 支援先驗證再明確追加 outcome JSON，保留原始歷史並拒絕過期、重播與資料版本衝突；P4 讀取最近 exact-cohort 案例，不假造資料或預測流量。P5 只建立回覆草擬任務；UI 不會自動發布或送留言，也不改既有 production 開關。
 

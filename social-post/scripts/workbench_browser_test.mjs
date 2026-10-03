@@ -1,6 +1,6 @@
 // Optional dev-only actual Chromium journey. No user's Chrome or real social data.
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { createReadStream, mkdtempSync, mkdirSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,8 +21,33 @@ const tempBase = realpathSync(tmpdir());
 const workspace = mkdtempSync(join(tempBase, "social-workbench-browser-"));
 mkdirSync(join(workspace, "references/formulas"), { recursive: true });
 writeFileSync(join(workspace, "references/formulas/F01.md"), "# F1 Fictional formula\n\nFictional body.");
+writeFileSync(join(workspace, "references/formulas/F06.md"), "# F6 | Mode B\n\n## F6a Invitation\n\n## F6b Own ship\n[Result]\n[Process]\n[Use]\n[One action]\n");
+writeFileSync(join(workspace, "voice_quick.md"), "Fictional author used only by this isolated test; plain factual voice.\n");
+mkdirSync(join(workspace, "data"));
+writeFileSync(join(workspace, "data/writing_policy.json"), JSON.stringify({ schema_version: 1, no_emoji: true,
+  plain_text: true, formula_checks: { F06b: { paragraphs: 4, no_links: true, no_lists: true,
+    exclamations_first_only: true, bare_endings_after_first: true } } }));
+function governance(action, file) {
+  const command = ["-B", join(skillRoot, "scripts/social_governance.py"), action, "--root", workspace, "--write"];
+  if (file) command.push("--input", file);
+  const result = spawnSync(options["--python"], command, { encoding: "utf8", shell: false,
+    env: { SystemRoot: process.env.SystemRoot, TEMP: tmpdir(), TMP: tmpdir(), PYTHONUTF8: "1" } });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  return JSON.parse(result.stdout);
+}
+const baseline = governance("bootstrap");
+writeFileSync(join(workspace, "external.json"), JSON.stringify({ reference_id: "fictional-external",
+  content_id: "one-fictional-video", platform: "instagram", media_family: "video", caption: "Fictional external caption",
+  published_at: null, captured_at: null, metrics: { likes: 100 }, metric_qualifiers: { likes: "exact" },
+  evidence: [{ source: "explicitly fictional renderer control" }] }));
+governance("record-reference", join(workspace, "external.json"));
+writeFileSync(join(workspace, "proposal.json"), JSON.stringify({ title: "Fictional reviewed change",
+  target: "references/formulas/F01.md", replacement_text: "# F1 Fictional formula\n\nReviewed fictional body.",
+  scope: { platform: "instagram", media_family: "video" }, evidence_ids: ["fictional-external"],
+  reason: "Isolated review-flow test, not a real author update." }));
+const candidate = governance("propose", join(workspace, "proposal.json"));
 const child = spawn(options["--python"], ["-B", join(skillRoot, "scripts", "workbench.py"),
-  "--root", workspace, "--port", "0"], {
+  "--root", workspace, "--port", options["--port"] || "0"], {
   shell: false, stdio: ["ignore", "pipe", "pipe"],
   env: { SystemRoot: process.env.SystemRoot, TEMP: tmpdir(), TMP: tmpdir(), PYTHONUTF8: "1" },
 });
@@ -119,6 +144,40 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   await page.screenshot({ path: join(output, "editor-mobile.png"), fullPage: true });
   checks.push("draft_save_reload_reopen_exact_text_and_mode", "black_card_preview", "responsive_editor_390");
+  await page.getByLabel("創作公式 F").selectOption("F06b");
+  await page.getByRole("button", { name: "Mode B 成果發布", exact: true }).click();
+  await page.getByLabel("貼文正文").fill("A result!!\n\nA real process\n\nA use case");
+  await page.getByRole("button", { name: "核對正式 F 契約", exact: true }).click();
+  await page.getByText("結構檢查未通過：wrong_paragraph_count", { exact: true }).waitFor();
+  await page.getByLabel("貼文正文").fill("A result!!\n\nA real process\n\nA use case\n\nOne action");
+  await page.getByRole("button", { name: "核對正式 F 契約", exact: true }).click();
+  await page.getByText("結構檢查通過；仍需主機閱讀完整 F 正文，審查語義順序、語氣與事實。", { exact: true }).waitFor();
+  checks.push("f6_variant_selector", "f6_structural_negative_and_positive", "semantic_review_not_falsely_passed");
+  await page.getByLabel("貼文正文").fill(original);
+  await page.getByRole("button", { name: "Mode C 觀點復盤", exact: true }).click();
+  await page.locator('#nav a[href="#learning"]').click();
+  await page.getByRole("heading", { name: "資料分區與規則審核", exact: true }).waitFor();
+  assert.equal(await page.locator(".mode-grid .comparison-card").count(), 10);
+  await page.screenshot({ path: join(output, "learning-mobile.png"), fullPage: true });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(JSON.parse(readFileSync(join(workspace, "data/author_contract.json"), "utf8")).revision, baseline.revision);
+  await page.getByLabel("審核理由").fill("Reviewed this fictional diff, scope and single-sample limits for the renderer test.");
+  page.once("dialog", dialog => dialog.accept());
+  await page.getByRole("button", { name: "批准此版本", exact: true }).click();
+  await page.getByRole("button", { name: "啟用已批准更新", exact: true }).waitFor();
+  assert.equal(JSON.parse(readFileSync(join(workspace, "data/author_contract.json"), "utf8")).revision, baseline.revision);
+  page.once("dialog", dialog => dialog.accept());
+  await page.getByRole("button", { name: "啟用已批准更新", exact: true }).click();
+  await page.getByText("instagram / video / activated", { exact: true }).waitFor();
+  const active = JSON.parse(readFileSync(join(workspace, "data/author_contract.json"), "utf8"));
+  const version = JSON.parse(readFileSync(join(workspace, "data/author_contracts", active.revision + ".json"), "utf8"));
+  assert.notEqual(active.revision, baseline.revision);
+  assert.equal(version.parent_revision, baseline.revision);
+  assert.equal(version.proposal_digest, candidate.proposal_digest);
+  assert.equal(readFileSync(join(workspace, "references/formulas/F01.md"), "utf8"), "# F1 Fictional formula\n\nFictional body.");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.screenshot({ path: join(output, "learning-desktop.png"), fullPage: true });
+  checks.push("ten_media_channels", "responsive_learning_390", "approve_does_not_activate", "explicit_scoped_activation_keeps_original");
   await page.locator('#nav a[href="#P3"]').click();
   await page.waitForFunction(() => document.querySelector(".workflow-head .eyebrow")?.textContent.startsWith("P3 / "));
   await page.getByLabel("Outcome JSON", { exact: true }).fill('{"snapshot":{},"snapshot":{}}');
@@ -154,7 +213,9 @@ try {
   checks.push("zero_uncaught_browser_errors", "zero_external_requests");
   const sources = ["scripts/workbench.py", "scripts/workbench_service.py", "scripts/workbench_contract.py",
     "scripts/workbench_store.py", "scripts/workbench_formulas.py", "workbench/app.js", "workbench/api.js", "workbench/ui.js",
-    "workbench/editor.js", "workbench/styles.css", "workbench/layout.css", "workbench/index.html"];
+    "workbench/editor.js", "workbench/governance.js", "workbench/styles.css", "workbench/layout.css", "workbench/index.html",
+    "scripts/social_writing_contract.py", "scripts/social_learning.py", "scripts/social_cohorts.py", "scripts/social_governance_store.py",
+    "scripts/social_primitives.py", "scripts/social_governance.py", "scripts/workbench_browser_test.mjs"];
   const receipt = {
     schema_version: 1, status: "PASS", evidence_class: "owned_loopback_fictional_browser",
     recorded_at: new Date().toISOString(), checks, viewport_count: 3,

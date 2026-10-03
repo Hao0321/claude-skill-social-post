@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import json
 from typing import Any
+from social_primitives import PLATFORMS
 
-VERSION = "0.1.0"
-FORMULA_IDS = frozenset([f"F{number:02}" for number in range(1, 31)] + ["F15-mini"])
-PLATFORMS = ("facebook", "instagram", "youtube", "threads", "x")
+VERSION = "0.2.0"
+FORMULA_ALIASES = {"F06a": "F06", "F06b": "F06", "F25a": "F25", "F25b": "F25", "F25c": "F25",
+                   "F29a": "F29", "F29b": "F29"}
+FORMULA_IDS = frozenset([f"F{number:02}" for number in range(1, 31)] + ["F15-mini", *FORMULA_ALIASES])
 FORMATS = (
     {"id": "A", "name": "日常觀察", "tagline": "一個想法，直接說",
      "description": "適合日常、觀察與單點想法。依你的真實樣本決定長度，不硬加行動呼籲。"},
@@ -90,7 +92,7 @@ def text_field(payload: dict[str, Any], key: str, maximum: int = MAX_TEXT) -> st
 def task_input(payload: Any) -> dict[str, str]:
     if not isinstance(payload, dict):
         raise ValueError("task must be an object")
-    allowed = {"mode", "platform", "format", "formula", "topic", "details", "goal", "url"}
+    allowed = {"mode", "platform", "media_family", "format", "formula", "topic", "details", "goal", "url"}
     if set(payload) - allowed:
         raise ValueError("unknown task field")
     result = {key: text_field(payload, key) for key in allowed}
@@ -98,6 +100,8 @@ def task_input(payload: Any) -> dict[str, str]:
         raise ValueError("unknown mode or platform")
     if result["format"] not in {"", "A", "B", "C"}:
         raise ValueError("unknown writing format")
+    if result["media_family"] not in {"", "text_image", "video"}:
+        raise ValueError("unknown media family")
     if result["formula"] and (result["formula"] not in FORMULA_IDS or result["mode"] not in {"P0", "P2"}):
         raise ValueError("unknown formula or workflow")
     if not result["topic"]:
@@ -120,14 +124,19 @@ def build_handoff(payload: Any) -> dict[str, Any]:
     ]
     if task["format"]:
         lines.append("文案格式：Mode " + task["format"])
+    if task["media_family"]:
+        lines.append("媒體分區：" + task["media_family"] + "；只使用此平台／媒體分區的成效，不回退到混合排名。")
     if task["formula"]:
-        lines.append("創作公式：" + task["formula"] + "；只讀 references/formulas/" + task["formula"] + ".md")
+        base = FORMULA_ALIASES.get(task["formula"], task["formula"])
+        lines.append("創作公式：" + task["formula"] + "；原始來源 references/formulas/" + base + ".md，先讀正式契約的有效版本。")
     elif task["mode"] in {"P0", "P2"}:
         lines.append("創作公式：依本機公式索引選一個符合題材與目標的公式，不疊加整庫。")
     if task["goal"]:
         lines.append("主要目標：" + task["goal"])
     lines += [
         "請先讀此流程的 reference：" + mode["reference"],
+        "先讀 references/writing-governance.md；核對正式契約、載入選定 F 的完整有效正文並完成結構檢查與語義審查。",
+        "新爆款只寫候選；不得自行審核或啟用，不得直接改 voice、F 公式或規則來源。",
         "請使用實際可存取的私人聲線簡卡與原文，不用公開 placeholder 假裝已校準。",
         "當有本機工具時，P0／P2 先讀 exact-cohort comparables；沒有工具就明示未執行。",
         "保留日期、星期、時區及發布分鐘；截圖手機時間不是發布時間，未知不可猜。",

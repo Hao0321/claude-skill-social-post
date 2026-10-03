@@ -17,6 +17,7 @@ from social_data_feature_matrix_test import main as run_feature_matrix_tests
 from social_post_analysis import caption_counts
 from social_store import commit_records
 from social_test_schema_time_validation import main as run_schema_time_tests
+from social_governance_test import run_governance_tests
 from social_validation import validate_posts
 from sync_public import (
     candidates,
@@ -478,6 +479,7 @@ def main() -> int:
     check_public_sync_guard()
     run_feature_matrix_tests()
     run_schema_time_tests()
+    run_governance_tests()
     run_comment_self_tests()
     print("self-test passed")
     return 0

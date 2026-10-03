@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from social_store import load_jsonl, store_revision
+from social_cohorts import MEDIA_FAMILIES, media_family as infer_media_family, owner_scope
 from social_post_analysis import HEX_256, punctuation_profile
 from social_validation import (
     MATURITY_VALUES, PLATFORM_VALUES, materialize_corrections, parse_time,
@@ -457,6 +458,7 @@ def _feature_matrix_row(post: dict[str, Any], snapshot: dict[str, Any]) -> dict[
     return {
         "post_id": post["post_id"], "series_id": post.get("series_id"),
         "episode": post.get("episode_number"), "content_type": post.get("content_type"),
+        "media_family": infer_media_family(post), "owner_scope": owner_scope(post),
         "caption": post.get("caption"),
         "caption_sha256": post.get("caption_sha256"),
         "analysis_version": post.get("analysis_version"),
@@ -501,8 +503,11 @@ def feature_matrix(
     platform: str | None = None,
     maturity: str | None = None,
     captured_before: str | None = None,
+    media_family: str | None = None,
 ) -> list[dict[str, Any]]:
     """Join stable post features to latest same-platform/maturity outcomes."""
+    if media_family is not None and media_family not in MEDIA_FAMILIES:
+        raise ValueError("unknown media family")
     result = validate_store(root)
     if result["errors"]:
         raise ValueError("; ".join(result["errors"]))
@@ -510,6 +515,8 @@ def feature_matrix(
         post["post_id"]: post for post in result["posts"]
         if post.get("analysis_status") == "complete"
         and post.get("analysis_eligible") is True
+        and owner_scope(post) == "own"
+        and (media_family is None or infer_media_family(post) == media_family)
         and (series_id is None or post.get("series_id") == series_id)
     }
     latest = latest_aggregation_snapshots(
@@ -594,6 +601,7 @@ def comparables_context(
     surface: str | None = None,
     maturity: str | None = None,
     captured_before: str | None = None,
+    media_family: str | None = None,
     limit: int = 2,
 ) -> dict[str, Any]:
     """Return a compact, score-free generation context from the feature matrix."""
@@ -605,7 +613,10 @@ def comparables_context(
         platform=platform,
         maturity=maturity,
         captured_before=captured_before,
+        media_family=media_family,
     )
+    rows = [row for row in rows if row["media_family"] in MEDIA_FAMILIES
+            and row["platform"] != "combined" and row["owner_scope"] == "own"]
     if content_type is not None:
         rows = [row for row in rows if row.get("content_type") == content_type]
     if surface is not None:
@@ -620,17 +631,21 @@ def comparables_context(
     exact_cohort = all(
         value is not None for value in (platform, maturity, content_type, surface)
     )
+    exact_cohort = exact_cohort and platform != "combined" and len({row["media_family"] for row in rows}) <= 1
     return {
         "query": {
             "series_id": series_id,
             "platform": platform,
             "content_type": content_type,
+            "media_family": media_family,
             "surface": surface,
             "maturity": maturity,
             "captured_before": captured_before,
             "limit": limit,
         },
         "comparison_policy": {
+            "owner_scope": "own", "media_family_isolation": True,
+            "cross_channel_fallback": False,
             "cohort": (
                 "same_platform_maturity_content_type_and_surface"
                 if exact_cohort else "incomplete_filter_set"
@@ -979,6 +994,7 @@ def main() -> int:
     parser.add_argument("--series")
     parser.add_argument("--platform", choices=("combined", *sorted(PLATFORM_VALUES)))
     parser.add_argument("--content-type")
+    parser.add_argument("--media-family", choices=MEDIA_FAMILIES)
     parser.add_argument("--surface")
     parser.add_argument("--maturity", choices=sorted(MATURITY_VALUES))
     parser.add_argument("--captured-before")
@@ -1020,6 +1036,7 @@ def main() -> int:
                 maturity=args.maturity,
                 captured_before=args.captured_before,
                 limit=args.limit,
+                media_family=args.media_family,
             )
             print(
                 json.dumps(context, ensure_ascii=False, indent=2, sort_keys=True)
@@ -1032,6 +1049,7 @@ def main() -> int:
             platform=args.platform,
             maturity=args.maturity,
             captured_before=args.captured_before,
+            media_family=args.media_family,
         )
         print(
             json.dumps(rows, ensure_ascii=False, indent=2, sort_keys=True)
