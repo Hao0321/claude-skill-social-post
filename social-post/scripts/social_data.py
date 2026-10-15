@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from social_store import load_jsonl, store_revision
+from social_store import load_jsonl, read_store_snapshot, store_revision
 from social_cohorts import MEDIA_FAMILIES, media_family as infer_media_family, owner_scope
 from social_post_analysis import HEX_256, punctuation_profile
 from social_validation import (
@@ -72,12 +72,15 @@ def _known_rule_ids(root: Path) -> set[str]:
 
 def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
     """Validate all ledgers and return current materialized views."""
+    result, _snapshots, _accounts = _validated_store(root)
+    return result
+
+
+def _validated_store(root: Path) -> tuple[dict[str, Any], list, list]:
     data = root / "data"
-    posts = load_jsonl(data / POSTS_FILE.name)
-    snapshots = load_jsonl(data / SNAPSHOTS_FILE.name)
-    account_snapshots = load_jsonl(data / ACCOUNT_SNAPSHOTS_FILE.name)
-    experiments = load_jsonl(data / EXPERIMENTS_FILE.name)
-    corrections = load_jsonl(data / CORRECTIONS_FILE.name)
+    revision, raw = read_store_snapshot(data)
+    posts, snapshots, account_snapshots = (raw[POSTS_FILE.name], raw[SNAPSHOTS_FILE.name], raw[ACCOUNT_SNAPSHOTS_FILE.name])
+    experiments, corrections = raw[EXPERIMENTS_FILE.name], raw[CORRECTIONS_FILE.name]
     errors: list[str] = []
     warnings: list[str] = []
     posts, snapshots, account_snapshots = materialize_corrections(
@@ -91,9 +94,9 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
     latest_experiments = validate_experiments(
         experiments, set(posts_by_id), _known_rule_ids(root), errors, warnings,
     )
-    return {
+    result = {
         "valid": not errors,
-        "revision": store_revision(data),
+        "revision": revision,
         "counts": {
             "posts": len(posts),
             "snapshots": len(snapshots),
@@ -110,6 +113,7 @@ def validate_store(root: Path = SKILL_ROOT) -> dict[str, Any]:
         "latest_account_snapshots": latest_accounts,
         "latest_experiments": latest_experiments,
     }
+    return result, snapshots, account_snapshots
 
 
 def validation_json_view(result: dict[str, Any]) -> dict[str, Any]:
@@ -195,33 +199,17 @@ def derived_row(post: dict[str, Any], snapshot: dict[str, Any]) -> dict[str, Any
 
 def _materialized_snapshots(root: Path) -> list[dict[str, Any]]:
     """Load corrected snapshots without changing the validator's latest indexes."""
-    data = root / "data"
-    errors: list[str] = []
-    _posts, snapshots, _accounts = materialize_corrections(
-        load_jsonl(data / POSTS_FILE.name),
-        load_jsonl(data / SNAPSHOTS_FILE.name),
-        load_jsonl(data / ACCOUNT_SNAPSHOTS_FILE.name),
-        load_jsonl(data / CORRECTIONS_FILE.name),
-        errors,
-    )
-    if errors:
-        raise ValueError("; ".join(errors))
+    result, snapshots, _accounts = _validated_store(root)
+    if result["errors"]:
+        raise ValueError("; ".join(result["errors"]))
     return snapshots
 
 
 def _materialized_account_snapshots(root: Path) -> list[dict[str, Any]]:
     """Load every corrected account snapshot, not only the latest index entries."""
-    data = root / "data"
-    errors: list[str] = []
-    _posts, _snapshots, accounts = materialize_corrections(
-        load_jsonl(data / POSTS_FILE.name),
-        load_jsonl(data / SNAPSHOTS_FILE.name),
-        load_jsonl(data / ACCOUNT_SNAPSHOTS_FILE.name),
-        load_jsonl(data / CORRECTIONS_FILE.name),
-        errors,
-    )
-    if errors:
-        raise ValueError("; ".join(errors))
+    result, _snapshots, accounts = _validated_store(root)
+    if result["errors"]:
+        raise ValueError("; ".join(result["errors"]))
     return accounts
 
 
@@ -506,9 +494,21 @@ def feature_matrix(
     media_family: str | None = None,
 ) -> list[dict[str, Any]]:
     """Join stable post features to latest same-platform/maturity outcomes."""
+    result, snapshots, _accounts = _validated_store(root)
+    return _feature_matrix(result, snapshots, series_id=series_id, platform=platform,
+                           maturity=maturity, captured_before=captured_before, media_family=media_family)
+
+
+def feature_matrix_snapshot(root: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Return overview counts and their matrix from the same validated revision."""
+    result, snapshots, _accounts = _validated_store(root)
+    return result, _feature_matrix(result, snapshots)
+
+
+def _feature_matrix(result: dict, snapshots: list, *, series_id=None, platform=None,
+                    maturity=None, captured_before=None, media_family=None) -> list[dict[str, Any]]:
     if media_family is not None and media_family not in MEDIA_FAMILIES:
         raise ValueError("unknown media family")
-    result = validate_store(root)
     if result["errors"]:
         raise ValueError("; ".join(result["errors"]))
     posts = {
@@ -520,7 +520,7 @@ def feature_matrix(
         and (series_id is None or post.get("series_id") == series_id)
     }
     latest = latest_aggregation_snapshots(
-        _materialized_snapshots(root),
+        snapshots,
         platform=platform,
         maturity=maturity,
         captured_before=captured_before,
@@ -786,21 +786,19 @@ def _coverage_row(
 
 def feature_coverage_report(root: Path) -> dict[str, Any]:
     """Prove feature and evidence preservation without exposing captions or source paths."""
-    result = validate_store(root)
+    result, materialized_snapshots, materialized_accounts = _validated_store(root)
     if result["errors"]:
         raise ValueError("; ".join(result["errors"]))
     eligible_posts = sorted((
         post for post in result["posts"]
         if post.get("analysis_status") == "complete" and post.get("analysis_eligible") is True
     ), key=lambda value: value["post_id"])
-    materialized_snapshots = _materialized_snapshots(root)
-    materialized_accounts = _materialized_account_snapshots(root)
     snapshots_by_id = {
         snapshot["snapshot_id"]: snapshot for snapshot in materialized_snapshots
         if isinstance(snapshot.get("snapshot_id"), str)
     }
     rows_by_post: dict[str, list[dict[str, Any]]] = {}
-    for row in feature_matrix(root):
+    for row in _feature_matrix(result, materialized_snapshots):
         rows_by_post.setdefault(row["post_id"], []).append(row)
     coverage_rows = [
         _coverage_row(post, rows_by_post.get(post["post_id"], []), snapshots_by_id)
@@ -823,12 +821,12 @@ def feature_coverage_report(root: Path) -> dict[str, Any]:
 
 
 def series_summary(root: Path, series_id: str | None = None) -> list[dict[str, Any]]:
-    result = validate_store(root)
+    result, snapshots, _accounts = _validated_store(root)
     if result["errors"]:
         raise ValueError("; ".join(result["errors"]))
     posts = result["posts"]
     latest = latest_aggregation_snapshots(
-        _materialized_snapshots(root), group_by_maturity=False,
+        snapshots, group_by_maturity=False,
     )
     rows = []
     for post in posts:

@@ -11,8 +11,8 @@ import time
 from pathlib import Path
 from typing import Any
 
-from log_outcome import load_store_records, prepare_records, validate_staged
-from social_data import comparables_context, feature_matrix, validate_store
+from log_outcome import prepare_records, validate_staged
+from social_data import comparables_context, feature_matrix_snapshot, validate_store
 from social_post_analysis import caption_counts, punctuation_profile
 from social_store import commit_records
 from social_cohorts import MEDIA_FAMILIES, channel_inventory
@@ -63,10 +63,9 @@ class WorkbenchService:
 
     def overview(self) -> dict[str, Any]:
         check_data_paths(self.root)
-        _, records = load_store_records(self.root / "data")
-        matrix = feature_matrix(self.root)
+        result, matrix = feature_matrix_snapshot(self.root)
         return {
-            "posts": len(records["posts"]), "snapshots": len(records["snapshots"]),
+            "posts": result["counts"]["posts"], "snapshots": result["counts"]["snapshots"],
             "drafts": len(list_drafts(self.root)), "eligible_rows": len(matrix),
             "voice_available": all(
                 safe_path(self.root, name).exists()

@@ -16,10 +16,15 @@ from social_data import (
     ACCOUNT_SNAPSHOTS_FILE, CORRECTIONS_FILE, DATA_DIR, EXPERIMENTS_FILE, POSTS_FILE,
     SNAPSHOTS_FILE, validate_store,
 )
-from social_store import commit_records, load_jsonl, store_revision, write_jsonl
+from social_store import commit_records, load_jsonl, read_store_snapshot, store_revision, write_jsonl
 
 
 def load_store_records(data_dir: Path) -> tuple[dict[str, Path], dict[str, list[dict[str, Any]]]]:
+    paths, records, _revision = _load_store_state(data_dir)
+    return paths, records
+
+
+def _load_store_state(data_dir: Path) -> tuple[dict, dict, str]:
     paths = {
         "posts": data_dir / POSTS_FILE.name,
         "snapshots": data_dir / SNAPSHOTS_FILE.name,
@@ -27,7 +32,8 @@ def load_store_records(data_dir: Path) -> tuple[dict[str, Path], dict[str, list[
         "experiments": data_dir / EXPERIMENTS_FILE.name,
         "corrections": data_dir / CORRECTIONS_FILE.name,
     }
-    return paths, {name: load_jsonl(path) for name, path in paths.items()}
+    revision, snapshot = read_store_snapshot(data_dir)
+    return paths, {name: snapshot[path.name] for name, path in paths.items()}, revision
 
 
 def append_snapshot(
@@ -94,7 +100,6 @@ def append_experiment(
 def prepare_records(
     bundle: dict[str, Any], data_dir: Path = DATA_DIR,
 ) -> tuple[dict[Path, list[dict[str, Any]]], dict[str, Any], str]:
-    base_revision = store_revision(data_dir)
     post = bundle.get("post")
     if isinstance(post, dict):
         post = copy.deepcopy(post)
@@ -113,7 +118,7 @@ def prepare_records(
             "bundle requires a post snapshot, account snapshot, experiment, correction, or a combination"
         )
 
-    paths, records = load_store_records(data_dir)
+    paths, records, base_revision = _load_store_state(data_dir)
     append_snapshot(post, snapshot, records)
     append_unique(account_snapshot, records["account_snapshots"], "account_snapshot_id")
     experiment = append_experiment(experiment, records["experiments"])

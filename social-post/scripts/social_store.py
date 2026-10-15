@@ -12,29 +12,13 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
-
-
-DATA_FILENAMES = (
-    "posts.jsonl", "insight_snapshots.jsonl", "account_snapshots.jsonl", "experiments.jsonl",
-    "corrections.jsonl",
-)
+from social_snapshot import DATA_FILENAMES, _lock_owner_scope, parse_jsonl, read_store_snapshot
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
-    records: list[dict[str, Any]] = []
-    for line_no, raw in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), start=1):
-        if not raw.strip():
-            continue
-        try:
-            value = json.loads(raw)
-        except json.JSONDecodeError as exc:
-            raise ValueError(f"{path.name}:{line_no}: invalid JSON: {exc}") from exc
-        if not isinstance(value, dict):
-            raise ValueError(f"{path.name}:{line_no}: each JSONL row must be an object")
-        records.append(value)
-    return records
+    return parse_jsonl(path.read_bytes(), path.name)
 
 
 def write_jsonl(path: Path, records: list[dict[str, Any]]) -> None:
@@ -73,7 +57,8 @@ def exclusive_store_lock(data_dir: Path, timeout_seconds: float = 10.0) -> Itera
                 raise TimeoutError(f"timed out waiting for outcome store lock: {lock_dir}")
             time.sleep(0.05)
     try:
-        yield
+        with _lock_owner_scope(data_dir):
+            yield
     finally:
         try:
             os.rmdir(lock_dir)

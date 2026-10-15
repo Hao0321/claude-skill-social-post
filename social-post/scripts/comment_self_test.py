@@ -58,6 +58,8 @@ JS_TEST_MODULES = {
     "scripts/comment_chrome_textarea_identity_test.mjs",
     "scripts/comment_chrome_threads_reader_test.mjs",
     "scripts/comment_chrome_threads_canary_surface_test.mjs",
+    "scripts/comment_chrome_threads_dom_fixtures_test.mjs",
+    "scripts/comment_chrome_threads_canary_reader_cases_test.mjs",
     "scripts/comment_chrome_threads_icon_identity_test.mjs",
 }
 
