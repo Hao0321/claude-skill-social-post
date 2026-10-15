@@ -10,17 +10,17 @@
 
 討論想法可到 [Discussions](https://github.com/Hao0321/claude-skill-social-post/discussions)，可重現問題與正式提案使用 [Issues](https://github.com/Hao0321/claude-skill-social-post/issues/new/choose)。
 
-目前穩定標籤：**v2.5.0**；`main` 已同步 **Unreleased candidate**。
+本次發布版本：**v2.5.1**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
 
 Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime revision／雜湊、架構自校準與單次送出／異常恢復的回歸測試。另已完成一次 IG 真實單次送出、原生子回覆查證與唯讀 recovery 對帳，以及一次 Chrome 斷線後的來源連線恢復與原目標讀取；這些證據不代表三平台 live Meta 回覆已解鎖。
 
 > `main` 已分開讀取與送出開關：FB／IG／Threads 指定原生留言的 target-only 回填各有實證；整篇掃描未開放，`live_browser_actuation_enabled` 仍預設為 `false`。真實送出／結果回讀未完成三平台 canary，不能宣稱全面自動回覆已完成。
 
-本候選版仍未完成三平台真實自動回覆驗收。過長契約與平台程式已按責任拆分，完整測試通過；但離線測試不能代替 FB／Threads 的登入操作、完整回覆串與父層驗證。穩定標籤仍為 v2.5.0，沒有新建正式 Release 或升級 production capability。
+本候選版仍未完成三平台真實自動回覆驗收。過長契約與平台程式已按責任拆分，完整測試通過；但離線測試不能代替 FB／Threads 的登入操作、完整回覆串與父層驗證。v2.5.1 發布不升級尚未驗收的 production capability。
 
 Cleanup 保留固定的程式長度警告與未測項，不以調高門檻消除問題。跨語言圖與私版 `no-origin` 更新來源仍未由 Cleanup 驗證；另有產品原生 JavaScript 架構圖，但不能把不同量尺或未測項當成同一份通過證明。
 
-## Unreleased on main
+## v2.5.1 交付範圍
 
 - 成效彙整、coverage 與工作台現在共用同一次 JSONL 快照，避免一個畫面混入不同讀取時點的資料。讀取期間遇到來源變動會拒絕不一致結果；處理 Unicode 換行字元時保留原始 JSONL 的實體行邊界。新增完整資料集、空資料與併發讀寫的回歸測試；私人語氣與成效仍留在本機。
 

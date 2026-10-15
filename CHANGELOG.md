@@ -1,3 +1,15 @@
+## v2.5.1 — 2026-10-16
+
+- Read outcome aggregation, coverage and workbench summaries from one coherent
+  JSONL snapshot. Reject concurrent source drift and preserve physical JSONL
+  line boundaries without treating Unicode text separators as new records.
+- Separate anonymous Threads DOM fixtures, serialized reader cases and native
+  orchestration tests. Keep the exact JavaScript module/edge inventory and
+  source-bound test controls intact.
+- Preserve private writing, voice and outcome data outside the public package.
+  This release does not enable broad live Meta replies or promote incomplete
+  platform capability evidence.
+
 # Changelog
 
 ## Unreleased
