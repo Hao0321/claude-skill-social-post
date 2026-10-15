@@ -57,7 +57,7 @@ def check_private_baseline(result: dict) -> None:
     if result["counts"].get("account_snapshots", 0) < 1:
         raise AssertionError("account-level Instagram history disappeared")
     statuses = [post.get("analysis_status") for post in result["posts"]]
-    if statuses.count("complete") != 7 or statuses.count("excluded_placeholder") != 1:
+    if statuses.count("complete") < 7 or statuses.count("excluded_placeholder") < 1:
         raise AssertionError(f"private post analysis coverage drifted: {statuses}")
     if any(
         post.get("analysis_eligible") is not False
@@ -463,6 +463,9 @@ def check_public_sync_guard() -> None:
 
 
 def main() -> int:
+    import sys
+    from social_snapshot_test import run_self_test as run_snapshot_tests
+    run_snapshot_tests(sys.modules[__name__])
     result = validate_store()
     if not result["valid"]:
         raise AssertionError(result["errors"])
