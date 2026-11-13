@@ -13,7 +13,10 @@ Windows PowerShell（Codex）：
 git clone https://github.com/Hao0321/claude-skill-social-post.git
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
 Copy-Item -Recurse ".\claude-skill-social-post\social-post" "$env:USERPROFILE\.codex\skills\social-post"
+python -m pip install -r ".\claude-skill-social-postequirements.txt"
 ```
+
+Windows 沒有系統內建的 IANA 時區資料庫，最後一行會安裝 `tzdata`，`Asia/Taipei` 這類時區才驗證得過；macOS、Linux 不需要。
 
 ## 2. 建立私人工作檔
 

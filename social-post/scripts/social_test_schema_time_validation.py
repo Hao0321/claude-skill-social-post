@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import copy
 import hashlib
+from unittest import mock
+from zoneinfo import ZoneInfoNotFoundError
 
 from social_post_analysis import caption_counts
 from social_validation import (
@@ -116,6 +118,10 @@ def check_post_schema_and_timezone() -> None:
     invalid_zone["timezone"] = "Taipei/Not-A-Zone"
     require_rejection(invalid_zone, "recognized IANA timezone")
 
+    misspelled_zone = copy.deepcopy(source)
+    misspelled_zone["timezone"] = "Asia/Taipe"
+    require_rejection(misspelled_zone, "recognized IANA timezone")
+
     wrong_offset = copy.deepcopy(source)
     wrong_offset["published_at"] = "2026-08-30T10:00:00+00:00"
     require_rejection(wrong_offset, "UTC offset does not match timezone")
@@ -131,6 +137,20 @@ def check_post_schema_and_timezone() -> None:
     wrong_minute = copy.deepcopy(source)
     wrong_minute["publication_context"]["local_time"] = "10:01"
     require_rejection(wrong_minute, "publication_context.local_time")
+
+
+def check_missing_timezone_database() -> None:
+    """A Python without tz data (Windows without tzdata) still rejects, with an install hint."""
+    def no_database(name: str):
+        raise ZoneInfoNotFoundError(f"No time zone found with key {name}")
+
+    with mock.patch("social_validation.ZoneInfo", side_effect=no_database),             mock.patch("social_validation.available_timezones", return_value=set()):
+        errors = post_errors(analyzed_post())
+    if not any("no IANA timezone database" in error and "pip install tzdata" in error
+               for error in errors):
+        raise AssertionError(f"expected a missing tz database rejection, received {errors}")
+    if any("is not a recognized IANA timezone" in error for error in errors):
+        raise AssertionError(f"missing tz database was reported as a bad name: {errors}")
 
 
 def check_platform_publications() -> None:
@@ -435,6 +455,7 @@ def check_account_latest_surface_index() -> None:
 
 def main() -> int:
     check_post_schema_and_timezone()
+    check_missing_timezone_database()
     check_platform_publications()
     check_validated_experiment_gate()
     check_every_ledger_has_a_schema_gate()

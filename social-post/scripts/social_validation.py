@@ -6,7 +6,7 @@ from __future__ import annotations
 import copy
 from datetime import datetime
 from typing import Any
-from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError, available_timezones
 
 from social_post_analysis import CONFIDENCE_VALUES, HEX_256, validate_post_analysis
 from social_primitives import PLATFORM_VALUES, parse_time
@@ -59,7 +59,14 @@ def _localize_with_named_timezone(
     try:
         zone = ZoneInfo(timezone_name)
     except (ZoneInfoNotFoundError, ValueError):
-        errors.append(f"{label}.timezone is not a recognized IANA timezone: {timezone_name!r}")
+        if not available_timezones():
+            # Windows has no system IANA database; zoneinfo then needs the tzdata package.
+            errors.append(
+                f"{label}.timezone {timezone_name!r} cannot be checked: this Python has no IANA "
+                f"timezone database (run: python -m pip install tzdata)"
+            )
+        else:
+            errors.append(f"{label}.timezone is not a recognized IANA timezone: {timezone_name!r}")
         return None
     local = parsed.astimezone(zone)
     if parsed.utcoffset() != local.utcoffset():
