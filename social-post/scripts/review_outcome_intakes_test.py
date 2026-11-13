@@ -4,16 +4,18 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
-import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from copy import deepcopy
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
-from review_outcome_intakes import review
+from review_outcome_intakes import main, review
 from social_data import feature_matrix
 from social_post_analysis import caption_counts
 from social_store import write_jsonl
@@ -153,11 +155,12 @@ class ReviewIntakesTest(unittest.TestCase):
 
     def test_cli_json_and_legacy_fractional_clock(self):
         self.seed(base())
-        command = [sys.executable, "-X", "utf8", "-B",
-                   str(Path(__file__).with_name("review_outcome_intakes.py")), "--root", str(self.root),
-                   "--since", "2025-02-03", "--format", "json"]
-        result = subprocess.run(command, check=True, capture_output=True, encoding="utf-8", timeout=10)
-        row, = json.loads(result.stdout)["post_observations"]
+        arguments = ["review_outcome_intakes.py", "--root", str(self.root),
+                     "--since", "2025-02-03", "--format", "json"]
+        output = io.StringIO()
+        with patch.object(sys, "argv", arguments), redirect_stdout(output):
+            self.assertEqual(main(), 0)
+        row, = json.loads(output.getvalue())["post_observations"]
         self.assertEqual(row["recorded_at"], "2025-02-03T18:00:00.1234567+00:00")
         self.assertEqual(row["missing"], ["capture_datetime", "complete_caption_analysis"])
 
