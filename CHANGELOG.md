@@ -16,6 +16,8 @@
 
 ### Added
 
+- P3 read-only outcome intake review (`review_outcome_intakes.py`). Link caption supplements to exact source snapshots, surface missing capture times, separate account metrics from individual posts and show cross-platform references without treating them as platform-native results. The report never writes the store or feeds the performance matrix.
+
 - Local Content Workbench 0.2.0: ten platform/media learning channels, scoped candidate diffs, separate author approval and activation, and selected-formula checks in the editor. No host-model execution or live social account permission is enabled.
 - Frozen, private author contracts covering installed voice, F formulas and rule sources, with immutable parent versions, drift/stale-revision rejection and complete effective-context handoff. Structural checks remain separate from mandatory host semantic/factual review.
 - Separate external-reference learning events and non-destructive legacy migration. Unknown/conflicting media and combined-platform observations cannot become pooled own-performance advice.

@@ -12,6 +12,8 @@
 
 本次發布版本：**v2.5.1**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
 
+未發布更新：P3 新增[成效待補件盤點](social-post/references/outcome-workflow.md#review-pending-evidence)。唯讀檢查既有收件、合併同篇的全文補件並提示缺件；帳號總覽和單篇、跨平台參考和原生指標分開。缺截圖時間的資料不進正式比較。
+
 Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime revision／雜湊、架構自校準與單次送出／異常恢復的回歸測試。另已完成一次 IG 真實單次送出、原生子回覆查證與唯讀 recovery 對帳，以及一次 Chrome 斷線後的來源連線恢復與原目標讀取；這些證據不代表三平台 live Meta 回覆已解鎖。
 
 > `main` 已分開讀取與送出開關：FB／IG／Threads 指定原生留言的 target-only 回填各有實證；整篇掃描未開放，`live_browser_actuation_enabled` 仍預設為 `false`。真實送出／結果回讀未完成三平台 canary，不能宣稱全面自動回覆已完成。

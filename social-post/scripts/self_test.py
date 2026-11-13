@@ -483,9 +483,19 @@ def main() -> int:
     run_feature_matrix_tests()
     run_schema_time_tests()
     run_governance_tests()
+    run_intake_review_tests()
     run_comment_self_tests()
     print("self-test passed")
     return 0
+
+
+def run_intake_review_tests() -> None:
+    import unittest
+    import review_outcome_intakes_test
+
+    suite = unittest.defaultTestLoader.loadTestsFromModule(review_outcome_intakes_test)
+    if not unittest.TextTestRunner().run(suite).wasSuccessful():
+        raise AssertionError("outcome intake review tests failed")
 
 
 if __name__ == "__main__":
