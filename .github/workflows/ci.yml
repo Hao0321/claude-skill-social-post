@@ -53,3 +53,39 @@ jobs:
         run: python -B social-post/scripts/workbench_test.py
       - name: Workbench JavaScript architecture
         run: node social-post/scripts/workbench_architecture_test.mjs
+
+  windows-self-test:
+    name: Windows self-test (Python 3.13)
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+      - name: Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: Requirements (tzdata on Windows)
+        run: python -m pip install -r requirements.txt
+      # The runner's default TEMP is an 8.3 short path (RUNNER~1), which the
+      # linked-root guards correctly treat as a link; use the physical temp root.
+      - name: Outcome validation
+        env:
+          TEMP: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+        run: python social-post/scripts/social_data.py validate
+      - name: Offline data and comment regression
+        env:
+          TEMP: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+        run: python social-post/scripts/self_test.py

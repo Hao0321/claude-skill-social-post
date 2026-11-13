@@ -34,6 +34,7 @@ Social Post 開放所有人提交貢獻，Hao 保留唯一的最高管理權與�
 git clone https://github.com/Hao0321/claude-skill-social-post.git
 cd claude-skill-social-post
 git switch -c feat/your-improvement
+python -m pip install -r requirements.txt  # Windows 會裝 tzdata，其他平台不裝任何東西
 python tools/check_public_contribution.py
 python -m unittest discover -s tools -p "test_*.py"
 python social-post/scripts/social_data.py validate
