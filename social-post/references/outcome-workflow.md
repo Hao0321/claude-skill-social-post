@@ -4,6 +4,7 @@
 
 - 資料來源層級
 - Log Outcome
+- Review pending evidence
 - Post analysis contract
 - Optimize Patterns
 - Schema 原則
@@ -38,6 +39,21 @@ X 快照只記平台實際提供的 impressions／views、互動類別、點擊�
 6. 平台縮寫值、`<0.1%`、圖上目測值分別以 `metric_qualifiers` 標成 `rounded`、`upper_bound`、`visual_estimate`；未標者才視為 exact。`metrics` 內的值用直接欄位名；位於 benchmark、audience 或其他巢狀物件的值用相對於 snapshot 根節點的 dotted path。
 7. 發現發布時間、片長或舊快照精度錯誤時，bundle 追加 `correction`；不得直接重寫既有 JSONL event。Correction 不可改任何 identity field。
 8. 先 dry-run bundle，再以 `--write` 寫入；最後跑 validate。
+
+## Review pending evidence
+
+同批補件或整合最近幾天資料時，先跑唯讀盤點：
+
+```powershell
+python -B scripts/review_outcome_intakes.py --since 2025-02-01 --format json
+```
+
+`--since` 是本機收件事件的日期（含當日；若有全文補件，採最近補件日期），不是發文或截圖日期。沒有本機 intake 檔時回傳空清單，不建立檔案。報告只供本機看缺件，不是正式成效矩陣或公開輸出。
+
+- `data/outcome_intakes.jsonl` 可保存作者的 `owner_post_outcome_intake`（`post_candidate`、`snapshot_observation`）及 `owner_account_outcome_intake`（`account_snapshot_candidate`）。每筆有唯一 `intake_id`、`recorded_at`、`owner_scope: own`、`platform`。保留原始證據，不用收件時間代替觀測時間。
+- `author_full_caption_confirmation` 以 `parent_intake_id`、`snapshot_source_intake_id`、`post_id`、`snapshot_id` 綁定原筆，提供完整分析的 `post_candidate`；全文須與原截斷開頭一致。補件不另計樣本；同篇多組真正不同快照也不多算貼文。舊紀錄留作歷史。
+- Facebook 等單平台原值、未明示平台的總覽、另一平台參考，以及帳號期間總覽分開。缺值不補 0，縮寫不補精度，不把一般點擊算成外連點擊。
+- 缺截圖時間就留在待補件，不猜測、不計入正式比較。補齊後，用原身分與來源建立正式 bundle，走原生 dry-run → 明確寫入 → validate／coverage。盤點只用精確 ID 確認是否已登錄，不驗證流量歸因或執行升級。
 
 ## Post analysis contract
 
