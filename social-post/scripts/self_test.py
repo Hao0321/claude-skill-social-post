@@ -337,8 +337,10 @@ def run_intake_review_tests() -> None:
     import review_outcome_intakes_test
     import social_intake_analysis_test
     import social_outcome_time_policy_test
+    import social_ask_gate_test
 
     suite = unittest.defaultTestLoader.loadTestsFromModule(review_outcome_intakes_test)
+    suite.addTests(unittest.defaultTestLoader.loadTestsFromModule(social_ask_gate_test))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromModule(social_intake_analysis_test))
     suite.addTests(unittest.defaultTestLoader.loadTestsFromModule(social_outcome_time_policy_test))
     if not unittest.TextTestRunner().run(suite).wasSuccessful():

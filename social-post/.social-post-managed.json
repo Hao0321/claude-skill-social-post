@@ -161,6 +161,8 @@
     "scripts/review_outcome_intakes.py",
     "scripts/review_outcome_intakes_test.py",
     "scripts/self_test.py",
+    "scripts/social_ask_gate.py",
+    "scripts/social_ask_gate_test.py",
     "scripts/social_cohorts.py",
     "scripts/social_data.py",
     "scripts/social_data_feature_matrix_test.py",

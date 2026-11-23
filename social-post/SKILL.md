@@ -17,6 +17,16 @@ P5 執行前核對 `references/chrome-comment-adapter.md` 的當前狀態。CUA 
 
 同一貼文每次回填都追加獨立 observation：按提供順序保留第1筆、第2筆，最新有效紀錄作目前數據，不覆蓋原值。`social_data.py history --post <post_id>` 可查看歷史與數量差額；作者給的「發文當天／隔天」標籤可記 `observation_label`，不必追問截圖幾點。不由輸入順序或發布時間捏造每小時速度、精確24小時成績。P5 的安全 freshness／permit 期限是另一用途，不受本政策刪除。
 
+## 補件前先查，不准讓作者重給（永久規則，所有 agent 都要遵守）
+
+本規則約束任何執行本 Skill 的 agent（Claude、Codex、ChatGPT 或其他），優先於舊案例、交接筆記或 agent 自己的記憶。作者給過的資料就算 agent 沒記錄到，也是 agent 的錯，不是作者要重給的理由。
+
+1. 向作者要任何貼文資料前，必須先跑 `python -B scripts/social_ask_gate.py --post <post_id> <要問的欄位…>`。結果是 `BLOCK` 就不准問：`BLOCK_RETIRED`＝截圖／擷取時間這類永不索取的東西；`BLOCK_ALREADY_RECORDED`＝紀錄裡已經有，直接用 gate 回傳的值。
+2. 結果是 `ASK_AFTER_EVIDENCE_CHECK` 時，先逐一打開 `evidence_to_check_first` 列出的證據檔，並搜尋 `data/*.jsonl`（post_id、日期、文案片段）。證據裡看得到就自己轉錄；之前轉錄錯了就用 `log_outcome.py` correction bundle 修正，不問作者。
+3. 真的查不到才問。問的時候一次問完：寫明查過哪些檔、缺的是哪個欄位；不准籠統叫作者「再給一次」「補截圖」。
+4. 公開貼文缺續文／留言串時，請作者自行登入後由 agent 從個人頁讀取，不叫作者重貼內容。
+5. 作者說「我已經給過了」時，先重跑 gate 並重查證據，查到就道歉並直接用，不爭辯、不再問。
+
 ## Session 啟動
 
 P0–P4 先讀 [references/writing-governance.md](references/writing-governance.md)，核對 `scripts/social_governance.py status --compact`（需要參考全文才去掉 compact）。既有 voice、F 公式、規則正文以私人版本契約鎖定；禁止 P1／P4 或新爆款案例直接覆寫。新分析只能建立同平台／媒體 scope 的候選，經使用者審核精確 diff／digest，另行啟用後才變成正式有效版本。當輪要求改一篇草稿不是永久規則更新授權。
@@ -33,7 +43,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋目標 formula；X 題材另讀 `references/x.md` 的演算法邊界 |
 | 重新學語氣 | P1 Learn Voice | `references/learn_style.md`＋`style_profile.md` |
 | 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；X 草稿先讀 `references/x.md` 的策略段，實際發布前再核對平台 UI |
-| 把數據訓練進來、記錄成效、查待補件 | P3 Log Outcome | `references/outcome-workflow.md`；以 `scripts/review_outcome_intakes.py` 盤點既有待補件 |
+| 把數據訓練進來、記錄成效、查待補件 | P3 Log Outcome | `references/outcome-workflow.md`；以 `scripts/review_outcome_intakes.py` 盤點既有待補件；向作者要任何資料前先過 `scripts/social_ask_gate.py` |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules；X 演算法解釋另讀 `references/x.md` |
 | 掃描、草擬、回覆 FB／IG／Threads 留言 | P5 Comment Ops | `references/comment-operations.md`＋實際操作時的 `references/chrome-comment-adapter.md`＋`scripts/comment_chrome_actuator.mjs`＋`references/comment-policy.json`＋目標平台 ref＋`voice_quick.md` |
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |

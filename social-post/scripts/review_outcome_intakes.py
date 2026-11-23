@@ -287,6 +287,8 @@ def render(report):
         missing = ", ".join(row["missing"]) or "none listed (native validation still required)"
         lines.append(f"{kind} {row['intake_id']} [{row['platform']}; {status}] missing: {missing}")
     lines.append("Not a performance comparison. Use --format json for scoped observations.")
+    lines.append("Before asking the author for anything: scripts/social_ask_gate.py --post <post_id> <item>; "
+                 "BLOCK means do not ask. Screenshot time is never asked.")
     return "\n".join(lines)
 
 
