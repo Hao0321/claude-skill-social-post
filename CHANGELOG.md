@@ -1,3 +1,19 @@
+## v2.6.1 — 2026-11-24
+
+- New `social_ask_gate.py`: every agent running the Skill (Claude, Codex,
+  ChatGPT or any other) must pass it before asking the author for post data.
+  It blocks any screenshot or capture-time request in English or Chinese, and
+  blocks any field the records already hold, returning the corrected value
+  instead (canonical corrections win over raw intake candidates). Only a field
+  that is truly absent may be asked for, after reading the listed evidence
+  files, and the request must name the files checked and the field missing.
+- SKILL.md gains a binding "check before asking" rule: transcription errors are
+  fixed with a correction bundle, a missing public continuation is read from
+  the author's profile after the author signs in, and "I already gave it"
+  triggers a re-search instead of another request.
+- The intake review output and the outcome workflow point to the gate; five
+  regression tests run inside `self_test.py`.
+
 ## v2.6.0 — 2026-11-24
 
 - Outcome analysis (P0–P4) uses publication time only: date, weekday, timezone

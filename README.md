@@ -10,7 +10,7 @@
 
 討論想法可到 [Discussions](https://github.com/Hao0321/claude-skill-social-post/discussions)，可重現問題與正式提案使用 [Issues](https://github.com/Hao0321/claude-skill-social-post/issues/new/choose)。
 
-本次發布版本：**v2.6.0**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
+本次發布版本：**v2.6.1**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
 
 Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime revision／雜湊、架構自校準與單次送出／異常恢復的回歸測試。另已完成一次 IG 真實單次送出、原生子回覆查證與唯讀 recovery 對帳，以及一次 Chrome 斷線後的來源連線恢復與原目標讀取；這些證據不代表三平台 live Meta 回覆已解鎖。
 
@@ -19,6 +19,12 @@ Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime 
 本候選版仍未完成三平台真實自動回覆驗收。過長契約與平台程式已按責任拆分，完整測試通過；但離線測試不能代替 FB／Threads 的登入操作、完整回覆串與父層驗證。v2.5.1 發布不升級尚未驗收的 production capability。
 
 Cleanup 保留固定的程式長度警告與未測項，不以調高門檻消除問題。跨語言圖與私版 `no-origin` 更新來源仍未由 Cleanup 驗證；另有產品原生 JavaScript 架構圖，但不能把不同量尺或未測項當成同一份通過證明。
+
+## v2.6.1 交付範圍
+
+- 新增 `social_ask_gate.py`：任何執行本 Skill 的 AI（Claude、Codex、ChatGPT 或其他）向作者要貼文資料前都必須先過這道檢查。截圖／擷取時間不論中英文寫法一律擋下；紀錄裡已經有的欄位也擋下，並直接回傳更正後的值。只有真的查不到的欄位才准問，而且要先看完列出的證據檔，問的時候寫明查過哪些檔、缺哪個欄位。
+- SKILL.md 新增「補件前先查，不准讓作者重給」永久規則：抄錯用 correction bundle 自己修；公開貼文缺續文時請作者自行登入、由 AI 讀個人頁；作者說「已經給過了」就重查，不再追問。
+- 待補件盤點的輸出與成效流程文件都指向這道檢查；5 個回歸測試納入 `self_test.py`。
 
 ## v2.6.0 交付範圍
 

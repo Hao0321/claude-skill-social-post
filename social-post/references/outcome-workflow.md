@@ -26,6 +26,8 @@ P0–P4永久採publication-only-v1；機器唯一來源為 `scripts/social_outc
 
 ## 補件與部分內容分析
 
+向作者要任何資料前一律先跑social_ask_gate.py（SKILL.md「補件前先查」永久規則）：BLOCK_RETIRED（截圖／擷取時間）與BLOCK_ALREADY_RECORDED（紀錄已有）不准問；ASK_AFTER_EVIDENCE_CHECK也要先看完列出的證據檔、搜過data/*.jsonl，查不到才問，並寫明查過哪些檔與缺哪個欄位。轉錄錯誤用correction bundle自己修，不叫作者重給。
+
 review_outcome_intakes.py唯讀盤點，--since只查收件事件日期，不是學習變數。支援owner_post_outcome_intake、owner_post_outcome_intake_pending_publication_time與owner_account_outcome_intake。無本機資料回空清單，不建假樣本。
 
 全文／發布補件分別為author_full_caption_confirmation、author_publication_time_confirmation，以parent intake、snapshot source、post、snapshot ID精確回綁，不多算樣本。發布補件不能改文案／已知時間／snapshot；近似分鐘保留precision。缺截圖時間不再列missing。原生numeric metrics、未知值名單、完整platform_analytics及Meta／IG reference分開；不可丟掉replies、reposts、quotes、profile_views或未來子樹。
@@ -58,6 +60,7 @@ P0／P2預設取2篇compact comparables，按發布時間選最近案例而非�
 
 ```powershell
 python -B scripts/review_outcome_intakes.py --include-analysis --format json
+python -B scripts/social_ask_gate.py --post <permanent-post-id> <field> [<field> ...]
 python -B scripts/social_data.py validate
 python -B scripts/social_data.py coverage
 python -B scripts/social_data.py matrix --platform <platform>
