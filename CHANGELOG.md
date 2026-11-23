@@ -1,3 +1,25 @@
+## v2.6.0 — 2026-11-24
+
+- Outcome analysis (P0–P4) uses publication time only: date, weekday, timezone
+  and minute. A screenshot or status-bar clock is never requested, parsed,
+  ranked or used as a learning feature; legacy capture metadata is ignored on
+  read and dropped on write. Raw archives and real metrics are preserved.
+- Read-only outcome intake review reconciles pending Threads observations and
+  publication-time supplements to their original posts without counting a
+  sample twice or inventing a capture time.
+- Unknown and future platform metrics (replies, reposts, quotes, profile views
+  and others) are preserved instead of dropped by a closed field list;
+  cross-platform totals stay separate.
+- New `social_intake_analysis.py`: hash-bound caption and image analysis into
+  the append-only learning ledger, with dry run, exact-replay deduplication and
+  source-drift rejection. Analyses stay hypotheses until the author reviews them.
+- `social_governance.py status --compact` prints a short metadata summary.
+- Evaluation separates Threads metrics and removes fixed multipliers and
+  "guaranteed second push" claims that could not be verified.
+- Time parsing no longer depends on the large validation module; the public
+  sync and privacy tests moved into their own test module.
+- Private writing, voice and outcome data stay outside the public package.
+
 ## v2.5.1 — 2026-10-16
 
 - Read outcome aggregation, coverage and workbench summaries from one coherent

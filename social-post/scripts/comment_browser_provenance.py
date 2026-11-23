@@ -16,7 +16,7 @@ import secrets
 from typing import Any
 
 from comment_browser_common import _json_digest
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 PROVENANCE_VERSION = 1

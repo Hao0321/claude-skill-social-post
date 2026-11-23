@@ -3,8 +3,8 @@
 ## Draft context（先少後多）
 
 1. 讀 `voice_quick.md` 與 `current_brief.md`。
-2. 必須先跑 `python -B scripts/social_data.py comparables --platform <platform> --content-type <content_type> --surface <surface> --maturity <maturity> --limit 2 --format json`，並在選 hook、版型、長度、關鍵字、語氣、標點與 CTA 時實際使用它帶出的原文與 feature fields。預設只取 2 篇，避免把整庫塞進 context；若結果為空，明示沒有同 cohort 樣本，不臆造成功規則。
-   - 平台、maturity、content type、surface 四個 filter 必須都有值；否則 `outcome_comparison_allowed:false`，不可用成效做選擇。
+2. 必須先跑 `python -B scripts/social_data.py comparables --platform <platform> --content-type <content_type> --surface <surface> --limit 2 --format json`，並在選 hook、版型、長度、關鍵字、語氣、標點與 CTA 時實際使用它帶出的原文與 feature fields。預設只取 2 篇，避免把整庫塞進 context；若結果為空，明示沒有同 cohort 樣本，不臆造成功規則。
+   - 平台、content type、surface 三個 filter 必須都有值；否則 `outcome_comparison_allowed:false`，不可用成效做選擇。
    - 回傳順序只代表最近發布，`performance_ranked:false`；不把第一篇叫冠軍，也不推導通用爆款分數。
 3. comparables 的日期、星期、精確分鐘只供提出待驗證候選，不得當生成分數、因果權重或固定黃金時段；同分鐘有高低反例時更不得以時間排名文案。
 4. 從 `data/rule_registry.json` 找任務相關規則，只開必要的 `rules/RNN.md`。
@@ -21,8 +21,8 @@
 
 ## 發文前三檢查
 
-- 用 structured latest snapshot 判斷前篇 maturity、是否仍成長、最近三篇陌生分發與題材／意圖冷卻；不要從 `content_plan.md` 讀舊績效。
-- 確認草稿決策來自同平台／同 maturity／同 content type／同 surface 的 comparables；跨 cohort 只能列差異，不可排成勝負榜。
+- 用最後有效回填紀錄判斷最近三篇陌生分發與題材／意圖冷卻；同篇多次回填可看數量差額，不以截圖時刻推算成熟度；不要從 `content_plan.md` 讀舊績效。
+- 確認草稿決策來自同平台／同 content type／同 surface 的 comparables；跨 cohort 只能列差異，不可排成勝負榜。
 - 題材、素材、平台與「一稿同步」若已由使用者說明，直接採用，不重問。
 - 個人帳號／頻道的內容禁區只讀 `current_brief.md`；通用平台文件不可硬編使用者的私人政策。
 - 只有使用者要求實際操作發布才啟用瀏覽器；寫草稿不需要。

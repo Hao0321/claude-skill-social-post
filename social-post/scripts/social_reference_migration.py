@@ -43,8 +43,6 @@ def migrate_external(root: Path) -> dict:
                     "caption_provenance": captions.get("source"),
                     "published_at": publication.get(platform + "_published_at"),
                     "timezone": publication.get("timezone"),
-                    "captured_at": publication.get("captured_at") if kind == "screenshot" else live.get("observed_at"),
-                    "capture_meaning": "unknown screenshot time" if kind == "screenshot" else live.get("observation_time_meaning"),
                     "metrics": metrics, "metric_qualifiers": observed.get("metric_qualifiers", {}) if kind == "screenshot" else {},
                     "observation": copy.deepcopy(observation),
                     "shared_context": {key: copy.deepcopy(source[key]) for key in

@@ -11,13 +11,9 @@
     "content_type": "text"
   },
   "snapshot": {
-    "snapshot_id": "fictional-workbench-example-24h",
+    "snapshot_id": "fictional-workbench-example-observation-1",
     "post_id": "fictional-workbench-example",
     "platform": "facebook",
-    "captured_at": "2026-09-02T12:00:00+08:00",
-    "captured_at_confidence": "high",
-    "hours_since_publish": 24,
-    "maturity": "developing",
     "metrics": {"views": 1200, "likes": 60, "comments": 8, "shares": 5, "saves": 12},
     "notes": ["Fictional data for schema demonstration only; not an observed outcome."]
   }

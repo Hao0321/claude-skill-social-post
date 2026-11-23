@@ -12,9 +12,6 @@ from social_post_analysis import CONFIDENCE_VALUES, HEX_256, validate_post_analy
 from social_primitives import PLATFORM_VALUES, parse_time
 
 
-MATURITY_VALUES = {
-    "early", "early_not_plateau", "developing", "near_48h_not_final", "mature", "plateau",
-}
 EVIDENCE_VALUES = {"hypothesis", "emerging", "validated", "deprecated"}
 POST_SCHEMA_VERSIONS = frozenset({"1.0"})
 SNAPSHOT_SCHEMA_VERSIONS = frozenset({"1.0"})
@@ -411,9 +408,9 @@ def _validate_snapshot(
     snapshot_ids: set[str],
     errors: list[str],
     warnings: list[str],
-) -> tuple[str, datetime] | None:
+) -> str | None:
     validate_schema_version(snapshot, label, SNAPSHOT_SCHEMA_VERSIONS, errors)
-    for key in ("snapshot_id", "post_id", "captured_at", "metrics"):
+    for key in ("snapshot_id", "post_id", "metrics"):
         if key not in snapshot:
             errors.append(f"{label} missing {key}")
     snapshot_id = snapshot.get("snapshot_id")
@@ -427,23 +424,6 @@ def _validate_snapshot(
     if not isinstance(post_id, str) or not post_id.strip() or post_id not in posts_by_id:
         errors.append(f"{label} references unknown post_id {post_id}")
         return None
-    try:
-        captured = parse_time(snapshot.get("captured_at", ""))
-        published = parse_time(posts_by_id[post_id]["published_at"])
-    except ValueError:
-        errors.append(f"{label} invalid captured_at (ISO 8601 with offset required)")
-        return None
-    if captured < published:
-        errors.append(f"{label} captured_at is before published_at")
-    hours = snapshot.get("hours_since_publish")
-    if hours is not None and (not isinstance(hours, (int, float)) or isinstance(hours, bool) or hours < 0):
-        errors.append(f"{label} hours_since_publish must be non-negative")
-    elif hours is not None and abs(float(hours) - (captured - published).total_seconds() / 3600) > 1:
-        warnings.append(f"{label} hours_since_publish differs from timestamps by more than 1 hour")
-    if snapshot.get("maturity") is not None and snapshot.get("maturity") not in MATURITY_VALUES:
-        errors.append(f"{label} invalid maturity {snapshot.get('maturity')}")
-    if snapshot.get("captured_at_confidence") not in (None, *CONFIDENCE_VALUES):
-        errors.append(f"{label} invalid captured_at_confidence {snapshot.get('captured_at_confidence')}")
     _validate_snapshot_evidence(snapshot, label, errors)
     scope = snapshot.get("platform_scope") or "combined"
     if scope != "combined" and scope not in posts_by_id[post_id].get("platforms", []):
@@ -451,7 +431,7 @@ def _validate_snapshot(
     metrics = snapshot.get("metrics")
     if not isinstance(metrics, dict):
         errors.append(f"{label} metrics must be an object")
-        return post_id, captured
+        return post_id
     non_negative_numbers(metrics, f"{label}.metrics", errors)
     validate_metric_qualifiers(snapshot, label, errors)
     validate_percent_mapping(snapshot.get("rates_reported", {}), f"{label}.rates_reported", errors)
@@ -460,7 +440,7 @@ def _validate_snapshot(
     if sources and sum(sources) > 101:
         warnings.append(f"{label} traffic source percentages sum above 101%")
     _validate_audience(snapshot, label, errors, warnings)
-    return post_id, captured
+    return post_id
 
 
 def validate_snapshots(
@@ -478,14 +458,11 @@ def validate_snapshots(
         )
         if identity is None:
             continue
-        post_id, captured = identity
-        previous = latest_by_post.get(post_id)
-        if previous is None or parse_time(previous["captured_at"]) < captured:
-            latest_by_post[post_id] = snapshot
+        post_id = identity
+        # Archive append order is a record ordering, never a screenshot clock.
+        latest_by_post[post_id] = snapshot
         key = (post_id, snapshot.get("platform_scope") or "combined")
-        previous_platform = latest_by_platform.get(key)
-        if previous_platform is None or parse_time(previous_platform["captured_at"]) < captured:
-            latest_by_platform[key] = snapshot
+        latest_by_platform[key] = snapshot
     return latest_by_post, latest_by_platform
 
 
@@ -495,13 +472,12 @@ def validate_account_snapshots(
     """Validate rolling account-level insights without pretending they belong to a post."""
     seen: set[str] = set()
     latest: dict[tuple[str, int, str | None], dict[str, Any]] = {}
-    latest_order: dict[tuple[str, int, str | None], tuple[datetime, str]] = {}
     for index, snapshot in enumerate(snapshots, start=1):
         label = f"account_snapshots.jsonl:{index}"
         validate_schema_version(
             snapshot, label, ACCOUNT_SNAPSHOT_SCHEMA_VERSIONS, errors,
         )
-        for key in ("account_snapshot_id", "platform", "captured_at", "window_days", "metrics"):
+        for key in ("account_snapshot_id", "platform", "window_days", "metrics"):
             if key not in snapshot:
                 errors.append(f"{label} missing {key}")
         snapshot_id = snapshot.get("account_snapshot_id")
@@ -514,16 +490,9 @@ def validate_account_snapshots(
         platform = snapshot.get("platform")
         if platform not in PLATFORM_VALUES:
             errors.append(f"{label} platform must be one of {sorted(PLATFORM_VALUES)}")
-        try:
-            captured = parse_time(snapshot.get("captured_at", ""))
-        except ValueError:
-            errors.append(f"{label} invalid captured_at (ISO 8601 with offset required)")
-            captured = None
         window_days = snapshot.get("window_days")
         if not isinstance(window_days, int) or isinstance(window_days, bool) or window_days < 1:
             errors.append(f"{label} window_days must be a positive integer")
-        if snapshot.get("captured_at_confidence") not in (None, *CONFIDENCE_VALUES):
-            errors.append(f"{label} invalid captured_at_confidence {snapshot.get('captured_at_confidence')}")
         measurement_surface = snapshot.get("measurement_surface")
         if measurement_surface is not None and (
             not isinstance(measurement_surface, str) or not measurement_surface.strip()
@@ -538,7 +507,6 @@ def validate_account_snapshots(
             validate_metric_qualifiers(snapshot, label, errors)
         if (
             platform in PLATFORM_VALUES
-            and captured is not None
             and isinstance(window_days, int)
             and not isinstance(window_days, bool)
             and window_days >= 1
@@ -546,10 +514,7 @@ def validate_account_snapshots(
         ):
             surface = measurement_surface.strip() if isinstance(measurement_surface, str) else None
             key = (platform, window_days, surface)
-            order = (captured, str(snapshot_id or ""))
-            if key not in latest_order or latest_order[key] < order:
-                latest[key] = snapshot
-                latest_order[key] = order
+            latest[key] = snapshot
     return latest
 
 

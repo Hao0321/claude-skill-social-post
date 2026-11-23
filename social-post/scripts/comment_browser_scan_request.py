@@ -15,7 +15,7 @@ from comment_domain import stable_id
 from comment_scan_provenance import (
     build_scan_capability_binding, normalize_scan_capability_metadata,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 SCAN_COMPLETION_EVENT_TYPE = "browser_scan_completed"

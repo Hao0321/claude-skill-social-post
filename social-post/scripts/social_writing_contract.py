@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from social_governance_store import digest, governance_lock, private_path, read_document, write_document
+from social_outcome_time_policy import time_policy
 
 POINTER = "data/author_contract.json"
 POLICY = "data/writing_policy.json"
@@ -181,6 +182,7 @@ def writing_context(root: Path, formula: str, writing_format: str,
             "reviewed_overrides": {path: source["text"] for path, source in sources.items()
                                    if source.get("reviewed_override")},
             "semantic_review_required": True,
+            "outcome_time_policy": time_policy(),
             "strategy_numbers_are_unverified_unless_backed_by_current_evidence": True}
 
 

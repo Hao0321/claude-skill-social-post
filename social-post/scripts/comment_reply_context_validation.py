@@ -9,7 +9,7 @@ from comment_scan_provenance import (
     validate_draft_provenance_binding,
     validate_send_provenance_binding,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 def _comment_at(

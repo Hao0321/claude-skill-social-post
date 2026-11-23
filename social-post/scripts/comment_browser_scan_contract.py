@@ -23,7 +23,7 @@ from comment_scan_provenance import (
     build_target_observation_provenance,
     validate_scan_provenance,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 from comment_browser_scan_request import (

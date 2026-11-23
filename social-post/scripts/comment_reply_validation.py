@@ -24,7 +24,7 @@ from comment_scan_provenance import (
     DRAFT_PROVENANCE_DIGEST_FIELD,
     SCAN_PROVENANCE_DIGEST_FIELD,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 RISK_LEVELS = {"low", "medium", "high"}

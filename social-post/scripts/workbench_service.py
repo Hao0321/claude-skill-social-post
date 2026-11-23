@@ -18,7 +18,7 @@ from social_store import commit_records
 from social_cohorts import MEDIA_FAMILIES, channel_inventory
 from social_learning import activate, learning_overview, propose, review, valid_scope
 from social_writing_contract import check_draft, contract_status, writing_context
-from social_validation import MATURITY_VALUES
+from social_outcome_time_policy import time_policy
 from workbench_contract import FORMATS, MODES, PLATFORMS, VERSION, build_handoff, parse_json, text_field
 from workbench_formulas import formula_catalog
 from workbench_store import check_data_paths, get_draft, list_drafts, safe_path, save_draft
@@ -38,7 +38,7 @@ class WorkbenchService:
                 "formulas": formula_catalog(self.root),
                 "media_families": [{"value": "text_image", "label": "圖文／純文字"},
                                    {"value": "video", "label": "影片／Reels／Shorts"}],
-                "platforms": PLATFORMS, "maturities": sorted(MATURITY_VALUES),
+                "platforms": PLATFORMS, "time_policy": time_policy(),
                 "execution": "local_tools_and_ai_handoff",
                 "live_publish": False, "live_comment_send": False}
 
@@ -81,11 +81,11 @@ class WorkbenchService:
         }
 
     def compare(self, payload: Any) -> dict[str, Any]:
-        required = {"platform", "content_type", "surface", "maturity"}
+        required = {"platform", "content_type", "surface"}
         if not isinstance(payload, dict) or set(payload) not in (required, required | {"media_family"}):
             raise ValueError("exact cohort fields are required")
         query = {key: text_field(payload, key, 120) for key in payload}
-        if query["platform"] not in PLATFORMS or query["maturity"] not in MATURITY_VALUES:
+        if query["platform"] not in PLATFORMS:
             raise ValueError("unknown comparison scope")
         if not query["content_type"] or not query["surface"]:
             raise ValueError("content type and surface are required")

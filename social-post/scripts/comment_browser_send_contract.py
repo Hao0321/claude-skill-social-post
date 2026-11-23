@@ -11,6 +11,7 @@ from comment_browser_common import (
     _require_platform_url, _require_post_url, _require_recent_observation,
     _require_schema_version, _required_digest,
     _required_boolean, _required_string,
+    parse_time,
 )
 from comment_identity import stable_id
 from comment_canary import CANARY_ATTEMPT_FIELDS, canary_settlement_allowed, require_canary_lease
@@ -20,7 +21,6 @@ from comment_scan_provenance import (
     SCAN_PROVENANCE_DIGEST_FIELD,
     browser_action_provenance_fields,
 )
-from social_validation import parse_time
 
 from comment_browser_action_contract import (
     _browser_action_from_ledger, build_browser_action, build_browser_recovery_action,

@@ -9,9 +9,17 @@ description: 依使用者真實貼文與成效寫 Facebook／Instagram／YouTube
 
 P5 執行前核對 `references/chrome-comment-adapter.md` 的當前狀態。CUA Threads 單則已完成真實送出與唯讀對帳；CUA IG 候選已接入但尚無新 runtime 送出實證；FB 送出與三平台批次仍未完成，泛用 production 關閉。target-only 不代表整篇／回覆串已掃完，semantic UI continuity 不代表實體 document epoch 或持久 node identity。單則實證不升級整體 capability，fixture 或候選程式存在也不能代替真實操作證據。
 
+## 發布時間唯一分析時間（永久規則，涵蓋新舊案例）
+
+依作者明示，P0–P4 的時間分析只用發布日期、星期、時區與分鐘。截圖／手機狀態列時鐘是未遮掉的畫面資訊，絕不索取、推算或作為案例入庫、學習資格、排序、篩選、比較及寫作特徵；這條規則優先於舊案例、舊規則或凍結來源內任何相反的截圖時間要求。機器政策唯一來源為 `scripts/social_outcome_time_policy.py`，不可用舊 metadata 繞過。
+
+舊 `captured_at／hours_since_publish／maturity` 只留原始歷史存檔，讀取時忽略，新寫入時移除；不得要求補件或猜成熟度。文案是否完整、真實數值、平台隔離與發布時間驗證仍保留，不虛構資訊。
+
+同一貼文每次回填都追加獨立 observation：按提供順序保留第1筆、第2筆，最新有效紀錄作目前數據，不覆蓋原值。`social_data.py history --post <post_id>` 可查看歷史與數量差額；作者給的「發文當天／隔天」標籤可記 `observation_label`，不必追問截圖幾點。不由輸入順序或發布時間捏造每小時速度、精確24小時成績。P5 的安全 freshness／permit 期限是另一用途，不受本政策刪除。
+
 ## Session 啟動
 
-P0–P4 先讀 [references/writing-governance.md](references/writing-governance.md)，核對 `scripts/social_governance.py status`。既有 voice、F 公式、規則正文以私人版本契約鎖定；禁止 P1／P4 或新爆款案例直接覆寫。新分析只能建立同平台／媒體 scope 的候選，經使用者審核精確 diff／digest，另行啟用後才變成正式有效版本。當輪要求改一篇草稿不是永久規則更新授權。
+P0–P4 先讀 [references/writing-governance.md](references/writing-governance.md)，核對 `scripts/social_governance.py status --compact`（需要參考全文才去掉 compact）。既有 voice、F 公式、規則正文以私人版本契約鎖定；禁止 P1／P4 或新爆款案例直接覆寫。新分析只能建立同平台／媒體 scope 的候選，經使用者審核精確 diff／digest，另行啟用後才變成正式有效版本。當輪要求改一篇草稿不是永久規則更新授權。
 
 P2 必須讀 `context` 輸出的完整有效 F 與 voice，按固定段落功能、順序、標點與 CTA 寫，交付前核對同 revision 的 `check-draft` 並完成語義／事實 QA。F06 必須分清 F06a／F06b。結構 PASS 不等於模仿成功；未核對、契約漂移或 F 結構不符不得聲稱正式文案已完成。
 
@@ -25,7 +33,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 重新規劃、排內容 | P0 Plan | `references/phase0_plan.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋目標 formula；X 題材另讀 `references/x.md` 的演算法邊界 |
 | 重新學語氣 | P1 Learn Voice | `references/learn_style.md`＋`style_profile.md` |
 | 寫一篇、PO、發文 | P2 Draft／Publish | `references/generate_and_publish.md`＋`voice_quick.md`＋`current_brief.md`＋`scripts/social_data.py comparables` compact context＋單一 formula；X 草稿先讀 `references/x.md` 的策略段，實際發布前再核對平台 UI |
-| 把數據訓練進來、記錄成效 | P3 Log Outcome | `references/outcome-workflow.md`＋`data/*.jsonl` |
+| 把數據訓練進來、記錄成效、查待補件 | P3 Log Outcome | `references/outcome-workflow.md`；以 `scripts/review_outcome_intakes.py` 盤點既有待補件 |
 | 比較貼文／集數、找 pattern | P4 Optimize Patterns | `references/outcome-workflow.md`＋`references/evaluation.md`＋相關 rules；X 演算法解釋另讀 `references/x.md` |
 | 掃描、草擬、回覆 FB／IG／Threads 留言 | P5 Comment Ops | `references/comment-operations.md`＋實際操作時的 `references/chrome-comment-adapter.md`＋`scripts/comment_chrome_actuator.mjs`＋`references/comment-policy.json`＋目標平台 ref＋`voice_quick.md` |
 | 查歷史 Case | Legacy Case | `references/case_studies.md` 索引，再讀單一 `references/cases/case-NN.md` |
@@ -43,7 +51,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 | 帳號期間總覽 | `data/account_snapshots.jsonl` |
 | 跨篇假設與 confound | `data/experiments.jsonl` |
 | 事實修正事件 | `data/corrections.jsonl`；原始 event 不覆寫 |
-| 圖文／影片分區 | `scripts/social_cohorts.py` 的平台 × media family × content type × surface × maturity；不混合排名 |
+| 圖文／影片分區 | `scripts/social_cohorts.py` 的平台 × media family × content type × surface；不混合排名 |
 | 第三方參考／候選與審核 | `data/learning_events.jsonl`；外部觀測與自有 KPI 嚴格分離 |
 | 正式有效寫作契約 | `data/author_contract.json`＋`data/author_contracts/`；凍結原始來源、審核後 scoped override，保留前版 |
 | 規則正文 | `references/rules/RNN.md`；`references/rules.md` 是索引 |
@@ -63,7 +71,7 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 - 不論素材由 `video-autopilot`、YouTube 專門 Skill、Meta 面板或其他流程產生，所有發布後的流量、推薦來源、搜尋、留存、互動、受眾、追蹤／訂閱與轉化證據，都必須寫回本 Skill 的 `data/*.jsonl`。
 - 專門 Skill 可以做平台診斷或產生剪輯／包裝建議；但觀測事實、跨平台比較、實驗證據與規則升降級，以本 Skill 為 canonical source，禁止另建互相漂移的成效記憶。
 - 同一內容的 FB／IG／YouTube 指標各自建立有平台 scope 的 snapshot；Meta 合併卡片只能作 cross-platform reference，沒有完整平台洞察時不得冒充該平台 snapshot。
-- 演算法時效性知識仍可放目標平台 reference；私人實測是否成立，只能依本 Skill 的同 maturity、多樣本資料升級。
+- 演算法時效性知識仍可放目標平台 reference；私人實測是否成立，只能依本 Skill 的同平台／媒體／類型／表面的多樣本資料升級。
 
 ## P3 Log Outcome
 
@@ -72,18 +80,21 @@ P2 預設讀 `voice_quick.md`；只有 P1 重新學語氣、使用者明確要�
 2. 每篇新 post 先建立 `analysis_status`、`analysis_version`、`analysis_eligible` 與精確 caption 的 `caption_sha256`；尚未完成語義分析時只能是 `pending`＋`analysis_eligible:false`，不得先進 pattern learning。
 3. `complete` post 必須保存完整文案／版型／長度、換行與段落、標點、關鍵字、named entities、數字語言、opening、hook、mechanism、differentiator、proof、語氣、CTA，以及由 `published_at`＋timezone 驗證出的日期、星期、`HH:mm` 與 daypart。黑底白字另存背景、字色、字重、對齊與觀測行數；影片另存直式版型，不從縮圖猜未見內容。
 4. caption 截斷、僅有代稱、placeholder 或尚待補證據時標成 `excluded_placeholder` 或 `pending`，一律 `analysis_eligible:false`；缺值用 `null`／空清單與低 confidence 明示，不補寫不存在的 hook、關鍵字、語氣或 CTA。
-5. 記 published_at、captured_at、hours_since_publish 與 maturity。IG／FB total 與可取得的拆分同時保存；missing 用 `null`。
+5. 保存 published_at 與可取得的 IG／FB 平台拆分；數據按回填順序追加。新舊截圖時間與衍生成熟度均忽略，缺值用 `null`，不影響入庫與學習。
 6. UI rate 與 derived rate 分開；留存曲線目測只寫 note。縮寫、上限或目測數字用 `metric_qualifiers` 標成 `rounded／upper_bound／visual_estimate`，不得冒充 exact。`metrics` 內的值直接用欄位名；其他巢狀值使用 dotted path（例如 `benchmarks_reported.views_more_than_usual_approx`）。
 7. 先 dry-run `scripts/log_outcome.py`，明確寫入時才加 `--write`；寫完執行 `scripts/social_data.py validate`，caption hash、deterministic counts、日期／星期／分鐘或 analysis eligibility 任一不一致都不得通過。
 8. 新數據不自動改寫作者契約。第三方資料用 `social_governance.py record-reference`，不得冒充自有 post；圖文與影片分區未知或衝突時不納入學習。新的寫作／F 改善建議用候選審核流程，不直接改 voice 或 F 原檔。
+9. 缺續文仍可分析已知部分：`review_outcome_intakes.py --include-analysis --format json` 明確讀取私人詞句角色、結構與測試候選。以 `--analysis-input <file>` dry-run、`--write-analysis` 追加 hash-bound 註記；只綁已知原文／原圖，不提升完整度、成效 eligibility 或 F 狀態。發布時間補件套用原筆；不再將截圖時間列為缺件。完整格式見 outcome workflow。
 
 ## P4 Optimize Patterns
 
-先跑 feature matrix；series summary 只作 KPI 總覽。Matrix 只納入 `analysis_status:complete`、`analysis_eligible:true`、caption hash 與 analysis version 均有效的 post，並在選 latest 前排除 `awaiting_data`／`aggregation_eligible:false`，再以相同平台 scope 與 maturity 比較。每列必須同時帶出文案長度、段落／分隔、完整 Unicode 標點 profile、關鍵字、語氣、CTA、黑底白字／影片版型、日期、星期、分鐘與成效；可用 `--captured-before` 重建當時可見的歷史比較，避免後來快照污染判斷。
+先跑 feature matrix；series summary 只作 KPI 總覽。Matrix 只納入 `analysis_status:complete`、`analysis_eligible:true`、caption hash 與 analysis version 均有效的 post，並在選 latest 前排除 `awaiting_data`／`aggregation_eligible:false`，再以相同平台、媒體類型與版型比較。每列必須同時帶出文案長度、段落／分隔、完整 Unicode 標點 profile、關鍵字、語氣、CTA、黑底白字／影片版型、日期、星期、分鐘與成效；同篇更新用 `history --post <post_id>` 查看回填序列；不使用截圖時鐘或 maturity 分組。
+
+使用者明確要求迭代時，可另讀上述私人分析作假設來源，逐一區分主題詞、用途、品牌、利益承諾、證據和 CTA；不要把「免費」「AI」出現視為演算法加權證明。候選與正式 F 分開交付；缺續文不妨礙已知片段的語義分析，但不得推測未知段落。歷史 evaluation／rules 的固定互動權重、時段保證不是已量測的演算法事實。
 
 跨平台同步內容若有可驗證的各平台收據，使用 `platform_publications` 分別記錄平台發布時間、IANA timezone、sync mode、caption digest 與 media digest；只有共同時間、沒有逐平台憑證時保留單一 `published_at` 並明示信心，不虛構每個平台的分鐘。不同 UI 表面出現 104.2／104.3 或 211／215 這類差異時，保留全部 `surface_observations`、表面與證據，canonical 值只作查詢基準，不覆蓋原始差異。
 
-故事、首幀、集數、caption、CTA、版型或時段同時改變時，列為 confound，不稱乾淨 A/B。發布時間只可作候選變因：同一精確分鐘若同時出現高低差異很大的結果，不得把該分鐘寫成爆款原因或固定黃金時段；必須由相近題材、包裝、平台與 maturity 的獨立樣本另行驗證。
+故事、首幀、集數、caption、CTA、版型或時段同時改變時，列為 confound，不稱乾淨 A/B。發布時間只可作候選變因：同一精確分鐘若同時出現高低差異很大的結果，不得把該分鐘寫成爆款原因或固定黃金時段；由相近題材、包裝與平台的獨立樣本另行驗證，不再加入截圖衍生成熟度條件。
 
 證據狀態只用：`hypothesis → emerging → validated → deprecated`。同一系列三集是 n=3 posts，但不是三個獨立樣本。實驗可用同一 `experiment_id` 追加 revision；不可覆寫歷史。候選規則必須同時在 experiment `rule_ids` 與 rule metadata `experiment_ids` 建 backlink。
 
@@ -126,7 +137,7 @@ $env:PYTHONUTF8='1'
 python scripts/social_data.py validate
 python scripts/social_data.py coverage
 python scripts/social_data.py summary --series <series-id>
-python scripts/social_data.py matrix --series <series-id> --platform <platform> --maturity <maturity>
+python scripts/social_data.py matrix --series <series-id> --platform <platform>
 python scripts/build_rule_registry.py --write
 python scripts/comment_assistant.py validate
 node scripts/comment_js_architecture_gate.mjs --self-test

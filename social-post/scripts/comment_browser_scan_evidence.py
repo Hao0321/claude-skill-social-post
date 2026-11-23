@@ -11,7 +11,7 @@ from comment_browser_common import (
     _require_schema_version, _required_boolean, _required_string,
 )
 from comment_domain import normalize_comment
-from social_validation import parse_time
+from social_primitives import parse_time
 
 def _normalize_thread_expansion_evidence(raw: Any) -> dict[str, Any]:
     """Keep an explicit, honest record of what the actuator expanded."""

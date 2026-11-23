@@ -98,7 +98,7 @@ class GovernanceTests(unittest.TestCase):
     def test_cross_media_and_platform_queries_never_fall_back(self):
         for platform, family in (("facebook", "video"), ("instagram", "text_image")):
             result = comparables_context(self.root, platform=platform, media_family=family,
-                                        content_type="ai_short_drama", surface="reel_caption", maturity="developing")
+                                        content_type="ai_short_drama", surface="reel_caption")
             self.assertEqual(result["comparables"], [])
         rows = feature_matrix(self.root, platform="instagram", media_family="video")
         self.assertEqual([row["post_id"] for row in rows], ["own-video"])

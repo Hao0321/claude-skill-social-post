@@ -16,7 +16,7 @@ import secrets
 from typing import Any
 
 from comment_browser_common import DIGEST_PATTERN, _json_digest
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 SCAN_PROVENANCE_SCHEMA_VERSION = 1

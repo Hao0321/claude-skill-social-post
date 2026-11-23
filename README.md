@@ -10,7 +10,7 @@
 
 討論想法可到 [Discussions](https://github.com/Hao0321/claude-skill-social-post/discussions)，可重現問題與正式提案使用 [Issues](https://github.com/Hao0321/claude-skill-social-post/issues/new/choose)。
 
-本次發布版本：**v2.5.1**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
+本次發布版本：**v2.6.0**。完整來源碼與離線驗證可安裝使用；真實平台能力仍以個別 capability 狀態為準。
 
 Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime revision／雜湊、架構自校準與單次送出／異常恢復的回歸測試。另已完成一次 IG 真實單次送出、原生子回覆查證與唯讀 recovery 對帳，以及一次 Chrome 斷線後的來源連線恢復與原目標讀取；這些證據不代表三平台 live Meta 回覆已解鎖。
 
@@ -19,6 +19,16 @@ Unreleased candidate 有封閉 JavaScript 模組清單、固定 browser-runtime 
 本候選版仍未完成三平台真實自動回覆驗收。過長契約與平台程式已按責任拆分，完整測試通過；但離線測試不能代替 FB／Threads 的登入操作、完整回覆串與父層驗證。v2.5.1 發布不升級尚未驗收的 production capability。
 
 Cleanup 保留固定的程式長度警告與未測項，不以調高門檻消除問題。跨語言圖與私版 `no-origin` 更新來源仍未由 Cleanup 驗證；另有產品原生 JavaScript 架構圖，但不能把不同量尺或未測項當成同一份通過證明。
+
+## v2.6.0 交付範圍
+
+- 成效分析（P0–P4）只用**發布時間**：日期、星期、時區、分鐘。截圖或手機狀態列的時鐘不索取、不推算，也不拿來當學習特徵；舊資料裡的截圖時間讀取時忽略、寫入時移除。原始存檔和真實數字都保留。
+- 待補件盤點會把 Threads 的待補觀察、發布時間補件接回原貼文，不重複計算樣本，也不捏造截圖時刻。
+- 平台新增或未知的指標（回覆、轉發、引用、個人頁瀏覽等）完整保留，不再因為固定欄位清單被丟掉；跨平台總數分開記。
+- 新增 `social_intake_analysis.py`：文案和原圖雙重綁定雜湊，寫進只能追加的學習紀錄；支援乾跑，完全相同的重播不重複寫入，來源一改就拒絕。分析結果在作者審核前都只是假設。
+- `social_governance.py status --compact` 只輸出精簡的狀態摘要。
+- 評估方法把 Threads 的指標分開看，撤下無法驗證的固定倍率和「保證二次推播」說法。
+- 私人的寫作、語氣與成效資料一樣不在公開版裡。
 
 ## v2.5.1 交付範圍
 

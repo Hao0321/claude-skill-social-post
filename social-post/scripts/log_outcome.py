@@ -17,6 +17,7 @@ from social_data import (
     SNAPSHOTS_FILE, validate_store,
 )
 from social_store import commit_records, load_jsonl, read_store_snapshot, store_revision, write_jsonl
+from social_outcome_time_policy import without_capture_metadata
 
 
 def load_store_records(data_dir: Path) -> tuple[dict[str, Path], dict[str, list[dict[str, Any]]]]:
@@ -100,6 +101,9 @@ def append_experiment(
 def prepare_records(
     bundle: dict[str, Any], data_dir: Path = DATA_DIR,
 ) -> tuple[dict[Path, list[dict[str, Any]]], dict[str, Any], str]:
+    # Retired screenshot metadata is never written to new outcome records.
+    bundle = {key: without_capture_metadata(value) if key in {"post", "snapshot", "account_snapshot"}
+              else copy.deepcopy(value) for key, value in bundle.items()}
     post = bundle.get("post")
     if isinstance(post, dict):
         post = copy.deepcopy(post)
