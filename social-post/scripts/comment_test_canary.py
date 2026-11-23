@@ -27,7 +27,7 @@ from comment_test_browser_contract_support import (
 )
 from comment_test_cli import draft_cli_fixture, ingest_cli_fixture, prepare_cli_fixture, run_cli
 from comment_test_support import POLICY
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 @contextmanager

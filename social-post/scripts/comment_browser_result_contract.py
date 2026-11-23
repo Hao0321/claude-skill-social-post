@@ -13,7 +13,7 @@ from comment_browser_send_common import (
     REINSPECTION_CONTEXT_FLAGS, RESULT_FLAGS, _find_intent,
     _require_non_negative_integer, _require_send_observed_url,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 def _result_scope_matches(

@@ -219,7 +219,7 @@ class ServiceTests(unittest.TestCase):
 
     def test_invalid_bundle_does_not_change_data(self):
         bad = copy.deepcopy(example())
-        bad["snapshot"]["captured_at"] = "not-a-time"
+        bad["snapshot"]["post_id"] = "unknown-post"
         for bundle in (bad, {}, {"snapshot": 12}, {"shell": "fictional command"}):
             with self.subTest(bundle_keys=list(bundle)), self.assertRaises((ValueError, TypeError)):
                 self.service.preview({"bundle": bundle})
@@ -234,13 +234,13 @@ class ServiceTests(unittest.TestCase):
 
     def test_exact_cohort_empty_is_honest_not_ranked(self):
         result = self.service.compare({"platform": "facebook", "content_type": "text",
-                                       "surface": "text_feed", "maturity": "developing"})
+                                       "surface": "text_feed"})
         self.assertEqual(result["returned_count"], 0)
         self.assertTrue(result["comparison_policy"]["cohort_is_exact"])
         self.assertFalse(result["comparison_policy"]["selection"]["performance_ranked"])
         self.assertFalse(result["comparison_policy"]["timing"]["causal_claim_allowed"])
         with self.assertRaises(ValueError):
-            self.service.compare({"platform": "facebook", "maturity": "developing"})
+            self.service.compare({"platform": "facebook"})
 
 
 class HttpTests(unittest.TestCase):

@@ -14,7 +14,7 @@ from comment_scan_provenance import (
     comment_scan_provenance_digest,
     validate_scan_provenance,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 PLATFORMS = {"facebook", "instagram", "threads"}

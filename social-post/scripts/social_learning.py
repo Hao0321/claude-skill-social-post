@@ -12,6 +12,7 @@ from social_cohorts import MEDIA_FAMILIES
 from social_governance_store import (append_event_locked, digest, governance_lock,
                                      learning_events, write_document)
 from social_primitives import PLATFORM_VALUES, parse_time
+from social_outcome_time_policy import without_capture_metadata
 from social_writing_contract import (POINTER, POLICY, active_contract, effective_sources,
                                      policy_valid, save_version_locked, verify_contract)
 
@@ -26,9 +27,10 @@ def valid_scope(scope: Any) -> None:
 def record_reference(root: Path, reference: dict[str, Any]) -> dict[str, Any]:
     """Unknown publication dates and metrics are allowed; no fake own-post ID."""
     required = {"reference_id", "content_id", "platform", "media_family", "caption", "published_at",
-                "captured_at", "metrics", "metric_qualifiers", "evidence"}
+                "metrics", "metric_qualifiers", "evidence"}
     if not isinstance(reference, dict) or not required <= set(reference):
         raise ValueError("incomplete external observation")
+    reference = without_capture_metadata(reference)
     valid_scope({key: reference[key] for key in ("platform", "media_family")})
     if reference.get("owner_scope", "external") != "external" or "post_id" in reference:
         raise ValueError("external observations cannot masquerade as own posts")
@@ -36,7 +38,7 @@ def record_reference(root: Path, reference: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("external identities are required")
     if reference["caption"] is not None and not isinstance(reference["caption"], str):
         raise ValueError("caption must be exact text or unknown")
-    for field in ("published_at", "captured_at"):
+    for field in ("published_at",):
         if reference[field] is not None:
             parse_time(reference[field])
     if not isinstance(reference["metrics"], dict) or not isinstance(reference["metric_qualifiers"], dict):
@@ -49,7 +51,7 @@ def record_reference(root: Path, reference: dict[str, Any]) -> dict[str, Any]:
         prior = [row for row in learning_events(root) if row.get("kind") == "external_reference"
                  and row["reference"]["reference_id"] == reference["reference_id"]]
         if prior:
-            if prior[-1] != event:
+            if without_capture_metadata(prior[-1]["reference"]) != reference:
                 raise ValueError("external observation already exists; append a new observation ID")
             return event
         append_event_locked(root, event)
@@ -196,5 +198,5 @@ def learning_overview(root: Path) -> dict[str, Any]:
                    and row["proposal_id"] == proposal["proposal_id"]]
         state = "activated" if event["proposal_digest"] in revisions else (reviews[-1]["decision"] if reviews else "pending")
         candidates.append({**event, "state": state})
-    references = [row["reference"] for row in rows if row.get("kind") == "external_reference"]
+    references = [without_capture_metadata(row["reference"]) for row in rows if row.get("kind") == "external_reference"]
     return {"external_references": references, "proposals": candidates, "automatic_update": False}

@@ -13,8 +13,9 @@ from typing import Any
 from social_store import load_jsonl, read_store_snapshot, store_revision
 from social_cohorts import MEDIA_FAMILIES, media_family as infer_media_family, owner_scope
 from social_post_analysis import HEX_256, punctuation_profile
+from social_outcome_time_policy import time_policy, without_capture_metadata
 from social_validation import (
-    MATURITY_VALUES, PLATFORM_VALUES, materialize_corrections, parse_time,
+    PLATFORM_VALUES, materialize_corrections, parse_time,
     validate_account_snapshots, validate_experiments, validate_posts, validate_snapshots,
 )
 
@@ -37,14 +38,14 @@ MATRIX_METRIC_KEYS = (
 OUTCOME_DIRECT_SNAPSHOT_KEYS = frozenset({
     "metrics", "rates_reported", "derived_rates", "traffic_sources_percent",
     "distribution_sources_percent", "audience", "ranking", "retention",
-    "captured_at_confidence", "metric_qualifiers", "metric_scope_notes",
+    "metric_qualifiers", "metric_scope_notes",
     "platform_breakdown", "surface_observations", "alternate_ui_values",
     "benchmarks_reported", "performance_comparison_reported",
     "moderation_or_delivery_note", "moderation_or_delivery_notice", "trajectory_note",
 })
 SNAPSHOT_CONTROL_KEYS = frozenset({
-    "schema_version", "snapshot_id", "post_id", "platform_scope", "captured_at",
-    "hours_since_publish", "maturity", "aggregation_eligible", "measurement_status",
+    "schema_version", "snapshot_id", "post_id", "platform_scope",
+    "aggregation_eligible", "measurement_status",
     "evidence", "evidence_sha256",
 })
 
@@ -85,6 +86,10 @@ def _validated_store(root: Path) -> tuple[dict[str, Any], list, list]:
     warnings: list[str] = []
     posts, snapshots, account_snapshots = materialize_corrections(
         posts, snapshots, account_snapshots, corrections, errors,
+    )
+    posts, snapshots, account_snapshots = (
+        [without_capture_metadata(row) for row in rows]
+        for rows in (posts, snapshots, account_snapshots)
     )
     posts_by_id = validate_posts(posts, errors, warnings)
     latest, latest_by_platform = validate_snapshots(
@@ -142,7 +147,6 @@ def validation_json_view(result: dict[str, Any]) -> dict[str, Any]:
                 latest_accounts.items(),
                 key=lambda item: (
                     item[0][0], item[0][1], item[0][2] or "",
-                    item[1].get("captured_at") or "",
                     item[1].get("account_snapshot_id") or "",
                 ),
             )
@@ -176,8 +180,7 @@ def derived_row(post: dict[str, Any], snapshot: dict[str, Any]) -> dict[str, Any
         "episode": post.get("episode_number"),
         "post_id": post.get("post_id"),
         "platform": snapshot.get("platform_scope") or "combined",
-        "captured_at": snapshot.get("captured_at"),
-        "hours_since_publish": snapshot.get("hours_since_publish"),
+        "published_at": post.get("published_at"),
         "plays": plays,
         "plays_qualifier": snapshot.get("metric_qualifiers", {}).get("plays", "exact") if plays is not None else None,
         "reach": reach,
@@ -334,45 +337,16 @@ def _has_aggregation_measurement(snapshot: dict[str, Any]) -> bool:
 
 
 def latest_aggregation_snapshots(
-    snapshots: list[dict[str, Any]],
-    *,
-    platform: str | None = None,
-    maturity: str | None = None,
-    captured_before: str | None = None,
-    group_by_maturity: bool = True,
-) -> dict[tuple[str, ...], dict[str, Any]]:
-    """Select the deterministic latest eligible snapshot in each comparison cohort.
-
-    Matrix cohorts are post + exact platform scope + maturity.  Eligibility is applied
-    before latest selection, so a newer awaiting/ineligible row cannot hide the latest
-    usable observation.  ``captured_before`` is inclusive and requires an ISO timestamp
-    with a UTC offset.
-    """
-    cutoff = parse_time(captured_before) if captured_before is not None else None
-    latest: dict[tuple[str, ...], dict[str, Any]] = {}
-    latest_order: dict[tuple[str, ...], tuple[Any, str]] = {}
+    snapshots: list[dict[str, Any]], *, platform: str | None = None,
+) -> dict[tuple[str, str], dict[str, Any]]:
+    """Last eligible record per post/platform, independent of every screenshot clock."""
+    latest = {}
     for snapshot in snapshots:
         scope = snapshot.get("platform_scope") or "combined"
-        snapshot_maturity = snapshot.get("maturity")
         if platform is not None and scope != platform:
             continue
-        if maturity is not None and snapshot_maturity != maturity:
-            continue
-        if not _has_aggregation_measurement(snapshot):
-            continue
-        captured = parse_time(snapshot.get("captured_at", ""))
-        if cutoff is not None and captured > cutoff:
-            continue
-        post_id = snapshot.get("post_id")
-        if not isinstance(post_id, str):
-            continue
-        key = (post_id, scope, str(snapshot_maturity or "unspecified")) if group_by_maturity else (
-            post_id, scope,
-        )
-        order = (captured, str(snapshot.get("snapshot_id") or ""))
-        if key not in latest_order or latest_order[key] < order:
-            latest[key] = snapshot
-            latest_order[key] = order
+        if _has_aggregation_measurement(snapshot) and isinstance(snapshot.get("post_id"), str):
+            latest[(snapshot["post_id"], scope)] = snapshot
     return latest
 
 
@@ -384,6 +358,7 @@ def _selected(mapping: Any, keys: tuple[str, ...]) -> dict[str, Any]:
 def _prompt_safe_metadata(value: Any) -> Any:
     """Keep measurement facts while removing local evidence-path provenance."""
     if isinstance(value, dict):
+        value = without_capture_metadata(value)
         return {
             key: _prompt_safe_metadata(child)
             for key, child in value.items()
@@ -412,6 +387,7 @@ def _extended_analytics(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def _outcome_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
+    snapshot = without_capture_metadata(snapshot)
     metrics = snapshot.get("metrics", {})
     return {
         "primary_metrics": {
@@ -429,7 +405,7 @@ def _outcome_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
         "extended_analytics": _extended_analytics(snapshot),
         "measurement_context": _prompt_safe_metadata(
             _selected(snapshot, (
-                "captured_at_confidence", "metric_qualifiers", "metric_scope_notes",
+                "metric_qualifiers", "metric_scope_notes",
                 "platform_breakdown", "surface_observations", "alternate_ui_values",
                 "benchmarks_reported", "performance_comparison_reported",
                 "moderation_or_delivery_note", "moderation_or_delivery_notice",
@@ -451,9 +427,7 @@ def _feature_matrix_row(post: dict[str, Any], snapshot: dict[str, Any]) -> dict[
         "caption_sha256": post.get("caption_sha256"),
         "analysis_version": post.get("analysis_version"),
         "platform": snapshot.get("platform_scope") or "combined",
-        "maturity": snapshot.get("maturity"), "snapshot_id": snapshot.get("snapshot_id"),
-        "captured_at": snapshot.get("captured_at"),
-        "hours_since_publish": snapshot.get("hours_since_publish"),
+        "snapshot_id": snapshot.get("snapshot_id"),
         "caption_length": _selected(formatting, (
             "characters_including_spaces", "characters_excluding_whitespace",
             "content_characters_excluding_whitespace_and_punctuation", "spaces",
@@ -489,14 +463,12 @@ def feature_matrix(
     *,
     series_id: str | None = None,
     platform: str | None = None,
-    maturity: str | None = None,
-    captured_before: str | None = None,
     media_family: str | None = None,
 ) -> list[dict[str, Any]]:
-    """Join stable post features to latest same-platform/maturity outcomes."""
+    """Join stable publication features to last eligible same-platform outcome records."""
     result, snapshots, _accounts = _validated_store(root)
     return _feature_matrix(result, snapshots, series_id=series_id, platform=platform,
-                           maturity=maturity, captured_before=captured_before, media_family=media_family)
+                           media_family=media_family)
 
 
 def feature_matrix_snapshot(root: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
@@ -506,7 +478,7 @@ def feature_matrix_snapshot(root: Path) -> tuple[dict[str, Any], list[dict[str, 
 
 
 def _feature_matrix(result: dict, snapshots: list, *, series_id=None, platform=None,
-                    maturity=None, captured_before=None, media_family=None) -> list[dict[str, Any]]:
+                    media_family=None) -> list[dict[str, Any]]:
     if media_family is not None and media_family not in MEDIA_FAMILIES:
         raise ValueError("unknown media family")
     if result["errors"]:
@@ -522,9 +494,6 @@ def _feature_matrix(result: dict, snapshots: list, *, series_id=None, platform=N
     latest = latest_aggregation_snapshots(
         snapshots,
         platform=platform,
-        maturity=maturity,
-        captured_before=captured_before,
-        group_by_maturity=True,
     )
     rows: list[dict[str, Any]] = []
     for snapshot in latest.values():
@@ -534,21 +503,8 @@ def _feature_matrix(result: dict, snapshots: list, *, series_id=None, platform=N
         rows.append(_feature_matrix_row(post, snapshot))
     return sorted(rows, key=lambda row: (
         row["publication"].get("published_at") or "",
-        row["post_id"], row["platform"], row.get("maturity") or "", row["captured_at"],
+        row["post_id"], row["platform"],
     ))
-
-
-def _latest_post_platform_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Collapse maturity variants without ever mixing platform scopes."""
-    latest: dict[tuple[str, str], dict[str, Any]] = {}
-    latest_order: dict[tuple[str, str], tuple[Any, str]] = {}
-    for row in rows:
-        key = (row["post_id"], row["platform"])
-        order = (parse_time(row["captured_at"]), str(row.get("snapshot_id") or ""))
-        if key not in latest_order or latest_order[key] < order:
-            latest[key] = row
-            latest_order[key] = order
-    return list(latest.values())
 
 
 def _primary_outcome_marker(row: dict[str, Any]) -> dict[str, Any] | None:
@@ -599,8 +555,6 @@ def comparables_context(
     platform: str | None = None,
     content_type: str | None = None,
     surface: str | None = None,
-    maturity: str | None = None,
-    captured_before: str | None = None,
     media_family: str | None = None,
     limit: int = 2,
 ) -> dict[str, Any]:
@@ -611,8 +565,6 @@ def comparables_context(
         root,
         series_id=series_id,
         platform=platform,
-        maturity=maturity,
-        captured_before=captured_before,
         media_family=media_family,
     )
     rows = [row for row in rows if row["media_family"] in MEDIA_FAMILIES
@@ -621,15 +573,14 @@ def comparables_context(
         rows = [row for row in rows if row.get("content_type") == content_type]
     if surface is not None:
         rows = [row for row in rows if row.get("layout", {}).get("surface") == surface]
-    comparable_rows = _latest_post_platform_rows(rows) if maturity is None else list(rows)
+    comparable_rows = list(rows)
     comparable_rows.sort(key=lambda row: (
         row.get("publication", {}).get("published_at") or "",
-        row.get("captured_at") or "",
-        row["post_id"], row["platform"], row.get("maturity") or "",
+        row["post_id"], row["platform"],
     ), reverse=True)
     selected = comparable_rows[:limit]
     exact_cohort = all(
-        value is not None for value in (platform, maturity, content_type, surface)
+        value is not None for value in (platform, content_type, surface)
     )
     exact_cohort = exact_cohort and platform != "combined" and len({row["media_family"] for row in rows}) <= 1
     return {
@@ -639,15 +590,13 @@ def comparables_context(
             "content_type": content_type,
             "media_family": media_family,
             "surface": surface,
-            "maturity": maturity,
-            "captured_before": captured_before,
             "limit": limit,
         },
         "comparison_policy": {
             "owner_scope": "own", "media_family_isolation": True,
             "cross_channel_fallback": False,
             "cohort": (
-                "same_platform_maturity_content_type_and_surface"
+                "same_platform_content_type_and_surface"
                 if exact_cohort else "incomplete_filter_set"
             ),
             "cohort_is_exact": exact_cohort,
@@ -655,10 +604,11 @@ def comparables_context(
             "selection": {
                 "strategy": "most_recent_publication",
                 "tie_breakers": [
-                    "captured_at_desc", "post_id_desc", "platform_desc", "maturity_desc",
+                    "post_id_desc", "platform_desc",
                 ],
                 "performance_ranked": False,
             },
+            "time_policy": time_policy(),
             "timing": {
                 "role": "candidate_variable_only",
                 "causal_claim_allowed": False,
@@ -765,9 +715,7 @@ def _coverage_row(
         "caption_sha256": post.get("caption_sha256"),
         "analysis_version": post.get("analysis_version"),
         "snapshot_count": len(rows),
-        "platform_maturities": sorted({
-            f"{row['platform']}:{row.get('maturity') or 'unspecified'}" for row in rows
-        }),
+        "platforms": sorted({row["platform"] for row in rows}),
         "extended_analytics_keys_by_snapshot": {
             row["snapshot_id"]: sorted(
                 row.get("outcome", {}).get("extended_analytics", {}).keys()
@@ -825,9 +773,7 @@ def series_summary(root: Path, series_id: str | None = None) -> list[dict[str, A
     if result["errors"]:
         raise ValueError("; ".join(result["errors"]))
     posts = result["posts"]
-    latest = latest_aggregation_snapshots(
-        snapshots, group_by_maturity=False,
-    )
+    latest = latest_aggregation_snapshots(snapshots)
     rows = []
     for post in posts:
         if post.get("analysis_status") != "complete" or post.get("analysis_eligible") is not True:
@@ -841,6 +787,36 @@ def series_summary(root: Path, series_id: str | None = None) -> list[dict[str, A
     return sorted(rows, key=lambda row: (
         row.get("episode") is None, row.get("episode") or 0, row["post_id"], row["platform"],
     ))
+
+
+def observation_history(root: Path, post_id: str, *, platform: str | None = None) -> dict[str, Any]:
+    """Successive inputs and same-platform count deltas; never invent elapsed hours."""
+    result, snapshots, _accounts = _validated_store(root)
+    if result["errors"]:
+        raise ValueError("; ".join(result["errors"]))
+    posts = {post["post_id"]: post for post in result["posts"]}
+    if post_id not in posts:
+        raise ValueError("unknown post_id")
+    previous, observations = {}, []
+    for snapshot in snapshots:
+        scope = snapshot.get("platform_scope") or "combined"
+        if snapshot.get("post_id") != post_id or (platform is not None and scope != platform):
+            continue
+        prior = previous.get(scope, {})
+        metrics = snapshot.get("metrics", {})
+        eligible = _has_aggregation_measurement(snapshot)
+        delta = {key: value - prior[key] for key, value in metrics.items()
+                 if eligible and type(value) in (int, float) and type(prior.get(key)) in (int, float)}
+        observations.append({"sequence": len(observations) + 1, "snapshot_id": snapshot["snapshot_id"],
+                             "platform": scope, "observation_label": snapshot.get("observation_label"),
+                             "measurement_status": snapshot.get("measurement_status"),
+                             "outcome_eligible": eligible,
+                             "outcome": _outcome_payload(snapshot), "count_delta_from_previous": delta})
+        if eligible:
+            previous[scope] = metrics
+    return {"post_id": post_id, "published_at": posts[post_id]["published_at"],
+            "time_policy": time_policy(), "observations": observations,
+            "order": "recorded_input_sequence", "growth_rate_per_hour": None}
 
 
 def render_table(rows: list[dict[str, Any]]) -> str:
@@ -867,7 +843,7 @@ def render_table(rows: list[dict[str, Any]]) -> str:
 
 def render_feature_matrix(rows: list[dict[str, Any]]) -> str:
     headers = (
-        "date", "time", "weekday", "platform", "maturity", "post_id", "chars", "layout",
+        "date", "time", "weekday", "platform", "post_id", "chars", "layout",
         "keywords", "voice", "punctuation", "CTA", "outcome", "snapshot",
     )
     output = [" | ".join(headers), " | ".join("---" for _ in headers)]
@@ -889,7 +865,7 @@ def render_feature_matrix(rows: list[dict[str, Any]]) -> str:
         ) or "—"
         values = (
             publication.get("local_date"), publication.get("local_time"),
-            publication.get("weekday_zh_tw"), row["platform"], row.get("maturity"),
+            publication.get("weekday_zh_tw"), row["platform"],
             row["post_id"], length.get("characters_including_spaces"),
             layout.get("caption_layout"), wording.get("keywords"), wording.get("voice"),
             (
@@ -910,7 +886,6 @@ def render_comparables_context(context: dict[str, Any]) -> str:
         (
             f"comparables={context['returned_count']}/{context['available_count']} "
             f"platform={query.get('platform') or 'any'} "
-            f"maturity={query.get('maturity') or 'latest-per-post'} "
             f"content_type={query.get('content_type') or 'any'} "
             f"surface={query.get('surface') or 'any'}"
         ),
@@ -933,7 +908,7 @@ def render_comparables_context(context: dict[str, Any]) -> str:
         publication = row["publication"]
         output.extend([
             "",
-            f"[{index}] {row['post_id']} ({row['platform']} / {row.get('maturity') or 'unspecified'})",
+            f"[{index}] {row['post_id']} ({row['platform']})",
             (
                 "published="
                 f"{publication.get('local_date')} {publication.get('weekday_zh_tw')} "
@@ -986,16 +961,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "command",
-        choices=("validate", "summary", "matrix", "comparables", "context", "coverage"),
+        choices=("validate", "summary", "matrix", "comparables", "context", "coverage", "history"),
     )
     parser.add_argument("--root", type=Path, default=SKILL_ROOT)
     parser.add_argument("--series")
+    parser.add_argument("--post", help="permanent post ID for history")
     parser.add_argument("--platform", choices=("combined", *sorted(PLATFORM_VALUES)))
     parser.add_argument("--content-type")
     parser.add_argument("--media-family", choices=MEDIA_FAMILIES)
     parser.add_argument("--surface")
-    parser.add_argument("--maturity", choices=sorted(MATURITY_VALUES))
-    parser.add_argument("--captured-before")
     parser.add_argument("--limit", type=int, default=2)
     parser.add_argument("--format", choices=("human", "json"), default="human")
     args = parser.parse_args()
@@ -1013,6 +987,11 @@ def main() -> int:
                 for warning in value["warnings"]:
                     print(f"WARN {warning}")
             return 0 if value["valid"] else 1
+        if args.command == "history":
+            if not args.post:
+                raise ValueError("history requires --post")
+            print(json.dumps(observation_history(args.root, args.post, platform=args.platform), ensure_ascii=False, indent=2))
+            return 0
         if args.command == "summary":
             rows = series_summary(args.root, args.series)
             print(json.dumps(rows, ensure_ascii=False, indent=2) if args.format == "json" else render_table(rows))
@@ -1031,8 +1010,6 @@ def main() -> int:
                 platform=args.platform,
                 content_type=args.content_type,
                 surface=args.surface,
-                maturity=args.maturity,
-                captured_before=args.captured_before,
                 limit=args.limit,
                 media_family=args.media_family,
             )
@@ -1045,8 +1022,6 @@ def main() -> int:
             args.root,
             series_id=args.series,
             platform=args.platform,
-            maturity=args.maturity,
-            captured_before=args.captured_before,
             media_family=args.media_family,
         )
         print(

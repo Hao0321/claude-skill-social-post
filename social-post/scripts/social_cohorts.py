@@ -41,7 +41,7 @@ def owner_scope(post: dict[str, Any]) -> str:
 
 def cohort_key(row: dict[str, Any]) -> tuple[Any, ...]:
     return (row.get("owner_scope"), row.get("platform"), row.get("media_family"),
-            row.get("content_type"), row.get("layout", {}).get("surface"), row.get("maturity"))
+            row.get("content_type"), row.get("layout", {}).get("surface"))
 
 
 def channel_inventory(rows: list[dict[str, Any]], platforms: tuple[str, ...]) -> dict[str, Any]:
@@ -51,13 +51,12 @@ def channel_inventory(rows: list[dict[str, Any]], platforms: tuple[str, ...]) ->
         for family in MEDIA_FAMILIES:
             selected = [row for row in rows if row.get("owner_scope") == OWN
                         and row.get("platform") == platform and row.get("media_family") == family]
-            counts = Counter((row.get("content_type"), row.get("layout", {}).get("surface"),
-                              row.get("maturity")) for row in selected)
+            counts = Counter((row.get("content_type"), row.get("layout", {}).get("surface")) for row in selected)
             channels.append({"platform": platform, "media_family": family, "owner_scope": OWN,
                              "post_count": len({row["post_id"] for row in selected}),
                              "snapshot_rows": len(selected),
                              "cohorts": [{"content_type": key[0], "surface": key[1],
-                                          "maturity": key[2], "rows": count}
+                                          "rows": count}
                                          for key, count in sorted(counts.items(), key=lambda item: str(item[0]))],
                              "video_metrics_applicable": family == "video"})
     return {"channels": channels,

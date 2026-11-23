@@ -18,7 +18,7 @@ from comment_test_browser_contract_support import (
     remember_receipt_capability, create_scan_request as create_bound_scan_request,
     scan_envelope, scan_provenance_envelope,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 PLATFORM_URLS = {

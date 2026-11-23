@@ -246,7 +246,6 @@ function comparing() {
     media_family: field("媒體分區", "media_family", { options: catalog.media_families, value: "text_image" }),
     content_type: field("內容類型", "content_type", { placeholder: "請填資料庫使用的內容類型", value: overview.content_types[0] || "" }),
     surface: field("版型／發布表面", "surface", { placeholder: "請填資料庫使用的 surface", value: overview.surfaces[0] || "" }),
-    maturity: field("成效觀測階段", "maturity", { options: catalog.maturities, value: "developing" }),
   };
   for (const [name, value] of Object.entries(fields)) {
     controls.append(value.wrapper);
@@ -263,13 +262,13 @@ function comparing() {
   }
   const output = panel("最近可比案例", "NOT A PERFORMANCE RANKING");
   const list = el("div", "compare-list");
-  list.append(notice("五個條件要對齊", "只比較同平台、圖文／影片分區、內容類型、版型與觀測階段。沒有樣本時不回退到混合資料。"));
+  list.append(notice("四個條件要對齊", "比較同平台、圖文／影片分區、內容類型與版型。分析時間只用發布時間；不需要截圖時間。沒有樣本時不回退到混合資料。"));
   for (const { input } of Object.values(fields)) input.addEventListener("input", () => {
     list.replaceChildren(notice("比較條件已變更", "請重新讀取，舊結果不代表新的比較範圍。"));
   });
   const load = button("讀取可比案例", () => run(load, async () => {
     const query = Object.fromEntries(Object.entries(fields).map(([key, value]) => [key, value.input.value]));
-    if (Object.values(query).some(value => !value.trim())) throw new Error("請完整填入五個比較條件。");
+    if (Object.values(query).some(value => !value.trim())) throw new Error("請完整填入四個比較條件。");
     const response = await api("/api/compare", query);
     if (Object.entries(fields).some(([key, value]) => value.input.value !== query[key])) {
       throw new Error("讀取期間比較條件已變更，請重新讀取。");
@@ -281,7 +280,7 @@ function comparing() {
       const date = row.publication || {};
       card.append(el("h3", "", row.post_id),
         el("p", "comparison-caption", row.caption || "原文未取得"),
-        el("p", "comparison-data", [row.platform, row.maturity, date.published_at || "發布時間未取得"].join(" / ")));
+        el("p", "comparison-data", [row.platform, date.published_at || "發布時間未取得"].join(" / ")));
       const detail = el("details");
       detail.append(el("summary", "", "查看完整格式、用詞、標點、日期與成效特徵"),
         el("pre", "", JSON.stringify(row, null, 2)));

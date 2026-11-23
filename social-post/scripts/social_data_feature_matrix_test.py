@@ -16,7 +16,7 @@ from social_data import (
     _coverage_dimensions, _coverage_expectations, _materialized_snapshots,
     comparables_context, feature_coverage_report, feature_matrix,
     latest_aggregation_snapshots, provenance_coverage_report,
-    render_comparables_context, series_summary,
+    render_comparables_context, series_summary, observation_history,
 )
 from social_post_analysis import caption_counts
 from social_store import write_jsonl
@@ -239,7 +239,7 @@ def _assert_matrix_caption_and_layout(facebook: dict) -> None:
 
 
 def _assert_matrix_outcome(facebook: dict) -> None:
-    if facebook["outcome"]["metrics"]["viewers"] != 20:
+    if facebook["outcome"]["metrics"]["viewers"] != 30:
         raise AssertionError("latest eligible outcome was not joined")
     if facebook["outcome"]["extended_analytics"] != {
         "content_packaging_analysis": {
@@ -253,33 +253,25 @@ def _assert_matrix_outcome(facebook: dict) -> None:
     }:
         raise AssertionError("extended analytics subtrees were not joined or sanitized")
     measurement = facebook["outcome"]["measurement_context"]
-    if measurement["captured_at_confidence"] != "high":
-        raise AssertionError("capture confidence was not joined")
+    if "captured_at_confidence" in measurement:
+        raise AssertionError("retired capture confidence leaked into writing features")
     if measurement["metric_scope_notes"] != {"viewers": "synthetic exact fixture"}:
         raise AssertionError("metric scope notes were not joined")
-    if measurement["platform_breakdown"] != {"viewers": {"facebook": 20}}:
+    if measurement["platform_breakdown"] != {"viewers": {"facebook": 30}}:
         raise AssertionError("platform outcome breakdown was not joined")
     if measurement["surface_observations"] != [{
-        "surface": "fixture_card", "reported_value": 20,
+        "surface": "fixture_card", "reported_value": 30,
     }]:
         raise AssertionError("surface observation values were lost or private evidence leaked")
 
 
 def _assert_matrix_contract(root: Path) -> None:
     rows = feature_matrix(root)
-    observed = {
-        (row["platform"], row["maturity"]): row["snapshot_id"] for row in rows
-    }
-    expected = {
-        ("facebook", "developing"): "snapshot-fb-developing-new",
-        ("facebook", "mature"): "snapshot-fb-mature",
-        ("instagram", "developing"): "snapshot-ig-developing",
-    }
+    observed = {row["platform"]: row["snapshot_id"] for row in rows}
+    expected = {"facebook": "snapshot-fb-mature", "instagram": "snapshot-ig-developing"}
     if observed != expected:
-        raise AssertionError(f"same-platform/maturity latest selection drifted: {observed}")
-    facebook = next(
-        row for row in rows if row["platform"] == "facebook" and row["maturity"] == "developing"
-    )
+        raise AssertionError(f"same-platform last eligible input selection drifted: {observed}")
+    facebook = next(row for row in rows if row["platform"] == "facebook")
     _assert_matrix_caption_and_layout(facebook)
     _assert_matrix_outcome(facebook)
 
@@ -290,7 +282,6 @@ def _assert_comparables_contract(root: Path) -> None:
         platform="facebook",
         content_type="background_text_post",
         surface="facebook_background_text",
-        maturity="developing",
         limit=1,
     )
     if context["returned_count"] != 1 or context["available_count"] != 1:
@@ -310,7 +301,7 @@ def _assert_comparables_contract(root: Path) -> None:
         raise AssertionError("comparables context omitted punctuation style")
     if row["publication"]["local_date"] != "2026-08-29" or row["publication"]["daypart"] != "週末上午":
         raise AssertionError("comparables context omitted date/daypart")
-    if row["outcome"]["metrics"]["viewers"] != 20:
+    if row["outcome"]["metrics"]["viewers"] != 30:
         raise AssertionError("comparables context omitted outcomes")
     if row["outcome"]["extended_analytics"]["youtube_search_terms_percent"] != {
         "戰鬥陀螺": 44.9,
@@ -325,14 +316,14 @@ def _assert_comparables_contract(root: Path) -> None:
     if context["comparison_policy"]["selection"] != {
         "strategy": "most_recent_publication",
         "tie_breakers": [
-            "captured_at_desc", "post_id_desc", "platform_desc", "maturity_desc",
+            "post_id_desc", "platform_desc",
         ],
         "performance_ranked": False,
     }:
         raise AssertionError("comparables selection policy is not deterministic and score-free")
     if "length=" not in render_comparables_context(context):
         raise AssertionError("human comparables context omitted exact caption length")
-    incomplete = comparables_context(root, platform="facebook", maturity="developing", limit=1)
+    incomplete = comparables_context(root, platform="facebook", limit=1)
     if incomplete["comparison_policy"]["cohort_is_exact"] is not False:
         raise AssertionError("heterogeneous content/surface query was marked exact")
     if incomplete["comparison_policy"]["outcome_comparison_allowed"] is not False:
@@ -342,7 +333,6 @@ def _assert_comparables_contract(root: Path) -> None:
         platform="facebook",
         content_type="background_text_post",
         surface="reel_caption",
-        maturity="developing",
         limit=1,
     )["returned_count"] != 0:
         raise AssertionError("surface filter was not exact")
@@ -355,23 +345,17 @@ def _assert_comparables_contract(root: Path) -> None:
 
 
 def _assert_filters_and_summary(root: Path) -> None:
-    filtered = feature_matrix(root, platform="facebook", maturity="developing")
-    if [row["snapshot_id"] for row in filtered] != ["snapshot-fb-developing-new"]:
+    filtered = feature_matrix(root, platform="facebook")
+    if [row["snapshot_id"] for row in filtered] != ["snapshot-fb-mature"]:
         raise AssertionError("platform/maturity filters are not exact")
-    historical = feature_matrix(
-        root,
-        platform="facebook",
-        maturity="developing",
-        captured_before="2026-08-29T12:00:00+08:00",
-    )
-    if [row["snapshot_id"] for row in historical] != ["snapshot-fb-developing-old"]:
-        raise AssertionError("captured-before was not inclusive or did not select latest historical row")
-    try:
-        feature_matrix(root, captured_before="2026-08-29T12:00:00")
-    except ValueError:
-        pass
-    else:
-        raise AssertionError("offset-free captured-before was accepted")
+    history = observation_history(root, "post-feature-matrix", platform="facebook")
+    if [row["snapshot_id"] for row in history["observations"]] != [
+        "snapshot-fb-developing-old", "snapshot-fb-developing-new",
+        "snapshot-fb-developing-ineligible", "snapshot-fb-mature",
+    ]:
+        raise AssertionError("clock retirement discarded original observation history")
+    if history["growth_rate_per_hour"] is not None:
+        raise AssertionError("history invented an hourly growth rate")
     summary = {(row["platform"], row["audience_count"]) for row in series_summary(root)}
     if summary != {("facebook", 30), ("instagram", 40)}:
         raise AssertionError(f"ineligible latest snapshot hid eligible summary data: {summary}")
@@ -420,7 +404,7 @@ def _assert_coverage_report(root: Path) -> None:
     mutated_rows = deepcopy(feature_matrix(root))
     mutated_row = next(
         item for item in mutated_rows
-        if item["platform"] == "facebook" and item["maturity"] == "developing"
+        if item["platform"] == "facebook"
     )
     del mutated_row["outcome"]["extended_analytics"]["monetization"]
     snapshots_by_id = {
@@ -469,7 +453,7 @@ def _assert_deterministic_cli(root: Path) -> None:
     second = invoke(matrix_command)
     if first != second:
         raise AssertionError("matrix JSON output is not deterministic")
-    if len(json.loads(first)) != 3:
+    if len(json.loads(first)) != 2:
         raise AssertionError("matrix CLI returned the wrong cohort count")
     context_command = [
         sys.executable, "-B", str(SCRIPT), "comparables",
@@ -477,7 +461,6 @@ def _assert_deterministic_cli(root: Path) -> None:
         "--platform", "facebook",
         "--content-type", "background_text_post",
         "--surface", "facebook_background_text",
-        "--maturity", "developing",
         "--limit", "1",
         "--format", "json",
     ]
@@ -537,7 +520,6 @@ def _assert_timing_stays_noncausal(root: Path) -> None:
         platform="facebook",
         content_type="background_text_post",
         surface="facebook_background_text",
-        maturity="developing",
         limit=2,
     )
     timing = context["comparison_policy"]["timing"]

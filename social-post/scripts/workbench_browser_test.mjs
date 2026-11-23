@@ -75,7 +75,8 @@ try {
   await until(() => /http:\/\/127\.0\.0\.1:\d+/.test(stdout) || child.exitCode !== null);
   assert.equal(child.exitCode, null, "server startup: " + stderr);
   const origin = stdout.match(/http:\/\/127\.0\.0\.1:\d+/)[0];
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({ headless: true,
+    ...(options["--browser-executable"] ? { executablePath: resolve(options["--browser-executable"]) } : {}) });
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   const page = await context.newPage();
   page.on("pageerror", error => pageErrors.push(error.message));
@@ -198,11 +199,15 @@ try {
   checks.push("invalid_import_blocked", "preview_no_write", "explicit_commit_and_replay_control");
   await page.locator('#nav a[href="#P4"]').click();
   await page.waitForFunction(() => document.querySelector(".workflow-head .eyebrow")?.textContent.startsWith("P4 / "));
+  assert.equal(await page.getByLabel("成效觀測階段", { exact: true }).count(), 0);
+  assert.equal(await page.locator('select[name="maturity"]').count(), 0);
   await page.getByLabel("內容類型").fill("text");
   await page.getByLabel("版型／發布表面").fill("text_feed");
   await page.getByRole("button", { name: "讀取可比案例", exact: true }).click();
   await page.getByText("找到 0 份可比資料，顯示最近 0 份", { exact: true }).waitFor();
   checks.push("pending_post_excluded_from_comparables");
+  checks.push("comparison_without_screenshot_clock_or_maturity");
+  await page.screenshot({ path: join(output, "comparison-publication-only.png"), fullPage: true });
   const keyboardLink = page.locator('#nav a[href="#P0"]');
   await keyboardLink.focus();
   await keyboardLink.press("Enter");
@@ -215,7 +220,8 @@ try {
     "scripts/workbench_store.py", "scripts/workbench_formulas.py", "workbench/app.js", "workbench/api.js", "workbench/ui.js",
     "workbench/editor.js", "workbench/governance.js", "workbench/styles.css", "workbench/layout.css", "workbench/index.html",
     "scripts/social_writing_contract.py", "scripts/social_learning.py", "scripts/social_cohorts.py", "scripts/social_governance_store.py",
-    "scripts/social_primitives.py", "scripts/social_governance.py", "scripts/workbench_browser_test.mjs"];
+    "scripts/social_primitives.py", "scripts/social_governance.py", "scripts/workbench_browser_test.mjs",
+    "scripts/social_outcome_time_policy.py", "scripts/social_data.py", "scripts/social_validation.py"];
   const receipt = {
     schema_version: 1, status: "PASS", evidence_class: "owned_loopback_fictional_browser",
     recorded_at: new Date().toISOString(), checks, viewport_count: 3,
@@ -223,7 +229,7 @@ try {
     source_sha256: Object.fromEntries(await Promise.all(sources.map(async name => [name, await hashFile(join(skillRoot, name))]))),
     runtime: { node_version: process.version, node_sha256: await hashFile(process.execPath),
       python_sha256: await hashFile(options["--python"]),
-      chromium_sha256: await hashFile(chromium.executablePath()) },
+      chromium_sha256: await hashFile(options["--browser-executable"] || chromium.executablePath()) },
   };
   writeFileSync(join(output, "browser-receipt.json"), JSON.stringify(receipt, null, 2));
   console.log("WORKBENCH_BROWSER_PASS checks=" + checks.length);

@@ -31,17 +31,25 @@ def main() -> int:
     parser.add_argument("--decision", choices=("approve", "reject"))
     parser.add_argument("--notes", default="")
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--compact", action="store_true", help="status metadata only; omit unrelated private reference bodies")
     parser.add_argument("--owner-confirmed", action="store_true",
                         help="Only after the human reviews this exact digest; never infer from a general task")
     args = parser.parse_args()
     root = args.root.absolute()
     try:
+        if args.compact and args.action != "status":
+            raise ValueError("--compact is only supported for status")
         if args.action in {"bootstrap", "record-reference", "migrate-external", "propose", "review", "activate"} and not args.write:
             raise ValueError("explicit --write required; no automatic author-policy writes")
         if args.action in {"context", "check-draft"} and (not args.platform or not args.media_family):
             raise ValueError("exact platform and media family are required")
         if args.action == "status":
             result = {"contract": contract_status(root), **learning_overview(root)}
+            if args.compact:
+                result = {"contract": result["contract"],
+                          "external_reference_count": len(result["external_references"]),
+                          "proposal_count": len(result["proposals"]),
+                          "automatic_update": result["automatic_update"]}
         elif args.action == "bootstrap":
             result = bootstrap(root)
         elif args.action == "channels":

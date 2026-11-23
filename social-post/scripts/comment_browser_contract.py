@@ -23,7 +23,7 @@ from comment_browser_send_contract import (
     validate_browser_preflight,
 )
 from comment_domain import reply_hash, stable_id
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 __all__ = [

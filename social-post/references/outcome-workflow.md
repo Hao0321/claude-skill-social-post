@@ -2,112 +2,67 @@
 
 ## 目錄
 
-- 資料來源層級
+- 時間政策與資料來源
 - Log Outcome
+- 補件與部分內容分析
 - Post analysis contract
-- Optimize Patterns
-- Schema 原則
-- 因果與證據邊界
+- 比較與同篇後續數據
 - 指令
 
-## 資料來源層級
+## 時間政策與資料來源
 
-1. `data/posts.jsonl`：貼文本體、發布條件、caption variant。
-2. `data/insight_snapshots.jsonl`：同一貼文可有多個時間快照，永遠保留 `captured_at` 與 maturity。
-3. `data/account_snapshots.jsonl`：帳號 7／30／90 天滾動總覽；不綁任何單篇貼文。
-4. `data/experiments.jsonl`：跨貼文假設、變因、confound、證據狀態與下一輪測試。
-5. `data/corrections.jsonl`：既有 event 的事實修正；append-only，原始列不覆寫。
-6. `data/rule_registry.json`：由 `references/rules/RNN.md` 生成的導航，不是規則正文。
-7. `references/case_studies.md`：舊案例索引；個別全文在 `references/cases/`，只作歷史證據。
+P0–P4永久採publication-only-v1；機器唯一來源為 `scripts/social_outcome_time_policy.py`。分析時間只用發布日期、星期、時區與分鐘。所有新舊文案的截圖／手機時鐘均不索取、不猜測，不影響入庫、分析資格、排序、篩選、比較或寫作特徵。舊captured_at、hours_since_publish、maturity等欄位只留原始歷史存檔；讀取時忽略、新寫入時移除。此作者明示政策優先於舊案例／規則／凍結來源中的相反要求，不更動voice與F段落結構。P5的安全期限與freshness另有用途，不受影響。
 
-不得再把新數據只寫進 prose。結構化資料是成效事實的 canonical source；Markdown 只留解讀與人類可讀摘要。
-
-任何其他 Skill 收到 FB／IG／YouTube／Threads／X 的流量、演算法、留存、受眾或轉化證據時，都要路由到本資料層。專門 Skill 可保留診斷方法，但不得另存一套會漂移的 outcome memory。跨平台同內容要共用永久 `post_id`，平台各自建 snapshot；只有 Meta 合併卡片時只記 reference，不虛構缺少的平台完整洞察。
-
-X 快照只記平台實際提供的 impressions／views、互動類別、點擊、停留、追蹤與下游轉化；缺少的欄位維持 `null`。公開 For You 原始碼的權重對應的是個別讀者的預測，不得套到貼文總互動數生成「演算法分數」。若以公開機制提出實驗假設，在 experiment 記來源 commit、可觀測指標、maturity 與 confound；規則是否成立仍由私有實測決定，見 `x.md`。
+成效仍寫回data/posts.jsonl、insight_snapshots.jsonl、account_snapshots.jsonl、experiments.jsonl、corrections.jsonl；原始event不覆寫。規則導航為生成的rule_registry.json，舊全文在references/cases/。同內容各平台各建observation；Meta不明平台總覽與另一平台局部卡只是reference，不能相減補出平台完整成績。帳號30天等總覽用獨立account ID與window_days，不綁單篇。
 
 ## Log Outcome
 
-1. 確認貼文 identity、平台、發布時間與時區。
-2. 每組截圖視為一個 snapshot，不覆蓋前一次。記錄截圖時間；不知道就標 `captured_at_confidence: low`，不要猜成最終值。
-   帳號期間總覽使用 `account_snapshot_id`、`platform`、`window_days` 與 `captured_at`；不要建立假的 `post_id`。
-   只有發布確認、但尚無任何成效值的事件保留 `measurement_status:awaiting_data` 並設 `aggregation_eligible:false`；不得讓 null／placeholder snapshot 進 latest outcome 或 pattern aggregation。
-3. IG／FB 合併面板保留 total，也記可取得的平台拆分。未拆出的 follower／follow 指標加 scope note。
-4. UI 顯示率保留在 `rates_reported`；手算 derived metric 不覆蓋 UI 值。
-5. Retention 圖沒有精確座標時只寫 curve note，不偽造百分比。
-6. 平台縮寫值、`<0.1%`、圖上目測值分別以 `metric_qualifiers` 標成 `rounded`、`upper_bound`、`visual_estimate`；未標者才視為 exact。`metrics` 內的值用直接欄位名；位於 benchmark、audience 或其他巢狀物件的值用相對於 snapshot 根節點的 dotted path。
-7. 發現發布時間、片長或舊快照精度錯誤時，bundle 追加 `correction`；不得直接重寫既有 JSONL event。Correction 不可改任何 identity field。
-8. 先 dry-run bundle，再以 `--write` 寫入；最後跑 validate。
+1. 核對永久post ID、平台、內容／版型、發布時間與時區。手機狀態列、附件建立／上傳時間不是發布證據；發布未知保留intake，不猜分鐘。
+2. 每次回填用不同snapshot ID追加，所有舊筆保留。同一篇今天、隔天各給一次數字，依提供順序記第1、2筆；最後有效回填供目前查詢，不要求截圖幾點。
+3. 作者明示「發文當天／隔天」可放observation_label；這不是自動驗證的精確24小時。不由輸入順序、收件或發布時間捏造實際觀測間隔與每小時速度。
+4. 真正沒有成效值才設measurement_status:awaiting_data及aggregation_eligible:false，不能遮蔽先前有效數據。缺截圖時間永遠不是排除理由；缺完整原文是另一件事。
+5. UI rate與derived分開；縮寫／上限／目測以metric_qualifiers標exact、rounded、lower_bound、upper_bound、visual_estimate、not_reported，巢狀值用dotted path。來源、受眾、留存及平台明示窗口照原值保存；首頁不是非追蹤，一般點擊不是外連，分享不全是私訊。缺值用null，不補0。
+6. 事實／發布時間／精度修正用correction，不改identity。先log_outcome.py dry-run，再明確--write，最後validate／coverage；舊截圖欄位即使格式錯誤也忽略，不修補或索取它們。
+
+## 補件與部分內容分析
+
+review_outcome_intakes.py唯讀盤點，--since只查收件事件日期，不是學習變數。支援owner_post_outcome_intake、owner_post_outcome_intake_pending_publication_time與owner_account_outcome_intake。無本機資料回空清單，不建假樣本。
+
+全文／發布補件分別為author_full_caption_confirmation、author_publication_time_confirmation，以parent intake、snapshot source、post、snapshot ID精確回綁，不多算樣本。發布補件不能改文案／已知時間／snapshot；近似分鐘保留precision。缺截圖時間不再列missing。原生numeric metrics、未知值名單、完整platform_analytics及Meta／IG reference分開；不可丟掉replies、reposts、quotes、profile_views或未來子樹。
+
+--include-analysis才明確讀取data/learning_events.jsonl中的intake_content_analysis，不當成已啟用F。註記精確欄位：analysis_id、source_intake_id、post_id、snapshot_id、platform、media_family、caption_sha256、content_scope、recorded_at、phrases、evidence、structure、hypotheses、confounds、next_test、candidates。
+
+- content_scope為complete_caption或visible_first_post；後者不猜續文、CTA、emoji碼或完整字數。所有計數明示只綁已知原文／prefix。
+- phrase有text、role、interpretation、basis。Role為topic/use_case/brand/cost_benefit/rights_claim/launch_hook/proof/differentiator/cta/audience/boundary/time_claim；caption_exact要逐字存在caption，visible_transcription只能引用原筆保存的visible_following_phrases。解讀不是量測因果。
+- evidence為非空{path,sha256}，只能引用這筆intake／合法補件的data/evidence來源，bytes漂移即拒絕。四個解讀／測試清單不可空；candidate有candidate_id/statement/exclusions/next_test，保持hypothesis，不自動啟用規則。
+- --analysis-input乾跑，--write-analysis才在既有writer lock下追加。同ID完全重播去重，同ID變更拒絕。可選supersedes_analysis_id建立新解讀revision，父筆必須存在、仍有效且同post／snapshot／平台scope；原始event不刪除，不允許跨scope或重複分岔。預設只回放有效revision。
+- 分析status與完整度仍依實際文案：缺續文能分析已知片段，但不能假裝取得完整原稿。截圖時間不再影響任何資格。
 
 ## Post analysis contract
 
-每篇 learned post 都必須明示以下狀態，不能只靠 caption 是否非空來判斷可否學習：
+每篇保留analysis_status、analysis_version、analysis_eligible、caption_sha256、信心及analysis_evidence。完整且可學原文為complete＋true；pending／excluded_placeholder保留已知文字但不冒充全文。完整特徵包含：
 
-- `analysis_status` 只用 `pending／complete／excluded_placeholder`。
-- `analysis_version` 記錄產生目前特徵的分析器版本；未分析的新 post 使用 `pending`。
-- `analysis_eligible` 只有完成且證據足夠的真實 caption 才能是 `true`。
-- `caption_sha256` 綁定 UTF-8 caption 原文；caption 改動後舊分析必須失效並重新產生。
-- `published_at_confidence`、`caption_confidence` 與 `analysis_evidence` 明示時間、文案和分析的證據邊界。
+- format_features：字數、空白、段落／換行／分隔、完整Unicode標點、emoji、連結、hashtag、surface和版型；黑底白字另記顏色／字重／對齊／行數，影片另記真實比例。
+- wording_features：opening、hook、mechanism、differentiator、proof、keywords、實體名、數字語言、voice與CTA。區分「確實沒有」和未知，不把功能主張當已驗證成果。
+- publication_context：由published_at與timezone驗證日期、星期、HH:mm及daypart。只有逐平台收據齊全才填platform_publications與各自digest，不補假分鐘。
 
-`analysis_status:complete` 必須保留可重算與可比較的完整特徵：
+## 比較與同篇後續數據
 
-1. `format_features`：surface、caption layout、字數、去空白字數、內容字數、空格、段落、明示換行、分隔塊、逗號／頓號／句號／問號／驚嘆號、引號／書名號、連結、hashtag、emoji 與明示 CTA 數。Facebook 黑底白字另記背景、字色、字重、置中與實際觀測行數；Reel／Short／短劇另記 `vertical_9_16`，不得以 caption 換行冒充 UI 自動換行。
-2. `wording_features`：opening、hook、mechanism、differentiator、proof style、keywords、named entities、numbers observed、numeric language、voice、punctuation style 與 CTA。未知值用 `null`／空清單，不用推測補齊；可由完整 caption 確認「確實沒有」時，另用 `proof_present:false`、`cta_type:none`、`explicit_cta:0` 等欄位區分「已知不存在」與「尚未取得」。
-3. `publication_context`：由 `published_at` 與 timezone 重算並驗證 `local_date`、`weekday_zh_tw`、`local_time`（`HH:mm`）與 daypart；不得依截圖手機狀態列時間猜發布分鐘。
-4. 同稿跨平台若有逐平台證據，另存 `platform_publications`：每個平台自己的 `published_at`、IANA timezone、`sync_mode`、caption SHA-256 與 media SHA-256。沒有逐平台收據或媒體 digest 時不要填假值，保留共同發布時間與信心即可。
-5. 穩定的文案與包裝特徵屬 post，不藏在某一平台的 insight snapshot；snapshot 只保存該次觀測的成效與平台脈絡。
+Matrix依平台、media family、content type與surface分區，不再有maturity／截圖時鐘條件。先排除缺全文／hash無效的整篇分析，以及真正awaiting／明示不eligible的outcome，再按提供順序取同post／平台最後有效紀錄。舊值完整保留，history --post <id>回傳序列、作者給的階段標籤和同平台數量差額；不自動換算每小時速度。
 
-caption 被截斷、只看見片名／集數代稱、或仍等待完整資料時：
+P0／P2預設取2篇compact comparables，按發布時間選最近案例而非成效排名。沒有同平台／內容類型／版型不回退混池。每列保留原文、長度、版型、完整標點、詞句、語氣、CTA、發布日期／星期／分鐘與全部適用analytics；未被固定schema命名的子樹進extended_analytics，由coverage逐子樹exact compare，私人來源路徑不進生成context。
 
-- 用 `excluded_placeholder` 或 `pending`，並強制 `analysis_eligible:false`。
-- placeholder 可保存實際可見字串及 exclusion reason，但不得把未知的 hook、版型、關鍵字、語氣或 CTA 當成已觀測事實。
-- pending／placeholder 不進 voice、keyword、timing 或 pattern aggregation；補到原始證據後再以 append-only correction 升級。
-
-## Optimize Patterns
-
-分析前先用 feature matrix 連結 post 特徵與同平台、同 maturity 的 latest eligible snapshot；series summary 只作 KPI 總覽。先排除 `pending`、`excluded_placeholder`、`analysis_eligible:false`、caption hash 不符、analysis version 無效、`awaiting_data` 或 `aggregation_eligible:false`。比較順序：
-
-Matrix 的 outcome 不只驗證固定 KPI。每個適用但未被固定 schema 命名的平台子樹（例如 YouTube 搜尋詞、48 小時來源、外部來源、推薦內容、營利與內容包裝）都必須原值進入 `extended_analytics`，並由 `coverage` 逐子樹 exact-compare。少一棵、值漂移或憑空多一棵都不能宣稱完整；私人 evidence 路徑與 digest 則只留在 canonical ledger，不進生成 context。
-
-1. 平台 scope、觀測時間與 maturity 是否相近、是否 plateau；不同 maturity 不直接排終局勝負。
-2. Watch quality：平均觀看占片長、略過率、首段／片尾曲線。
-3. Distribution：Reels＋探索、個人檔案、非粉絲。
-4. Conversion：follow／play、follow／reach、profile／reach。
-5. Content 與 packaging：cold open、standalone premise、字幕／語言、caption 長度、段落／分隔、標點、關鍵字、語氣、CTA、黑底白字或影片版型、首幀與時段。
-
-兩集同時改了故事、首幀與 caption，不得稱為 A/B。先列共變量與 confound，再說哪個解釋目前最有力。
-
-## Schema 原則
-
-- ID 永久不改：`post_id`、`snapshot_id`、`experiment_id`。
-- 時間使用 ISO 8601＋offset，例如 `2026-08-11T14:56:00+08:00`。
-- Learned post 必須有可驗證的 `analysis_status／analysis_version／analysis_eligible／caption_sha256`；只有 `complete＋true` 才可進 pattern learning。
-- 日期、星期與 `HH:mm` 是由發布 timestamp 衍生的可驗證欄位；衍生值不一致就 fail，不同欄位不得各自成為漂移的 source of truth。
-- 百分比一律存 0–100，不存 0–1。
-- Missing value 用 `null`，不填 0。
-- Measurement qualifier 只用 `exact／rounded／lower_bound／upper_bound／visual_estimate／not_reported`；巢狀 measurement 以 dotted path 指向實際存在的值，validator 會拒絕失效路徑。
-- Evidence status 只用 `hypothesis／emerging／validated／deprecated`。
-- 同系列多集不等於獨立樣本；在 `independent_samples` 明示。
-
-## 因果與證據邊界
-
-- Caption 可是分類／搜尋／轉化訊號，但不能替代影片留存。
-- 早期 snapshot 只能報趨勢，不做終局勝負。
-- 發布日期、星期與分鐘只能先列為候選變因，不能由單篇或同系列共變資料直接推成因果；同一精確分鐘若同時出現高低差異很大的結果，就不是已驗證的爆款時段。
-- `n=3` 同系列可降低單點偶然，不能直接升成跨題材定律。
-- 規則升級需符合 `references/rules.md` 索引頂部的證據強度公約，正文寫回對應 `references/rules/RNN.md`。
-- 平台規格與演算法會變；若結論依賴當前官方規則，先查權威來源並記 last verified。
+題材、首圖、文案、CTA或時段同時變更就列confound，不稱乾淨A/B。發布時間是分析條件，不保證同分鐘複製同級流量。重複snapshot不是新獨立post，單篇／同系列不證明關鍵字因果。hypothesis→emerging→validated→deprecated及作者精確diff審核維持；截圖時間不構成任何規則升級門檻。
 
 ## 指令
 
 ```powershell
-$env:PYTHONUTF8='1'
-python scripts/social_data.py validate
-python scripts/social_data.py summary --series <series-id>
-python scripts/social_data.py matrix --series <series-id> --platform <platform> --maturity <maturity>
-python scripts/social_data.py matrix --series <series-id> --captured-before <ISO-8601-with-offset>
-python scripts/log_outcome.py outcome-bundle.json
-python scripts/log_outcome.py outcome-bundle.json --write
-python scripts/build_rule_registry.py --write
-python scripts/split_rule_archive.py --refresh-manifest
+python -B scripts/review_outcome_intakes.py --include-analysis --format json
+python -B scripts/social_data.py validate
+python -B scripts/social_data.py coverage
+python -B scripts/social_data.py matrix --platform <platform>
+python -B scripts/social_data.py comparables --platform <platform> --content-type <type> --surface <surface> --limit 2
+python -B scripts/social_data.py history --post <permanent-post-id> --platform <platform>
+python -B scripts/log_outcome.py outcome-bundle.json
+python -B scripts/log_outcome.py outcome-bundle.json --write
 ```

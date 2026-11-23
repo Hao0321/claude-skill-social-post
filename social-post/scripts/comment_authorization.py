@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import Any
 
 from comment_identity import PLATFORMS
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 APPROVAL_MODES = {"batch_confirm", "bounded_auto"}

@@ -17,7 +17,7 @@ from comment_scan_provenance import (
     SCAN_PROVENANCE_DIGEST_FIELD, normalize_scan_capability_metadata,
     normalize_scan_receipt_consumption, validate_scan_provenance,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 def _scan_completion_provenance(
     raw: dict[str, Any], clean_request: dict[str, Any],

@@ -15,21 +15,25 @@ explicit per-draft instructions. A per-draft exception is not a permanent update
 
 ## Independent learning channels
 
-Five platforms × `text_image` / `video`, then content type, surface and maturity.
+Five platforms × `text_image` / `video`, then content type and surface.
 Text, black-background cards, photos and carousels remain separate surfaces;
 Reels, Shorts and long video also remain separate. Broad media labels alone
 do not make samples comparable. No empty-cohort fallback to a pooled winner.
 
 Own facts stay in the original outcome ledgers. Platform-combined observations
 are reference-only, not an individual platform result. Unknown or conflicting
-media stays quarantined. Snapshot clocks, rounded counts, missing denominators,
-audience populations and capture maturity retain their existing qualifiers.
+media stays quarantined. Rounded counts, missing denominators and audience
+populations retain their qualifiers. Screenshot clocks and derived maturity are
+retired for ALL old and new P0–P4 cases; the owner's explicit publication-only
+policy takes precedence even when a frozen historical source mentions them.
+Neither ingestion, learning nor comparison may request or depend on a screenshot
+clock. Preserve raw archives and successive inputs, not their obsolete gates.
 
 External examples live in `data/learning_events.jsonl`, kind `external_reference`.
 They need no invented own post ID or publication minute. Multiple platforms or
 observations of one content ID are not independent content samples. Preserve
 caption, visual layout, wording, punctuation, source provenance, unknown fields
-and observation times. Never use an external voice to replace the author's voice.
+and publication conditions. Observation order is input order, not a screenshot clock. Never use an external voice to replace the author's voice.
 Legacy external experiment events remain historical provenance and planned-test
 context after migration; the external-reference ledger owns current observations.
 

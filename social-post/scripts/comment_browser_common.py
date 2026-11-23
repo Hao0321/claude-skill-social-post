@@ -11,7 +11,7 @@ import re
 from typing import Any
 from urllib.parse import parse_qsl, urlsplit, urlunsplit
 
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 PLATFORM_HOSTS = {

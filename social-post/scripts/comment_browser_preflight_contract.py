@@ -21,7 +21,7 @@ from comment_scan_provenance import (
     ACTION_PROVENANCE_DIGEST_FIELD, DRAFT_PROVENANCE_DIGEST_FIELD,
     SCAN_PROVENANCE_DIGEST_FIELD,
 )
-from social_validation import parse_time
+from social_primitives import parse_time
 
 
 def _require_action_binding(
