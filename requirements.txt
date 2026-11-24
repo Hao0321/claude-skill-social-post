@@ -1,0 +1,2 @@
+# Windows has no system IANA timezone database; zoneinfo needs tzdata there.
+tzdata; sys_platform == "win32"
